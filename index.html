@@ -388,10 +388,32 @@
 
     .hero h2 {
       max-width: 680px;
+      min-height: 3.1em;
       font-size: clamp(1.45rem, 3vw, 2.55rem);
       line-height: 1.35;
       color: var(--coffee);
       margin-bottom: 18px;
+    }
+
+    .typing-title {
+      display: block;
+    }
+
+    .typing-cursor {
+      display: inline-block;
+      width: 3px;
+      height: .9em;
+      margin-inline-start: 6px;
+      vertical-align: -.08em;
+      background: var(--mint);
+      border-radius: 999px;
+      animation: cursorBlink .8s steps(1) infinite;
+    }
+
+    @keyframes cursorBlink {
+      50% {
+        opacity: 0;
+      }
     }
 
     .hero p {
@@ -2122,7 +2144,7 @@
         <div class="hero-copy reveal">
           <div class="eyebrow">قهوة ومزاج على أصوله</div>
           <h1>SEEU</h1>
-          <h2>مش مجرد كافيه، دي تجربتك المفضلة كل مرة.</h2>
+          <h2 class="typing-title" aria-live="polite"><span id="heroTypedText">مش مجرد كافيه، دي تجربتك المفضلة كل مرة.</span><span class="typing-cursor" aria-hidden="true"></span></h2>
           <p>في SEEU هتلاقي قهوتك المفضلة، مشروبات باردة وساخنة، عصائر فريش، وحلويات في مكان دافئ يليق بالخروجة واللمة والوقت الحلو.</p>
           <div class="hero-actions">
             <a class="btn btn-primary" href="#menu">استكشف المنيو</a>
@@ -2583,11 +2605,62 @@
       elements.forEach((element) => observer.observe(element));
     }
 
+    function initHeroTyping() {
+      const typedText = document.getElementById("heroTypedText");
+      if (!typedText) return;
+
+      const lines = [
+        "مش مجرد كافيه، دي تجربتك المفضلة كل مرة.",
+        "قهوة مظبوطة ومشروبات بتتعمل على مزاجك.",
+        "اختار مشروبك وسيب الباقي على SEEU.",
+        "لمة حلوة، قعدة هادية، وطعم فاكرينه."
+      ];
+
+      if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+        typedText.textContent = lines[0];
+        return;
+      }
+
+      let lineIndex = 0;
+      let charIndex = 0;
+      let deleting = false;
+
+      const type = () => {
+        const currentLine = lines[lineIndex];
+        typedText.textContent = currentLine.slice(0, charIndex);
+
+        if (!deleting && charIndex < currentLine.length) {
+          charIndex += 1;
+          setTimeout(type, 58);
+          return;
+        }
+
+        if (!deleting && charIndex === currentLine.length) {
+          deleting = true;
+          setTimeout(type, 1500);
+          return;
+        }
+
+        if (deleting && charIndex > 0) {
+          charIndex -= 1;
+          setTimeout(type, 28);
+          return;
+        }
+
+        deleting = false;
+        lineIndex = (lineIndex + 1) % lines.length;
+        setTimeout(type, 260);
+      };
+
+      type();
+    }
+
     createFilterButtons();
     createMenuCards();
     attachFilters();
     initNavigation();
     initReveal();
+    initHeroTyping();
   </script>
 </body>
 </html>
