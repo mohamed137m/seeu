@@ -1,0 +1,1838 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="SEEU Cafe - قهوة ومشروبات وحلويات في أجواء مريحة وعصرية.">
+  <title>SEEU Cafe</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800&amp;family=Playfair+Display:wght@600;700&amp;display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --ink: #211916;
+      --coffee: #493027;
+      --espresso: #2a1a15;
+      --caramel: #c88752;
+      --honey: #f3c77a;
+      --mint: #3f8f86;
+      --berry: #b24768;
+      --citrus: #d6a833;
+      --blue: #427ea6;
+      --paper: #fff9f1;
+      --cream: #f3e8d8;
+      --sand: #e5d1b8;
+      --muted: #75655c;
+      --line: rgba(73, 48, 39, .14);
+      --white: #fff;
+      --shadow: 0 22px 55px rgba(45, 26, 20, .16);
+      --soft-shadow: 0 16px 35px rgba(45, 26, 20, .1);
+      --radius: 8px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      min-height: 100vh;
+      font-family: "Cairo", sans-serif;
+      color: var(--ink);
+      background:
+        linear-gradient(90deg, rgba(63, 143, 134, .08) 0 1px, transparent 1px 100%),
+        linear-gradient(180deg, rgba(178, 71, 104, .07) 0 1px, transparent 1px 100%),
+        linear-gradient(180deg, rgba(255, 249, 241, .92), rgba(243, 232, 216, .9)),
+        url("https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&fit=crop&w=1800&q=82") center top / cover fixed;
+      background-size: 54px 54px, 54px 54px, auto, cover;
+      line-height: 1.75;
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      z-index: -1;
+      pointer-events: none;
+      background:
+        linear-gradient(115deg, rgba(255, 249, 241, .72), transparent 38%),
+        linear-gradient(295deg, rgba(63, 143, 134, .14), transparent 44%),
+        linear-gradient(180deg, transparent 0, rgba(255, 249, 241, .5) 82%);
+    }
+
+    body::selection {
+      background: var(--mint);
+      color: var(--white);
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    img {
+      display: block;
+      max-width: 100%;
+    }
+
+    button,
+    input {
+      font: inherit;
+    }
+
+    .container {
+      width: min(1180px, calc(100% - 32px));
+      margin-inline: auto;
+    }
+
+    .navbar {
+      position: fixed;
+      inset: 0 0 auto;
+      z-index: 20;
+      background: rgba(255, 249, 241, .72);
+      border-bottom: 1px solid rgba(73, 48, 39, .1);
+      backdrop-filter: blur(18px);
+      transition: box-shadow .25s ease, background .25s ease;
+    }
+
+    .navbar.scrolled {
+      background: rgba(255, 249, 241, .96);
+      box-shadow: 0 12px 32px rgba(45, 26, 20, .1);
+    }
+
+    .nav-inner {
+      min-height: 76px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 22px;
+    }
+
+    .logo {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-family: "Playfair Display", serif;
+      font-size: clamp(1.65rem, 4vw, 2.1rem);
+      font-weight: 700;
+      letter-spacing: 4px;
+      color: var(--coffee);
+      direction: ltr;
+    }
+
+    .logo-mark {
+      width: 12px;
+      height: 34px;
+      background: linear-gradient(180deg, var(--mint), var(--berry), var(--caramel));
+      border-radius: 999px;
+      box-shadow: 0 0 0 5px rgba(63, 143, 134, .08);
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 22px;
+      color: var(--muted);
+      font-weight: 700;
+    }
+
+    .nav-links a {
+      position: relative;
+      padding-block: 8px;
+      transition: color .25s ease;
+    }
+
+    .nav-links a::after {
+      content: "";
+      position: absolute;
+      inset: auto 0 0;
+      height: 2px;
+      background: var(--mint);
+      transform: scaleX(0);
+      transform-origin: right;
+      transition: transform .25s ease;
+    }
+
+    .nav-links a:hover,
+    .nav-links a:focus-visible {
+      color: var(--coffee);
+    }
+
+    .nav-links a:hover::after,
+    .nav-links a:focus-visible::after {
+      transform: scaleX(1);
+    }
+
+    .mobile-toggle {
+      display: none;
+      width: 44px;
+      height: 44px;
+      border: 1px solid var(--line);
+      background: var(--paper);
+      color: var(--coffee);
+      cursor: pointer;
+      border-radius: var(--radius);
+      font-size: 1.3rem;
+      line-height: 1;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 9px;
+      min-height: 46px;
+      padding: 11px 20px;
+      border: 1px solid transparent;
+      border-radius: var(--radius);
+      cursor: pointer;
+      font-weight: 800;
+      transition: transform .2s ease, background .2s ease, border-color .2s ease, color .2s ease;
+    }
+
+    .btn:hover {
+      transform: translateY(-2px);
+    }
+
+    .btn-primary {
+      color: var(--white);
+      background: linear-gradient(135deg, var(--coffee), #24130f);
+      box-shadow: 0 16px 32px rgba(73, 48, 39, .22);
+    }
+
+    .btn-primary:hover {
+      background: var(--espresso);
+    }
+
+    .btn-secondary {
+      color: var(--coffee);
+      background: rgba(255, 255, 255, .62);
+      border-color: rgba(73, 48, 39, .2);
+    }
+
+    .btn-secondary:hover {
+      border-color: var(--mint);
+      color: var(--mint);
+    }
+
+    .hero {
+      min-height: 100vh;
+      display: grid;
+      align-items: center;
+      padding: 118px 0 64px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: "SEEU";
+      position: absolute;
+      top: 108px;
+      left: -34px;
+      direction: ltr;
+      font-family: "Playfair Display", serif;
+      font-size: clamp(7rem, 21vw, 20rem);
+      line-height: 1;
+      letter-spacing: 16px;
+      color: rgba(73, 48, 39, .045);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .hero::after {
+      content: "";
+      position: absolute;
+      inset: auto 0 0;
+      height: 140px;
+      background: linear-gradient(180deg, transparent, rgba(243, 232, 216, .95));
+      pointer-events: none;
+    }
+
+    .hero-grid {
+      position: relative;
+      z-index: 1;
+      display: grid;
+      grid-template-columns: minmax(0, .95fr) minmax(320px, 1.05fr);
+      gap: clamp(34px, 6vw, 70px);
+      align-items: center;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      color: var(--mint);
+      font-weight: 800;
+      margin-bottom: 16px;
+    }
+
+    .eyebrow::before {
+      content: "";
+      width: 38px;
+      height: 2px;
+      background: currentColor;
+    }
+
+    h1 {
+      font-family: "Playfair Display", serif;
+      font-size: clamp(4rem, 10vw, 8.4rem);
+      line-height: .88;
+      letter-spacing: 5px;
+      color: transparent;
+      background: linear-gradient(120deg, var(--espresso), var(--coffee) 38%, var(--mint) 78%, var(--berry));
+      -webkit-background-clip: text;
+      background-clip: text;
+      direction: ltr;
+      margin-bottom: 20px;
+      text-shadow: 0 24px 55px rgba(73, 48, 39, .16);
+    }
+
+    .hero h2 {
+      max-width: 680px;
+      font-size: clamp(1.45rem, 3vw, 2.55rem);
+      line-height: 1.35;
+      color: var(--coffee);
+      margin-bottom: 18px;
+    }
+
+    .hero p {
+      max-width: 650px;
+      color: var(--muted);
+      font-size: 1.08rem;
+      margin-bottom: 28px;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-bottom: 24px;
+    }
+
+    .quick-stats {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 10px;
+      max-width: 560px;
+    }
+
+    .stat {
+      min-height: 86px;
+      padding: 14px;
+      position: relative;
+      overflow: hidden;
+      background: rgba(255, 249, 241, .76);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: var(--soft-shadow);
+    }
+
+    .stat::before {
+      content: "";
+      position: absolute;
+      inset: 0 0 auto;
+      height: 3px;
+      background: linear-gradient(90deg, var(--mint), var(--berry), var(--caramel));
+    }
+
+    .stat strong {
+      display: block;
+      color: var(--coffee);
+      font-size: 1.1rem;
+      line-height: 1.35;
+    }
+
+    .stat span {
+      display: block;
+      color: var(--muted);
+      font-size: .9rem;
+      line-height: 1.45;
+      margin-top: 4px;
+    }
+
+    .hero-visual {
+      position: relative;
+      min-height: 620px;
+    }
+
+    .orbital-showcase {
+      position: absolute;
+      inset: 42px 18px 42px auto;
+      z-index: 3;
+      width: min(330px, 46vw);
+      aspect-ratio: 1;
+      border: 1px solid rgba(255, 249, 241, .5);
+      border-radius: 50%;
+      pointer-events: none;
+      animation: spinSlow 18s linear infinite;
+      filter: drop-shadow(0 24px 45px rgba(45, 26, 20, .22));
+    }
+
+    .orbital-showcase::before,
+    .orbital-showcase::after {
+      content: "";
+      position: absolute;
+      inset: 28px;
+      border-radius: 50%;
+      border: 1px dashed rgba(255, 255, 255, .38);
+    }
+
+    .orbital-showcase::after {
+      inset: 78px;
+      border-style: solid;
+      border-color: rgba(63, 143, 134, .38);
+      animation: spinReverse 12s linear infinite;
+    }
+
+    .orbit-dot {
+      position: absolute;
+      width: 58px;
+      height: 58px;
+      display: grid;
+      place-items: center;
+      color: var(--espresso);
+      background: rgba(255, 249, 241, .9);
+      border: 1px solid rgba(255, 255, 255, .7);
+      border-radius: 50%;
+      box-shadow: 0 14px 28px rgba(45, 26, 20, .16);
+      font-size: 1.2rem;
+      animation: spinReverse 18s linear infinite;
+    }
+
+    .orbit-dot:nth-child(1) {
+      top: -10px;
+      left: 50%;
+      translate: -50% 0;
+    }
+
+    .orbit-dot:nth-child(2) {
+      top: 50%;
+      right: -10px;
+      translate: 0 -50%;
+    }
+
+    .orbit-dot:nth-child(3) {
+      bottom: -10px;
+      left: 50%;
+      translate: -50% 0;
+    }
+
+    .orbit-dot:nth-child(4) {
+      top: 50%;
+      left: -10px;
+      translate: 0 -50%;
+    }
+
+    @keyframes spinSlow {
+      to {
+        transform: rotate(360deg);
+      }
+    }
+
+    @keyframes spinReverse {
+      to {
+        transform: rotate(-360deg);
+      }
+    }
+
+    .photo-stack {
+      position: absolute;
+      inset: 0;
+      display: grid;
+      grid-template-columns: 1fr .72fr;
+      grid-template-rows: 1fr .78fr;
+      gap: 16px;
+      transform: rotate(-1.5deg);
+    }
+
+    .photo-stack::before {
+      content: "";
+      position: absolute;
+      inset: 26px -18px -18px 28px;
+      border: 1px solid rgba(73, 48, 39, .22);
+      border-radius: var(--radius);
+      transform: rotate(3deg);
+      pointer-events: none;
+    }
+
+    .photo-tile {
+      position: relative;
+      overflow: hidden;
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      background: var(--coffee);
+    }
+
+    .photo-tile img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform .7s ease;
+    }
+
+    .photo-tile:hover img {
+      transform: scale(1.05);
+    }
+
+    .photo-tile::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(to top, rgba(22, 13, 10, .54), transparent 60%),
+        linear-gradient(135deg, rgba(63, 143, 134, .22), transparent 38%);
+    }
+
+    .photo-main {
+      grid-row: span 2;
+      min-height: 580px;
+    }
+
+    .hero-badge {
+      position: absolute;
+      inset: auto auto 34px 34px;
+      width: min(290px, 70%);
+      padding: 20px;
+      color: var(--white);
+      background: linear-gradient(135deg, rgba(42, 26, 21, .84), rgba(63, 143, 134, .62));
+      border: 1px solid rgba(255, 255, 255, .22);
+      border-radius: var(--radius);
+      backdrop-filter: blur(12px);
+      box-shadow: var(--shadow);
+    }
+
+    .signature-strip {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 1px;
+      margin-top: 28px;
+      max-width: 760px;
+      overflow: hidden;
+      border: 1px solid rgba(73, 48, 39, .14);
+      border-radius: var(--radius);
+      box-shadow: var(--soft-shadow);
+    }
+
+    .signature-strip span {
+      min-height: 54px;
+      display: grid;
+      place-items: center;
+      padding: 10px;
+      color: var(--coffee);
+      background: rgba(255, 249, 241, .76);
+      font-size: .88rem;
+      font-weight: 800;
+      text-align: center;
+    }
+
+    .signature-strip span:nth-child(2) {
+      color: var(--mint);
+    }
+
+    .signature-strip span:nth-child(3) {
+      color: var(--berry);
+    }
+
+    .signature-strip span:nth-child(4) {
+      color: #8a6721;
+    }
+
+    .motion-ticker {
+      max-width: 640px;
+      margin-top: 14px;
+      overflow: hidden;
+      border: 1px solid rgba(73, 48, 39, .12);
+      border-radius: var(--radius);
+      background: rgba(255, 249, 241, .54);
+      mask-image: linear-gradient(90deg, transparent, #000 12%, #000 88%, transparent);
+    }
+
+    .ticker-track {
+      display: flex;
+      width: max-content;
+      animation: tickerMove 22s linear infinite;
+    }
+
+    .ticker-track span {
+      padding: 10px 22px;
+      color: var(--coffee);
+      white-space: nowrap;
+      font-size: .9rem;
+      font-weight: 800;
+    }
+
+    .ticker-track span:nth-child(3n + 2) {
+      color: var(--mint);
+    }
+
+    .ticker-track span:nth-child(3n) {
+      color: var(--berry);
+    }
+
+    @keyframes tickerMove {
+      to {
+        transform: translateX(50%);
+      }
+    }
+
+    .hero-badge strong {
+      display: block;
+      font-family: "Playfair Display", serif;
+      font-size: 2.2rem;
+      letter-spacing: 5px;
+      direction: ltr;
+      line-height: 1;
+      margin-bottom: 8px;
+    }
+
+    .hero-badge span {
+      color: rgba(255, 255, 255, .78);
+      font-size: .95rem;
+    }
+
+    section {
+      padding: 96px 0;
+      background: rgba(255, 249, 241, .94);
+    }
+
+    .section-art {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .section-art::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      background:
+        linear-gradient(90deg, rgba(63, 143, 134, .07), transparent 28%, rgba(178, 71, 104, .06)),
+        repeating-linear-gradient(135deg, transparent 0 16px, rgba(73, 48, 39, .035) 16px 17px);
+    }
+
+    .section-art > .container {
+      position: relative;
+      z-index: 1;
+    }
+
+    .section-alt {
+      background: rgba(243, 232, 216, .95);
+    }
+
+    .section-dark {
+      color: var(--white);
+      background:
+        linear-gradient(135deg, rgba(31, 18, 14, .97), rgba(73, 48, 39, .94) 52%, rgba(35, 77, 73, .93)),
+        url("https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?auto=format&fit=crop&w=1800&q=80") center / cover;
+    }
+
+    .section-head {
+      display: grid;
+      gap: 8px;
+      max-width: 760px;
+      margin: 0 auto 42px;
+      text-align: center;
+    }
+
+    .section-head h3 {
+      position: relative;
+      display: inline-block;
+      justify-self: center;
+    }
+
+    .section-head h3::after {
+      content: "";
+      display: block;
+      width: min(110px, 42%);
+      height: 3px;
+      margin: 14px auto 0;
+      background: linear-gradient(90deg, var(--mint), var(--berry), var(--caramel));
+      border-radius: 999px;
+    }
+
+    .section-kicker {
+      color: var(--mint);
+      font-weight: 800;
+    }
+
+    .section-head h3 {
+      color: var(--coffee);
+      font-size: clamp(2rem, 5vw, 3.4rem);
+      line-height: 1.2;
+    }
+
+    .section-head p {
+      color: var(--muted);
+    }
+
+    .section-dark .section-head h3,
+    .section-dark .section-kicker {
+      color: var(--white);
+    }
+
+    .section-dark .section-head p {
+      color: rgba(255, 255, 255, .72);
+    }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 18px;
+    }
+
+    .feature-card,
+    .review,
+    .contact-panel {
+      background: rgba(255, 255, 255, .66);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: var(--soft-shadow);
+    }
+
+    .feature-card {
+      min-height: 230px;
+      padding: 26px;
+      position: relative;
+      overflow: hidden;
+      transition: transform .25s ease, box-shadow .25s ease;
+    }
+
+    .feature-card::after {
+      content: "";
+      position: absolute;
+      inset: auto -20px -40px auto;
+      width: 130px;
+      height: 130px;
+      background: conic-gradient(from 160deg, rgba(63, 143, 134, .2), rgba(178, 71, 104, .16), rgba(200, 135, 82, .2), rgba(63, 143, 134, .2));
+      border-radius: 50%;
+      opacity: .55;
+    }
+
+    .feature-card:hover {
+      transform: translateY(-6px);
+      box-shadow: var(--shadow);
+    }
+
+    .feature-icon {
+      width: 54px;
+      height: 54px;
+      display: grid;
+      place-items: center;
+      margin-bottom: 18px;
+      color: var(--white);
+      background: var(--coffee);
+      border-radius: var(--radius);
+      font-size: 1.5rem;
+    }
+
+    .feature-card:nth-child(2) .feature-icon {
+      background: var(--mint);
+    }
+
+    .feature-card:nth-child(3) .feature-icon {
+      background: var(--berry);
+    }
+
+    .feature-card h4 {
+      color: var(--coffee);
+      font-size: 1.25rem;
+      margin-bottom: 7px;
+    }
+
+    .feature-card p,
+    .review p,
+    .contact-panel p {
+      color: var(--muted);
+    }
+
+    .filters-wrap {
+      position: sticky;
+      top: 76px;
+      z-index: 10;
+      margin-bottom: 30px;
+      padding: 12px;
+      background: rgba(42, 26, 21, .84);
+      border: 1px solid rgba(255, 255, 255, .13);
+      border-radius: var(--radius);
+      backdrop-filter: blur(16px);
+    }
+
+    .menu-toolbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+      margin-bottom: 12px;
+      color: rgba(255, 255, 255, .74);
+      font-size: .9rem;
+      font-weight: 800;
+    }
+
+    .menu-count {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--white);
+    }
+
+    .menu-count::before {
+      content: "";
+      width: 9px;
+      height: 9px;
+      background: var(--mint);
+      border-radius: 999px;
+      box-shadow: 0 0 0 6px rgba(63, 143, 134, .14);
+    }
+
+    .filters {
+      display: flex;
+      gap: 10px;
+      overflow-x: auto;
+      scrollbar-width: thin;
+      padding-bottom: 2px;
+    }
+
+    .filter-btn {
+      flex: 0 0 auto;
+      min-height: 42px;
+      padding: 9px 16px;
+      color: rgba(255, 255, 255, .78);
+      background: rgba(255, 255, 255, .08);
+      border: 1px solid rgba(255, 255, 255, .14);
+      border-radius: var(--radius);
+      cursor: pointer;
+      font-weight: 800;
+      transition: background .2s ease, color .2s ease, transform .2s ease;
+    }
+
+    .filter-btn:hover,
+    .filter-btn.active {
+      color: var(--espresso);
+      background: var(--white);
+      transform: translateY(-1px);
+    }
+
+    .menu-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 18px;
+      align-items: stretch;
+    }
+
+    .menu-card {
+      min-height: 342px;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      position: relative;
+      background: rgba(255, 255, 255, .08);
+      border: 1px solid rgba(255, 255, 255, .14);
+      border-radius: var(--radius);
+      transition: opacity .2s ease, transform .25s ease, background .25s ease, box-shadow .25s ease;
+    }
+
+    .menu-card::after {
+      content: attr(data-index);
+      position: absolute;
+      top: 12px;
+      left: 12px;
+      z-index: 4;
+      min-width: 38px;
+      height: 30px;
+      display: grid;
+      place-items: center;
+      padding-inline: 9px;
+      color: rgba(255, 255, 255, .9);
+      background: rgba(22, 13, 10, .46);
+      border: 1px solid rgba(255, 255, 255, .2);
+      border-radius: var(--radius);
+      backdrop-filter: blur(10px);
+      direction: ltr;
+      font-size: .78rem;
+      font-weight: 800;
+    }
+
+    .menu-card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      background: linear-gradient(135deg, rgba(243, 199, 122, .12), transparent 46%);
+      pointer-events: none;
+    }
+
+    .menu-card[data-category="fresh"]::before,
+    .menu-card[data-category="smoothie"]::before {
+      background: linear-gradient(135deg, rgba(63, 143, 134, .18), transparent 48%);
+    }
+
+    .menu-card[data-category="mojito"]::before,
+    .menu-card[data-category="soft"]::before {
+      background: linear-gradient(135deg, rgba(66, 126, 166, .2), transparent 48%);
+    }
+
+    .menu-card[data-category="milkshake"]::before {
+      background: linear-gradient(135deg, rgba(178, 71, 104, .2), transparent 48%);
+    }
+
+    .menu-card:hover {
+      transform: translateY(-6px);
+      background: rgba(255, 255, 255, .13);
+      box-shadow: 0 22px 45px rgba(0, 0, 0, .24);
+    }
+
+    .menu-card.hide {
+      display: none;
+    }
+
+    .drink-image {
+      position: relative;
+      height: 205px;
+      overflow: hidden;
+      background: var(--espresso);
+    }
+
+    .drink-image.is-loading {
+      background:
+        linear-gradient(110deg, rgba(255, 255, 255, .06) 8%, rgba(255, 255, 255, .16) 18%, rgba(255, 255, 255, .06) 33%),
+        linear-gradient(135deg, var(--espresso), var(--coffee));
+      background-size: 220% 100%, 100% 100%;
+      animation: imageLoading 1.15s ease-in-out infinite;
+    }
+
+    @keyframes imageLoading {
+      from {
+        background-position: 120% 0, 0 0;
+      }
+
+      to {
+        background-position: -120% 0, 0 0;
+      }
+    }
+
+    .drink-image::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: 2;
+      background: linear-gradient(110deg, transparent 0 36%, rgba(255, 255, 255, .28) 46%, transparent 56% 100%);
+      transform: translateX(120%);
+      transition: transform .7s ease;
+      pointer-events: none;
+    }
+
+    .drink-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform .6s ease, filter .6s ease;
+    }
+
+    .menu-card:hover .drink-image img {
+      transform: scale(1.07);
+      filter: saturate(1.08);
+    }
+
+    .menu-card:hover .drink-image::before {
+      transform: translateX(-120%);
+    }
+
+    .drink-image::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      background: linear-gradient(to top, rgba(18, 10, 7, .4), transparent 58%);
+    }
+
+    .drink-image.image-fallback {
+      display: grid;
+      place-items: center;
+      background:
+        linear-gradient(135deg, rgba(63, 143, 134, .75), rgba(178, 71, 104, .58)),
+        linear-gradient(135deg, var(--espresso), var(--coffee));
+    }
+
+    .drink-image.image-fallback::before {
+      content: "SEEU";
+      position: static;
+      z-index: 2;
+      display: block;
+      color: rgba(255, 255, 255, .9);
+      font-family: "Playfair Display", serif;
+      font-size: 2.2rem;
+      letter-spacing: 6px;
+      transform: none;
+      background: none;
+    }
+
+    .menu-card-body {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      padding: 18px;
+      position: relative;
+      z-index: 2;
+    }
+
+    .drink-category {
+      align-self: flex-start;
+      color: var(--honey);
+      direction: ltr;
+      font-size: .72rem;
+      font-weight: 800;
+      letter-spacing: 1.2px;
+      text-transform: uppercase;
+    }
+
+    .menu-card[data-category="fresh"] .drink-category,
+    .menu-card[data-category="smoothie"] .drink-category {
+      color: #9be2d8;
+    }
+
+    .menu-card[data-category="mojito"] .drink-category,
+    .menu-card[data-category="soft"] .drink-category {
+      color: #a9d8ff;
+    }
+
+    .menu-card[data-category="milkshake"] .drink-category {
+      color: #ffb9cb;
+    }
+
+    .menu-card h4 {
+      color: var(--white);
+      font-size: 1.18rem;
+      line-height: 1.35;
+      margin: 8px 0 5px;
+    }
+
+    .menu-card p {
+      color: rgba(255, 255, 255, .68);
+      font-size: .94rem;
+      margin-top: auto;
+    }
+
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: 1.1fr .9fr .9fr;
+      grid-auto-rows: 245px;
+      gap: 16px;
+    }
+
+    .gallery-item {
+      position: relative;
+      overflow: hidden;
+      border-radius: var(--radius);
+      box-shadow: var(--soft-shadow);
+      background: var(--coffee);
+    }
+
+    .gallery-item.large {
+      grid-row: span 2;
+    }
+
+    .gallery-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform .65s ease;
+    }
+
+    .gallery-item:hover img {
+      transform: scale(1.05);
+    }
+
+    .gallery-item::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      background: linear-gradient(to top, rgba(23, 13, 10, .62), transparent 64%);
+    }
+
+    .gallery-item::after {
+      content: attr(data-label);
+      position: absolute;
+      inset: auto 18px 16px;
+      z-index: 2;
+      color: var(--white);
+      font-weight: 800;
+      text-shadow: 0 4px 18px rgba(0, 0, 0, .36);
+    }
+
+    .gallery-item:nth-child(2) {
+      transform: translateY(24px);
+    }
+
+    .gallery-item:nth-child(4) {
+      transform: translateY(-18px);
+    }
+
+    .reviews-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 18px;
+    }
+
+    .review {
+      padding: 26px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .review::before {
+      content: "“";
+      position: absolute;
+      inset: -26px auto auto 18px;
+      color: rgba(63, 143, 134, .16);
+      font-family: "Playfair Display", serif;
+      font-size: 8rem;
+      line-height: 1;
+    }
+
+    .stars {
+      color: #d99a3f;
+      letter-spacing: 3px;
+      direction: ltr;
+      text-align: right;
+      margin-bottom: 12px;
+    }
+
+    .review p {
+      margin-bottom: 16px;
+    }
+
+    .review strong {
+      color: var(--coffee);
+    }
+
+    .visit-layout {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(310px, .75fr);
+      gap: 20px;
+      align-items: stretch;
+    }
+
+    .visit-card {
+      min-height: 420px;
+      display: grid;
+      align-content: end;
+      padding: clamp(28px, 5vw, 48px);
+      color: var(--white);
+      background:
+        linear-gradient(to top, rgba(26, 14, 11, .86), rgba(26, 14, 11, .12)),
+        linear-gradient(115deg, rgba(63, 143, 134, .5), transparent 42%),
+        url("https://images.unsplash.com/photo-1509042239860-f550ce710b93?auto=format&fit=crop&w=1400&q=84") center / cover;
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+
+    .visit-card h3 {
+      font-size: clamp(2.1rem, 5vw, 4rem);
+      line-height: 1.2;
+      margin-bottom: 12px;
+    }
+
+    .visit-card p {
+      max-width: 720px;
+      color: rgba(255, 255, 255, .78);
+      margin-bottom: 20px;
+    }
+
+    .contact-panel {
+      padding: 26px;
+      display: grid;
+      gap: 16px;
+      align-content: center;
+    }
+
+    .info-list {
+      display: grid;
+      gap: 12px;
+    }
+
+    .info-list span {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      color: var(--coffee);
+      font-weight: 700;
+    }
+
+    footer {
+      padding: 30px 0;
+      color: var(--muted);
+      background: var(--paper);
+      border-top: 1px solid var(--line);
+    }
+
+    .footer-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+    }
+
+    .footer-logo {
+      font-family: "Playfair Display", serif;
+      font-size: 1.55rem;
+      color: var(--coffee);
+      letter-spacing: 4px;
+      direction: ltr;
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity .65s ease, transform .65s ease;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: none;
+    }
+
+    .btn:focus-visible,
+    .filter-btn:focus-visible,
+    .mobile-toggle:focus-visible,
+    a:focus-visible {
+      outline: 3px solid var(--mint);
+      outline-offset: 4px;
+    }
+
+    @media (max-width: 980px) {
+      .hero {
+        padding-top: 108px;
+      }
+
+      .hero-grid,
+      .visit-layout {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-visual {
+        min-height: 540px;
+      }
+
+      .about-grid,
+      .menu-grid,
+      .reviews-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .gallery-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .gallery-item.large {
+        grid-row: span 1;
+      }
+    }
+
+    @media (max-width: 720px) {
+      .nav-links {
+        position: absolute;
+        top: 76px;
+        right: 16px;
+        left: 16px;
+        display: none;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 8px;
+        padding: 14px;
+        background: rgba(255, 249, 241, .98);
+        border: 1px solid var(--line);
+        border-radius: var(--radius);
+        box-shadow: var(--shadow);
+      }
+
+      .nav-links.open {
+        display: flex;
+      }
+
+      .mobile-toggle {
+        display: grid;
+        place-items: center;
+      }
+
+      .nav-inner > .btn {
+        display: none;
+      }
+
+      .hero {
+        min-height: auto;
+        padding-bottom: 44px;
+      }
+
+      .hero-grid {
+        gap: 28px;
+      }
+
+      .hero-visual {
+        min-height: 390px;
+      }
+
+      .orbital-showcase {
+        inset: 34px 8px auto auto;
+        width: 190px;
+        opacity: .86;
+      }
+
+      .orbit-dot {
+        width: 44px;
+        height: 44px;
+        font-size: .95rem;
+      }
+
+      .photo-stack {
+        grid-template-columns: 1fr 1fr;
+        gap: 10px;
+      }
+
+      .photo-main {
+        min-height: 360px;
+      }
+
+      .hero-badge {
+        inset: auto 14px 14px 14px;
+        width: auto;
+      }
+
+      .quick-stats,
+      .signature-strip,
+      .about-grid,
+      .menu-grid,
+      .reviews-grid,
+      .gallery-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .signature-strip span {
+        min-height: 48px;
+      }
+
+      .hero::before {
+        top: 96px;
+        left: -18px;
+        font-size: 7rem;
+        letter-spacing: 8px;
+      }
+
+      .filters-wrap {
+        top: 76px;
+        margin-inline: -4px;
+      }
+
+      .menu-toolbar {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+
+      .menu-card {
+        min-height: 318px;
+      }
+
+      .drink-image {
+        height: 190px;
+      }
+
+      .gallery-grid {
+        grid-auto-rows: 250px;
+      }
+
+      .gallery-item:nth-child(2),
+      .gallery-item:nth-child(4) {
+        transform: none;
+      }
+
+      section {
+        padding: 72px 0;
+      }
+
+      .footer-inner {
+        flex-direction: column;
+        text-align: center;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *,
+      *::before,
+      *::after {
+        scroll-behavior: auto !important;
+        transition-duration: .01ms !important;
+        animation-duration: .01ms !important;
+        animation-iteration-count: 1 !important;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="navbar" id="navbar">
+    <div class="container nav-inner">
+      <a class="logo" href="#home" aria-label="SEEU Cafe home">
+        <span class="logo-mark" aria-hidden="true"></span>
+        SEEU
+      </a>
+      <nav class="nav-links" id="navLinks" aria-label="روابط الموقع">
+        <a href="#about">عن SEEU</a>
+        <a href="#menu">المنيو</a>
+        <a href="#gallery">الأجواء</a>
+        <a href="#reviews">الآراء</a>
+        <a href="#visit">زورنا</a>
+      </nav>
+      <a class="btn btn-primary" href="#menu">شوف المنيو</a>
+      <button class="mobile-toggle" id="mobileToggle" type="button" aria-label="فتح القائمة" aria-expanded="false">☰</button>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero" id="home">
+      <div class="container hero-grid">
+        <div class="hero-copy reveal">
+          <div class="eyebrow">قهوة ومزاج على أصوله</div>
+          <h1>SEEU</h1>
+          <h2>مش مجرد كافيه، دي تجربتك المفضلة كل مرة.</h2>
+          <p>في SEEU هتلاقي قهوتك المفضلة، مشروبات باردة وساخنة، عصائر فريش، وحلويات في مكان دافئ يليق بالخروجة واللمة والوقت الحلو.</p>
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="#menu">استكشف المنيو</a>
+            <a class="btn btn-secondary" href="#visit">اعرف مكاننا</a>
+          </div>
+          <div class="quick-stats" aria-label="مميزات SEEU">
+            <div class="stat"><strong>60+</strong><span>اختيار في المنيو</span></div>
+            <div class="stat"><strong>Fresh</strong><span>عصائر ومشروبات يومية</span></div>
+            <div class="stat"><strong>Cozy</strong><span>قعدة مريحة وهادية</span></div>
+          </div>
+          <div class="signature-strip" aria-label="تجربة SEEU">
+            <span>بن مختار</span>
+            <span>تفاصيل هادية</span>
+            <span>مشروبات ملونة</span>
+            <span>قعدة على المزاج</span>
+          </div>
+          <div class="motion-ticker" aria-hidden="true">
+            <div class="ticker-track">
+              <span>Espresso Bar</span>
+              <span>Fresh Juice</span>
+              <span>Cold Coffee</span>
+              <span>Milkshake</span>
+              <span>Mojito</span>
+              <span>Sweet Moments</span>
+              <span>Espresso Bar</span>
+              <span>Fresh Juice</span>
+              <span>Cold Coffee</span>
+              <span>Milkshake</span>
+              <span>Mojito</span>
+              <span>Sweet Moments</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="hero-visual reveal" aria-label="صور من SEEU Cafe">
+          <div class="orbital-showcase" aria-hidden="true">
+            <span class="orbit-dot">☕</span>
+            <span class="orbit-dot">✦</span>
+            <span class="orbit-dot">SE</span>
+            <span class="orbit-dot">♡</span>
+          </div>
+          <div class="photo-stack">
+            <div class="photo-tile photo-main">
+              <img src="https://images.unsplash.com/photo-1509042239860-f550ce710b93?auto=format&amp;fit=crop&amp;w=900&amp;q=86" alt="قهوة ساخنة في SEEU Cafe" loading="eager">
+            </div>
+            <div class="photo-tile">
+              <img src="https://images.unsplash.com/photo-1517701604599-bb29b565090c?auto=format&amp;fit=crop&amp;w=700&amp;q=84" alt="مشروب بارد من SEEU Cafe" loading="eager">
+            </div>
+            <div class="photo-tile">
+              <img src="https://images.unsplash.com/photo-1554118811-1e0d58224f24?auto=format&amp;fit=crop&amp;w=700&amp;q=84" alt="أجواء كافيه دافئة" loading="eager">
+            </div>
+          </div>
+          <div class="hero-badge">
+            <strong>SEEU</strong>
+            <span>قهوتك مظبوطة، وقعدتك أظبط.</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="about" class="section-alt section-art">
+      <div class="container">
+        <div class="section-head reveal">
+          <span class="section-kicker">عن المكان</span>
+          <h3>ليه تختار SEEU؟</h3>
+          <p>تفاصيل بسيطة لكنها بتفرق، من جودة المشروب لحد شكل المكان والخدمة.</p>
+        </div>
+        <div class="about-grid">
+          <article class="feature-card reveal">
+            <div class="feature-icon" aria-hidden="true">☕</div>
+            <h4>جودة في كل كوب</h4>
+            <p>بنختار المكونات بعناية علشان كل مشروب يطلع بالمذاق اللي تستناه.</p>
+          </article>
+          <article class="feature-card reveal">
+            <div class="feature-icon" aria-hidden="true">✦</div>
+            <h4>أجواء مريحة</h4>
+            <p>مكان هادي وعصري مناسب للقاءات والخروجات والوقت اللي محتاج تهدى فيه.</p>
+          </article>
+          <article class="feature-card reveal">
+            <div class="feature-icon" aria-hidden="true">♡</div>
+            <h4>خدمة باهتمام</h4>
+            <p>فريقنا هدفه يخلي تجربتك سهلة ومريحة من أول الطلب لآخر رشفة.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section-dark" id="menu">
+      <div class="container">
+        <div class="section-head reveal">
+          <span class="section-kicker">منيو SEEU</span>
+          <h3>كل المشروبات اللي بتحبها</h3>
+          <p>اختار التصنيف وشوف مجموعة كبيرة من المشروبات الساخنة والباردة.</p>
+        </div>
+        <div class="filters-wrap reveal">
+          <div class="menu-toolbar">
+            <span>اختار مزاجك من المنيو</span>
+            <span class="menu-count" id="menuCount">كل المشروبات</span>
+          </div>
+          <div class="filters" id="filters" aria-label="فلترة المنيو"></div>
+        </div>
+        <div class="menu-grid" id="menuGrid" aria-live="polite"></div>
+      </div>
+    </section>
+
+    <section id="gallery">
+      <div class="container">
+        <div class="section-head reveal">
+          <span class="section-kicker">أجواء SEEU</span>
+          <h3>مكان يليق بوقتك</h3>
+          <p>تصميم مريح وتفاصيل دافئة تخلي كل قعدة لها طعم مختلف.</p>
+        </div>
+        <div class="gallery-grid">
+          <div class="gallery-item large reveal" data-label="قهوة بمذاق مختلف">
+            <img alt="قهوة SEEU" loading="lazy" src="https://images.unsplash.com/photo-1445116572660-236099ec97a0?auto=format&amp;fit=crop&amp;w=1000&amp;q=86">
+          </div>
+          <div class="gallery-item reveal" data-label="مشروبات باردة">
+            <img alt="مشروبات باردة" loading="lazy" src="https://images.unsplash.com/photo-1551024709-8f23befc6f87?auto=format&amp;fit=crop&amp;w=800&amp;q=86">
+          </div>
+          <div class="gallery-item reveal" data-label="تفاصيل المكان">
+            <img alt="أجواء الكافيه" loading="lazy" src="https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?auto=format&amp;fit=crop&amp;w=800&amp;q=86">
+          </div>
+          <div class="gallery-item reveal" data-label="وقت حلو مع أصحابك">
+            <img alt="جلسات SEEU" loading="lazy" src="https://images.unsplash.com/photo-1521017432531-fbd92d768814?auto=format&amp;fit=crop&amp;w=800&amp;q=86">
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section-alt" id="reviews">
+      <div class="container">
+        <div class="section-head reveal">
+          <span class="section-kicker">آراء العملاء</span>
+          <h3>تجارب بتتكلم عن نفسها</h3>
+        </div>
+        <div class="reviews-grid">
+          <article class="review reveal">
+            <div class="stars" aria-label="5 نجوم">★★★★★</div>
+            <p>القهوة مظبوطة جدًا والمكان هادي والخدمة محترمة.</p>
+            <strong>عميل SEEU</strong>
+          </article>
+          <article class="review reveal">
+            <div class="stars" aria-label="5 نجوم">★★★★★</div>
+            <p>المنيو متنوع وكل مرة بجرب حاجة جديدة وبتطلع حلوة.</p>
+            <strong>عميلة SEEU</strong>
+          </article>
+          <article class="review reveal">
+            <div class="stars" aria-label="5 نجوم">★★★★★</div>
+            <p>مكان مناسب للخروجة واللمة، والديكور مريح جدًا.</p>
+            <strong>عميل SEEU</strong>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="visit">
+      <div class="container visit-layout">
+        <div class="visit-card reveal">
+          <h3>مستنيينك في SEEU</h3>
+          <p>تعالى اختار مشروبك المفضل واستمتع بوقتك وسط أجواء مريحة.</p>
+          <a class="btn btn-primary" href="https://maps.google.com" target="_blank" rel="noreferrer">فتح الموقع</a>
+        </div>
+        <aside class="contact-panel reveal">
+          <h3>بيانات الزيارة</h3>
+          <p>عدّل العنوان ورقم التواصل من نفس الملف لما تكون جاهز.</p>
+          <div class="info-list">
+            <span><b aria-hidden="true">📍</b> أضف عنوان الكافيه هنا</span>
+            <span><b aria-hidden="true">📞</b> أضف رقم التواصل هنا</span>
+            <span><b aria-hidden="true">🕒</b> يوميًا من 8:00 صباحًا حتى 2:00 بعد منتصف الليل</span>
+          </div>
+        </aside>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container footer-inner">
+      <div class="footer-logo">SEEU</div>
+      <p>© 2026 SEEU Cafe. جميع الحقوق محفوظة.</p>
+    </div>
+  </footer>
+
+  <script>
+    const imageMap = {
+      hotCoffee: "https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?auto=format&fit=crop&w=720&q=82",
+      coldCoffee: "https://images.unsplash.com/photo-1461023058943-07fcbe16d735?auto=format&fit=crop&w=720&q=82",
+      hotDrinks: "https://images.unsplash.com/photo-1544787219-7f47ccb76574?auto=format&fit=crop&w=720&q=82",
+      fresh: "https://images.unsplash.com/photo-1621506289937-a8e4df240d0b?auto=format&fit=crop&w=720&q=82",
+      mojito: "https://images.unsplash.com/photo-1551538827-9c037cb4f32a?auto=format&fit=crop&w=720&q=82",
+      milkshake: "https://images.unsplash.com/photo-1572490122747-3968b75cc699?auto=format&fit=crop&w=720&q=82",
+      smoothie: "https://images.unsplash.com/photo-1505252585461-04db1eb84625?auto=format&fit=crop&w=720&q=82",
+      soft: "https://images.unsplash.com/photo-1527960471264-932f39eb5846?auto=format&fit=crop&w=720&q=82"
+    };
+
+    const categories = [
+      { id: "all", label: "الكل" },
+      { id: "hot-coffee", label: "قهوة ساخنة" },
+      { id: "cold-coffee", label: "قهوة باردة" },
+      { id: "hot-drinks", label: "مشروبات ساخنة" },
+      { id: "fresh", label: "عصائر فريش" },
+      { id: "mojito", label: "موهيتو وصودا" },
+      { id: "milkshake", label: "ميلك شيك" },
+      { id: "smoothie", label: "سموذي" },
+      { id: "soft", label: "مشروبات غازية ومياه" }
+    ];
+
+    const menuItems = [
+      ["hot-coffee", "hot coffee", "Espresso", "سنجل أو دبل", imageMap.hotCoffee],
+      ["hot-coffee", "hot coffee", "Americano", "إسبريسو ومياه ساخنة", imageMap.hotCoffee],
+      ["hot-coffee", "hot coffee", "Cappuccino", "إسبريسو وحليب وفوم", imageMap.hotCoffee],
+      ["hot-coffee", "hot coffee", "Cafe Latte", "قهوة بالحليب الناعم", imageMap.hotCoffee],
+      ["hot-coffee", "hot coffee", "Flat White", "إسبريسو مركز بحليب", imageMap.hotCoffee],
+      ["hot-coffee", "hot coffee", "Cortado", "إسبريسو بحليب متوازن", imageMap.hotCoffee],
+      ["hot-coffee", "hot coffee", "Mocha", "قهوة وشوكولاتة وحليب", imageMap.hotCoffee],
+      ["hot-coffee", "hot coffee", "Macchiato", "إسبريسو بلمسة فوم", imageMap.hotCoffee],
+      ["hot-coffee", "hot coffee", "Turkish Coffee", "سادة أو مظبوط أو زيادة", imageMap.hotCoffee],
+      ["hot-coffee", "hot coffee", "French Coffee", "قهوة فرنش غنية", imageMap.hotCoffee],
+      ["hot-coffee", "hot coffee", "Spanish Latte Hot", "إسبريسو وحليب مكثف", imageMap.hotCoffee],
+      ["hot-coffee", "hot coffee", "Caramel Latte Hot", "لاتيه بصوص الكراميل", imageMap.hotCoffee],
+      ["hot-coffee", "hot coffee", "Hazelnut Latte Hot", "لاتيه بطعم البندق", imageMap.hotCoffee],
+      ["hot-coffee", "hot coffee", "Vanilla Latte Hot", "لاتيه بالفانيليا", imageMap.hotCoffee],
+      ["cold-coffee", "cold coffee", "Iced Americano", "إسبريسو بارد ومنعش", imageMap.coldCoffee],
+      ["cold-coffee", "cold coffee", "Iced Latte", "إسبريسو وحليب وثلج", imageMap.coldCoffee],
+      ["cold-coffee", "cold coffee", "Iced Mocha", "قهوة باردة وشوكولاتة", imageMap.coldCoffee],
+      ["cold-coffee", "cold coffee", "Iced Spanish Latte", "قهوة باردة وحليب مكثف", imageMap.coldCoffee],
+      ["cold-coffee", "cold coffee", "Iced Caramel Macchiato", "كراميل وقهوة وحليب", imageMap.coldCoffee],
+      ["cold-coffee", "cold coffee", "Iced Vanilla Latte", "لاتيه بارد بالفانيليا", imageMap.coldCoffee],
+      ["cold-coffee", "cold coffee", "Iced Hazelnut Latte", "لاتيه بارد بالبندق", imageMap.coldCoffee],
+      ["cold-coffee", "cold coffee", "Cold Brew", "قهوة منقوعة على البارد", imageMap.coldCoffee],
+      ["cold-coffee", "cold coffee", "Frappuccino", "قهوة مثلجة كريمي", imageMap.coldCoffee],
+      ["cold-coffee", "cold coffee", "Caramel Frappe", "قهوة مثلجة بالكراميل", imageMap.coldCoffee],
+      ["cold-coffee", "cold coffee", "Mocha Frappe", "قهوة مثلجة بالشوكولاتة", imageMap.coldCoffee],
+      ["hot-drinks", "hot drinks", "Tea", "شاي أحمر كلاسيك", imageMap.hotDrinks],
+      ["hot-drinks", "hot drinks", "Green Tea", "شاي أخضر", imageMap.hotDrinks],
+      ["hot-drinks", "hot drinks", "Tea with Mint", "شاي بالنعناع", imageMap.hotDrinks],
+      ["hot-drinks", "hot drinks", "Tea with Milk", "شاي بالحليب", imageMap.hotDrinks],
+      ["hot-drinks", "hot drinks", "Hot Chocolate", "شوكولاتة ساخنة كريمي", imageMap.hotDrinks],
+      ["hot-drinks", "hot drinks", "White Hot Chocolate", "شوكولاتة بيضاء ساخنة", imageMap.hotDrinks],
+      ["hot-drinks", "hot drinks", "Sahlab", "سحلب غني ودافئ", imageMap.hotDrinks],
+      ["hot-drinks", "hot drinks", "Cinnamon", "قرفة ساخنة", imageMap.hotDrinks],
+      ["hot-drinks", "hot drinks", "Ginger", "جنزبيل ساخن", imageMap.hotDrinks],
+      ["hot-drinks", "hot drinks", "Lemon & Ginger", "ليمون بالجنزبيل", imageMap.hotDrinks],
+      ["hot-drinks", "hot drinks", "Anise", "يانسون دافئ", imageMap.hotDrinks],
+      ["hot-drinks", "hot drinks", "Hibiscus Hot", "كركديه ساخن", imageMap.hotDrinks],
+      ["hot-drinks", "hot drinks", "Orchid Herbs", "أعشاب مشكلة", imageMap.hotDrinks],
+      ["fresh", "fresh", "Orange Juice", "برتقال فريش", imageMap.fresh],
+      ["fresh", "fresh", "Mango Juice", "مانجو فريش", imageMap.fresh],
+      ["fresh", "fresh", "Strawberry Juice", "فراولة فريش", imageMap.fresh],
+      ["fresh", "fresh", "Guava Juice", "جوافة فريش", imageMap.fresh],
+      ["fresh", "fresh", "Lemon Juice", "ليمون منعش", imageMap.fresh],
+      ["fresh", "fresh", "Lemon Mint", "ليمون بالنعناع", imageMap.fresh],
+      ["fresh", "fresh", "Watermelon Juice", "بطيخ فريش", imageMap.fresh],
+      ["fresh", "fresh", "Pineapple Juice", "أناناس فريش", imageMap.fresh],
+      ["fresh", "fresh", "Kiwi Juice", "كيوي فريش", imageMap.fresh],
+      ["fresh", "fresh", "Pomegranate Juice", "رمان فريش", imageMap.fresh],
+      ["fresh", "fresh", "Avocado Juice", "أفوكادو كريمي", imageMap.fresh],
+      ["fresh", "fresh", "Fruit Cocktail", "كوكتيل فواكه", imageMap.fresh],
+      ["mojito", "mojito", "Classic Mojito", "ليمون ونعناع وصودا", imageMap.mojito],
+      ["mojito", "mojito", "Blue Mojito", "موهيتو بلو منعش", imageMap.mojito],
+      ["mojito", "mojito", "Strawberry Mojito", "موهيتو فراولة", imageMap.mojito],
+      ["mojito", "mojito", "Passion Fruit Mojito", "موهيتو باشن فروت", imageMap.mojito],
+      ["mojito", "mojito", "Peach Mojito", "موهيتو خوخ", imageMap.mojito],
+      ["mojito", "mojito", "Green Apple Mojito", "موهيتو تفاح أخضر", imageMap.mojito],
+      ["mojito", "mojito", "Berry Mojito", "موهيتو توت", imageMap.mojito],
+      ["mojito", "mojito", "Energy Mojito", "موهيتو إنرجي", imageMap.mojito],
+      ["mojito", "mojito", "Soda Mix", "صودا بنكهات مختلفة", imageMap.mojito],
+      ["milkshake", "milkshake", "Vanilla Milkshake", "ميلك شيك فانيليا", imageMap.milkshake],
+      ["milkshake", "milkshake", "Chocolate Milkshake", "ميلك شيك شوكولاتة", imageMap.milkshake],
+      ["milkshake", "milkshake", "Strawberry Milkshake", "ميلك شيك فراولة", imageMap.milkshake],
+      ["milkshake", "milkshake", "Oreo Milkshake", "ميلك شيك أوريو", imageMap.milkshake],
+      ["milkshake", "milkshake", "Lotus Milkshake", "ميلك شيك لوتس", imageMap.milkshake],
+      ["milkshake", "milkshake", "Caramel Milkshake", "ميلك شيك كراميل", imageMap.milkshake],
+      ["milkshake", "milkshake", "Nutella Milkshake", "ميلك شيك نوتيلا", imageMap.milkshake],
+      ["milkshake", "milkshake", "Blueberry Milkshake", "ميلك شيك توت أزرق", imageMap.milkshake],
+      ["milkshake", "milkshake", "Mango Milkshake", "ميلك شيك مانجو", imageMap.milkshake],
+      ["smoothie", "smoothie", "Mango Smoothie", "سموذي مانجو", imageMap.smoothie],
+      ["smoothie", "smoothie", "Strawberry Smoothie", "سموذي فراولة", imageMap.smoothie],
+      ["smoothie", "smoothie", "Berry Smoothie", "سموذي توت", imageMap.smoothie],
+      ["smoothie", "smoothie", "Peach Smoothie", "سموذي خوخ", imageMap.smoothie],
+      ["smoothie", "smoothie", "Passion Fruit Smoothie", "سموذي باشن فروت", imageMap.smoothie],
+      ["smoothie", "smoothie", "Kiwi Smoothie", "سموذي كيوي", imageMap.smoothie],
+      ["smoothie", "smoothie", "Mix Berry Smoothie", "سموذي ميكس بيري", imageMap.smoothie],
+      ["soft", "soft", "Cola", "مشروب غازي", imageMap.soft],
+      ["soft", "soft", "Diet Cola", "كولا دايت", imageMap.soft],
+      ["soft", "soft", "Sprite / Lemon Soda", "مشروب ليمون غازي", imageMap.soft],
+      ["soft", "soft", "Orange Soda", "مشروب برتقال غازي", imageMap.soft],
+      ["soft", "soft", "Energy Drink", "مشروب طاقة", imageMap.soft],
+      ["soft", "soft", "Mineral Water", "مياه معدنية", imageMap.soft],
+      ["soft", "soft", "Sparkling Water", "مياه غازية", imageMap.soft]
+    ];
+
+    const filters = document.getElementById("filters");
+    const menuGrid = document.getElementById("menuGrid");
+    const menuCount = document.getElementById("menuCount");
+
+    function updateMenuCount(filter, cards) {
+      const visibleCount = Array.from(cards).filter((card) => !card.classList.contains("hide")).length;
+      const activeCategory = categories.find((category) => category.id === filter);
+      const label = activeCategory ? activeCategory.label : "المنيو";
+      menuCount.textContent = `${visibleCount} مشروب | ${label}`;
+    }
+
+    function createFilterButtons() {
+      const fragment = document.createDocumentFragment();
+
+      categories.forEach((category, index) => {
+        const button = document.createElement("button");
+        button.className = `filter-btn${index === 0 ? " active" : ""}`;
+        button.type = "button";
+        button.dataset.filter = category.id;
+        button.textContent = category.label;
+        fragment.appendChild(button);
+      });
+
+      filters.replaceChildren(fragment);
+    }
+
+    function createMenuCards() {
+      const fragment = document.createDocumentFragment();
+
+      menuItems.forEach(([category, label, title, description, image], index) => {
+        const card = document.createElement("article");
+        card.className = "menu-card reveal";
+        card.dataset.category = category;
+        card.dataset.index = String(index + 1).padStart(2, "0");
+        card.style.transitionDelay = `${Math.min(index % 6, 5) * 28}ms`;
+
+        const imageWrap = document.createElement("div");
+        imageWrap.className = "drink-image is-loading";
+
+        const photo = document.createElement("img");
+        photo.alt = `${title} - SEEU Cafe`;
+        photo.loading = "lazy";
+        photo.decoding = "async";
+        photo.addEventListener("load", () => imageWrap.classList.remove("is-loading"), { once: true });
+        photo.onerror = () => {
+          imageWrap.classList.remove("is-loading");
+          photo.remove();
+          imageWrap.classList.add("image-fallback");
+        };
+        photo.src = image;
+        imageWrap.appendChild(photo);
+
+        const body = document.createElement("div");
+        body.className = "menu-card-body";
+
+        const tag = document.createElement("span");
+        tag.className = "drink-category";
+        tag.textContent = label;
+
+        const heading = document.createElement("h4");
+        heading.textContent = title;
+
+        const text = document.createElement("p");
+        text.textContent = description;
+
+        body.append(tag, heading, text);
+        card.append(imageWrap, body);
+        fragment.appendChild(card);
+      });
+
+      menuGrid.replaceChildren(fragment);
+    }
+
+    function attachFilters() {
+      const filterButtons = document.querySelectorAll(".filter-btn");
+      const cards = document.querySelectorAll(".menu-card");
+      updateMenuCount("all", cards);
+
+      filterButtons.forEach((button) => {
+        button.addEventListener("click", () => {
+          const filter = button.dataset.filter;
+          filterButtons.forEach((item) => item.classList.remove("active"));
+          button.classList.add("active");
+
+          cards.forEach((card) => {
+            card.classList.toggle("hide", filter !== "all" && card.dataset.category !== filter);
+          });
+
+          updateMenuCount(filter, cards);
+        });
+      });
+    }
+
+    function initNavigation() {
+      const navbar = document.getElementById("navbar");
+      const mobileToggle = document.getElementById("mobileToggle");
+      const navLinks = document.getElementById("navLinks");
+
+      const closeMenu = () => {
+        navLinks.classList.remove("open");
+        mobileToggle.setAttribute("aria-expanded", "false");
+      };
+
+      mobileToggle.addEventListener("click", () => {
+        const isOpen = navLinks.classList.toggle("open");
+        mobileToggle.setAttribute("aria-expanded", String(isOpen));
+      });
+
+      navLinks.querySelectorAll("a").forEach((link) => {
+        link.addEventListener("click", closeMenu);
+      });
+
+      const onScroll = () => navbar.classList.toggle("scrolled", window.scrollY > 16);
+      window.addEventListener("scroll", onScroll, { passive: true });
+      onScroll();
+    }
+
+    function initReveal() {
+      const elements = document.querySelectorAll(".reveal");
+
+      if (!("IntersectionObserver" in window)) {
+        elements.forEach((element) => element.classList.add("visible"));
+        return;
+      }
+
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("visible");
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: .08 });
+
+      elements.forEach((element) => observer.observe(element));
+    }
+
+    createFilterButtons();
+    createMenuCards();
+    attachFilters();
+    initNavigation();
+    initReveal();
+  </script>
+</body>
+</html>
