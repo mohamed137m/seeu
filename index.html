@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="SEEU Cafe - قهوة ومشروبات وحلويات في أجواء مريحة وعصرية.">
-  <title>SEEU Cafe</title>
+  <title>SEEU Cafe | Developed by Code Plus</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800&amp;family=Playfair+Display:wght@600;700&amp;display=swap" rel="stylesheet">
@@ -1077,17 +1077,24 @@
       pointer-events: none;
     }
 
-    .menu-card[data-category="fresh"]::before,
-    .menu-card[data-category="smoothie"]::before {
+    .menu-card[data-category="ice-tea"]::before,
+    .menu-card[data-category="mojito"]::before,
+    .menu-card[data-category="mojito-mix"]::before,
+    .menu-card[data-category="smoothie"]::before,
+    .menu-card[data-category="bonbon"]::before {
       background: linear-gradient(135deg, rgba(63, 143, 134, .18), transparent 48%);
     }
 
-    .menu-card[data-category="mojito"]::before,
-    .menu-card[data-category="soft"]::before {
+    .menu-card[data-category="iced-coffee"]::before,
+    .menu-card[data-category="hot-drinks"]::before,
+    .menu-card[data-category="espresso"]::before {
       background: linear-gradient(135deg, rgba(66, 126, 166, .2), transparent 48%);
     }
 
-    .menu-card[data-category="milkshake"]::before {
+    .menu-card[data-category="milkshake"]::before,
+    .menu-card[data-category="frappe"]::before,
+    .menu-card[data-category="frappuccino"]::before,
+    .menu-card[data-category="waffle"]::before {
       background: linear-gradient(135deg, rgba(178, 71, 104, .2), transparent 48%);
     }
 
@@ -1220,17 +1227,24 @@
       text-transform: uppercase;
     }
 
-    .menu-card[data-category="fresh"] .drink-category,
-    .menu-card[data-category="smoothie"] .drink-category {
+    .menu-card[data-category="ice-tea"] .drink-category,
+    .menu-card[data-category="mojito"] .drink-category,
+    .menu-card[data-category="mojito-mix"] .drink-category,
+    .menu-card[data-category="smoothie"] .drink-category,
+    .menu-card[data-category="bonbon"] .drink-category {
       color: #9be2d8;
     }
 
-    .menu-card[data-category="mojito"] .drink-category,
-    .menu-card[data-category="soft"] .drink-category {
+    .menu-card[data-category="iced-coffee"] .drink-category,
+    .menu-card[data-category="hot-drinks"] .drink-category,
+    .menu-card[data-category="espresso"] .drink-category {
       color: #a9d8ff;
     }
 
-    .menu-card[data-category="milkshake"] .drink-category {
+    .menu-card[data-category="milkshake"] .drink-category,
+    .menu-card[data-category="frappe"] .drink-category,
+    .menu-card[data-category="frappuccino"] .drink-category,
+    .menu-card[data-category="waffle"] .drink-category {
       color: #ffb9cb;
     }
 
@@ -1273,21 +1287,457 @@
       box-shadow: 0 0 0 5px rgba(243, 199, 122, .12);
     }
 
-    .menu-card[data-category="fresh"] .drink-chip::before,
-    .menu-card[data-category="smoothie"] .drink-chip::before {
+    .menu-card[data-category="ice-tea"] .drink-chip::before,
+    .menu-card[data-category="mojito"] .drink-chip::before,
+    .menu-card[data-category="mojito-mix"] .drink-chip::before,
+    .menu-card[data-category="smoothie"] .drink-chip::before,
+    .menu-card[data-category="bonbon"] .drink-chip::before {
       background: #9be2d8;
       box-shadow: 0 0 0 5px rgba(155, 226, 216, .12);
     }
 
-    .menu-card[data-category="mojito"] .drink-chip::before,
-    .menu-card[data-category="soft"] .drink-chip::before {
+    .menu-card[data-category="iced-coffee"] .drink-chip::before,
+    .menu-card[data-category="hot-drinks"] .drink-chip::before,
+    .menu-card[data-category="espresso"] .drink-chip::before {
       background: #a9d8ff;
       box-shadow: 0 0 0 5px rgba(169, 216, 255, .12);
     }
 
-    .menu-card[data-category="milkshake"] .drink-chip::before {
+    .menu-card[data-category="milkshake"] .drink-chip::before,
+    .menu-card[data-category="frappe"] .drink-chip::before,
+    .menu-card[data-category="frappuccino"] .drink-chip::before,
+    .menu-card[data-category="waffle"] .drink-chip::before {
       background: #ffb9cb;
       box-shadow: 0 0 0 5px rgba(255, 185, 203, .12);
+    }
+
+    .order-controls {
+      display: grid;
+      gap: 10px;
+      margin-top: 16px;
+    }
+
+    .quick-check {
+      min-height: 42px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      color: rgba(255, 255, 255, .9);
+      background: rgba(255, 255, 255, .08);
+      border: 1px solid rgba(255, 255, 255, .16);
+      border-radius: var(--radius);
+      cursor: pointer;
+      font-size: .9rem;
+      font-weight: 900;
+    }
+
+    .quick-check input {
+      width: 18px;
+      height: 18px;
+      accent-color: var(--honey);
+      cursor: pointer;
+    }
+
+    .order-card-btn {
+      width: 100%;
+      min-height: 44px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      color: var(--espresso);
+      background: linear-gradient(135deg, var(--honey), var(--caramel));
+      border: 0;
+      border-radius: var(--radius);
+      cursor: pointer;
+      font-size: .94rem;
+      font-weight: 900;
+      box-shadow: 0 12px 26px rgba(200, 135, 82, .25);
+      transition: transform .2s ease, filter .2s ease;
+    }
+
+    .menu-card.is-selected {
+      border-color: rgba(243, 199, 122, .72);
+      box-shadow: 0 28px 58px rgba(0, 0, 0, .28), 0 0 0 2px rgba(243, 199, 122, .18);
+    }
+
+    .order-card-btn:hover,
+    .order-card-btn:focus-visible {
+      transform: translateY(-2px);
+      filter: brightness(1.04);
+    }
+
+    .floating-order {
+      position: fixed;
+      right: 18px;
+      bottom: 18px;
+      z-index: 30;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      min-height: 50px;
+      padding: 10px 16px;
+      color: var(--white);
+      background: linear-gradient(135deg, var(--berry), var(--espresso));
+      border: 1px solid rgba(255, 255, 255, .18);
+      border-radius: 999px;
+      cursor: pointer;
+      font-weight: 900;
+      box-shadow: 0 18px 40px rgba(45, 26, 20, .28);
+    }
+
+    .cart-count {
+      min-width: 26px;
+      height: 26px;
+      display: grid;
+      place-items: center;
+      color: var(--espresso);
+      background: var(--honey);
+      border-radius: 999px;
+      direction: ltr;
+      font-size: .82rem;
+    }
+
+    .modal {
+      position: fixed;
+      inset: 0;
+      z-index: 40;
+      display: none;
+      place-items: center;
+      padding: 20px;
+      background: rgba(18, 10, 7, .62);
+      backdrop-filter: blur(10px);
+    }
+
+    .modal.open {
+      display: grid;
+    }
+
+    .modal-panel {
+      width: min(760px, 100%);
+      max-height: min(88vh, 760px);
+      overflow: auto;
+      color: var(--ink);
+      background: var(--paper);
+      border: 1px solid rgba(73, 48, 39, .14);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+    }
+
+    .modal-head,
+    .modal-actions {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 18px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .modal-actions {
+      border-top: 1px solid var(--line);
+      border-bottom: 0;
+      flex-wrap: wrap;
+    }
+
+    .modal-head h3 {
+      color: var(--coffee);
+      font-size: 1.35rem;
+    }
+
+    .icon-btn {
+      width: 42px;
+      height: 42px;
+      display: grid;
+      place-items: center;
+      color: var(--coffee);
+      background: rgba(73, 48, 39, .06);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      cursor: pointer;
+      font-size: 1.35rem;
+      line-height: 1;
+    }
+
+    .modal-body {
+      display: grid;
+      gap: 18px;
+      padding: 18px;
+    }
+
+    .cart-items {
+      display: grid;
+      gap: 10px;
+    }
+
+    .cart-empty {
+      padding: 18px;
+      color: var(--muted);
+      background: rgba(73, 48, 39, .05);
+      border: 1px dashed var(--line);
+      border-radius: var(--radius);
+      text-align: center;
+      font-weight: 800;
+    }
+
+    .cart-item {
+      display: grid;
+      grid-template-columns: 58px 1fr auto;
+      align-items: center;
+      gap: 12px;
+      padding: 10px;
+      background: rgba(255, 255, 255, .72);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+    }
+
+    .cart-item img {
+      width: 58px;
+      height: 58px;
+      object-fit: cover;
+      border-radius: var(--radius);
+    }
+
+    .cart-item strong {
+      display: block;
+      color: var(--coffee);
+      line-height: 1.25;
+    }
+
+    .cart-item small {
+      color: var(--muted);
+      font-weight: 800;
+    }
+
+    .qty-controls {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      direction: ltr;
+    }
+
+    .qty-controls button {
+      width: 32px;
+      height: 32px;
+      display: grid;
+      place-items: center;
+      color: var(--coffee);
+      background: rgba(73, 48, 39, .06);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      cursor: pointer;
+      font-weight: 900;
+    }
+
+    .order-form {
+      display: grid;
+      gap: 14px;
+      padding: 16px;
+      background: rgba(255, 255, 255, .62);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+    }
+
+    .service-switch {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 8px;
+    }
+
+    .service-switch label {
+      display: grid;
+      place-items: center;
+      min-height: 46px;
+      padding: 8px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      cursor: pointer;
+      font-weight: 900;
+      text-align: center;
+    }
+
+    .service-switch input {
+      position: absolute;
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    .service-switch label:has(input:checked) {
+      color: var(--white);
+      background: linear-gradient(135deg, var(--mint), var(--coffee));
+      border-color: rgba(63, 143, 134, .5);
+    }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+    }
+
+    .form-grid label,
+    .field-wide {
+      display: grid;
+      gap: 6px;
+      color: var(--coffee);
+      font-weight: 900;
+    }
+
+    .form-grid input,
+    .form-grid textarea,
+    .form-grid select,
+    .field-wide textarea {
+      width: 100%;
+      min-height: 44px;
+      padding: 10px 12px;
+      color: var(--ink);
+      background: var(--white);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      outline: none;
+    }
+
+    .form-grid textarea,
+    .field-wide textarea {
+      min-height: 88px;
+      resize: vertical;
+    }
+
+    .review-form {
+      display: grid;
+      gap: 14px;
+      margin-top: 22px;
+      padding: 22px;
+      background: rgba(255, 255, 255, .72);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: var(--soft-shadow);
+    }
+
+    .review-form h4 {
+      color: var(--coffee);
+      font-size: 1.35rem;
+    }
+
+    .review-form .btn {
+      justify-self: start;
+    }
+
+    .delivery-fields {
+      display: none;
+    }
+
+    .order-form.delivery-mode .delivery-fields {
+      display: grid;
+    }
+
+    .order-form.delivery-mode .inside-fields {
+      display: none;
+    }
+
+    .form-status {
+      min-height: 26px;
+      color: var(--muted);
+      font-weight: 900;
+    }
+
+    .admin-section {
+      background:
+        linear-gradient(135deg, rgba(35, 77, 73, .96), rgba(42, 26, 21, .96)),
+        url("https://images.unsplash.com/photo-1554118811-1e0d58224f24?auto=format&fit=crop&w=1800&q=80") center / cover;
+    }
+
+    .admin-shell {
+      display: grid;
+      gap: 18px;
+      color: var(--white);
+    }
+
+    .admin-login,
+    .admin-dashboard {
+      padding: 18px;
+      background: rgba(255, 255, 255, .08);
+      border: 1px solid rgba(255, 255, 255, .16);
+      border-radius: var(--radius);
+      box-shadow: 0 20px 48px rgba(0, 0, 0, .18);
+      backdrop-filter: blur(14px);
+    }
+
+    .admin-login form {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr)) auto;
+      gap: 10px;
+      margin-top: 12px;
+    }
+
+    .admin-login input {
+      min-height: 46px;
+      padding: 10px 12px;
+      border: 1px solid rgba(255, 255, 255, .18);
+      border-radius: var(--radius);
+      outline: none;
+    }
+
+    .admin-dashboard[hidden],
+    .admin-login[hidden] {
+      display: none;
+    }
+
+    .admin-topbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-bottom: 14px;
+    }
+
+    .orders-list {
+      display: grid;
+      gap: 12px;
+    }
+
+    .order-admin-card {
+      display: grid;
+      gap: 10px;
+      padding: 14px;
+      color: var(--ink);
+      background: rgba(255, 249, 241, .94);
+      border-radius: var(--radius);
+      border: 1px solid rgba(255, 255, 255, .22);
+    }
+
+    .order-admin-card header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .order-status {
+      display: inline-flex;
+      align-items: center;
+      min-height: 28px;
+      padding: 4px 10px;
+      color: var(--white);
+      background: var(--berry);
+      border-radius: 999px;
+      font-size: .8rem;
+      font-weight: 900;
+    }
+
+    .order-admin-card ul {
+      display: grid;
+      gap: 4px;
+      padding: 0;
+      list-style: none;
+    }
+
+    .order-admin-card footer {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
     }
 
     .gallery-grid {
@@ -1438,6 +1888,129 @@
       font-weight: 700;
     }
 
+    .developer-section {
+      position: relative;
+      overflow: hidden;
+      color: var(--white);
+      background:
+        linear-gradient(135deg, rgba(35, 77, 73, .96), rgba(42, 26, 21, .94) 58%, rgba(178, 71, 104, .84)),
+        url("https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?auto=format&fit=crop&w=1800&q=82") center / cover;
+    }
+
+    .developer-section::before {
+      content: "CODE PLUS";
+      position: absolute;
+      inset: 30px auto auto -18px;
+      color: rgba(255, 255, 255, .055);
+      font-family: "Playfair Display", serif;
+      font-size: clamp(4rem, 14vw, 12rem);
+      line-height: 1;
+      letter-spacing: 8px;
+      direction: ltr;
+      pointer-events: none;
+    }
+
+    .developer-profile {
+      position: relative;
+      z-index: 1;
+      display: grid;
+      grid-template-columns: minmax(280px, .8fr) minmax(0, 1.2fr);
+      gap: clamp(22px, 5vw, 56px);
+      align-items: center;
+    }
+
+    .developer-photo {
+      position: relative;
+      min-height: 560px;
+      overflow: hidden;
+      border-radius: var(--radius);
+      background:
+        linear-gradient(135deg, rgba(243, 199, 122, .22), rgba(178, 71, 104, .2)),
+        rgba(255, 255, 255, .08);
+      border: 1px solid rgba(255, 255, 255, .18);
+      box-shadow: 0 28px 70px rgba(0, 0, 0, .28);
+    }
+
+    .developer-photo::before {
+      content: "MR";
+      position: absolute;
+      inset: 0;
+      display: grid;
+      place-items: center;
+      color: rgba(255, 255, 255, .2);
+      font-family: "Playfair Display", serif;
+      font-size: clamp(4rem, 12vw, 8rem);
+      letter-spacing: 10px;
+      direction: ltr;
+    }
+
+    .developer-photo img {
+      position: relative;
+      z-index: 1;
+      width: 100%;
+      height: 100%;
+      min-height: 560px;
+      object-fit: cover;
+      object-position: center top;
+    }
+
+    .developer-copy {
+      display: grid;
+      gap: 18px;
+    }
+
+    .developer-copy .section-kicker {
+      color: var(--honey);
+    }
+
+    .developer-copy h3 {
+      color: var(--white);
+      font-size: clamp(2.4rem, 6vw, 4.8rem);
+      line-height: 1.1;
+    }
+
+    .developer-title {
+      color: rgba(255, 255, 255, .82);
+      font-size: clamp(1.05rem, 2vw, 1.3rem);
+      font-weight: 900;
+    }
+
+    .developer-title strong {
+      color: var(--honey);
+    }
+
+    .developer-bio {
+      color: rgba(255, 255, 255, .74);
+      font-size: 1.02rem;
+      line-height: 2;
+    }
+
+    .developer-actions {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .developer-contact {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px;
+    }
+
+    .developer-contact a {
+      min-height: 52px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 10px 14px;
+      color: rgba(255, 255, 255, .9);
+      background: rgba(255, 255, 255, .08);
+      border: 1px solid rgba(255, 255, 255, .14);
+      border-radius: var(--radius);
+      font-weight: 900;
+      direction: ltr;
+    }
+
     footer {
       padding: 30px 0;
       color: var(--muted);
@@ -1446,9 +2019,9 @@
     }
 
     .footer-inner {
-      display: flex;
+      display: grid;
+      grid-template-columns: auto minmax(0, 1fr) auto;
       align-items: center;
-      justify-content: space-between;
       gap: 18px;
     }
 
@@ -1461,7 +2034,33 @@
     }
 
     .developer-credit {
+      display: grid;
+      gap: 4px;
+      min-width: 260px;
+      padding: 14px 16px;
       color: var(--coffee);
+      background:
+        linear-gradient(135deg, rgba(63, 143, 134, .12), rgba(178, 71, 104, .1)),
+        rgba(255, 255, 255, .68);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: var(--soft-shadow);
+    }
+
+    .developer-credit span {
+      color: var(--muted);
+      font-size: .82rem;
+      font-weight: 800;
+    }
+
+    .developer-credit strong {
+      color: var(--coffee);
+      font-size: 1rem;
+      font-weight: 900;
+    }
+
+    .developer-credit b {
+      color: var(--berry);
       font-weight: 800;
     }
 
@@ -1535,7 +2134,11 @@
       .signature-strip span,
       .menu-card,
       .feature-card,
-      .review {
+      .review,
+      .modal-panel,
+      .admin-login,
+      .admin-dashboard,
+      .order-admin-card {
         min-width: 0;
         overflow-wrap: anywhere;
       }
@@ -1623,6 +2226,15 @@
         grid-template-columns: 1fr;
       }
 
+      .developer-profile {
+        grid-template-columns: 1fr;
+      }
+
+      .developer-photo,
+      .developer-photo img {
+        min-height: 460px;
+      }
+
       .hero-copy {
         max-width: 760px;
         width: 100%;
@@ -1671,6 +2283,10 @@
 
       .gallery-item.large {
         grid-row: span 1;
+      }
+
+      .admin-login form {
+        grid-template-columns: 1fr;
       }
     }
 
@@ -1887,8 +2503,46 @@
       }
 
       .footer-inner {
-        flex-direction: column;
+        grid-template-columns: 1fr;
         text-align: center;
+      }
+
+      .developer-credit {
+        min-width: 0;
+      }
+
+      .floating-order {
+        right: 12px;
+        bottom: 12px;
+        min-height: 46px;
+        padding-inline: 14px;
+      }
+
+      .modal {
+        padding: 10px;
+        align-items: end;
+      }
+
+      .modal-panel {
+        max-height: 92vh;
+      }
+
+      .form-grid,
+      .service-switch {
+        grid-template-columns: 1fr;
+      }
+
+      .cart-item {
+        grid-template-columns: 50px 1fr;
+      }
+
+      .qty-controls {
+        grid-column: 1 / -1;
+        justify-content: flex-end;
+      }
+
+      .modal-actions .btn {
+        flex: 1 1 180px;
       }
     }
 
@@ -1928,6 +2582,15 @@
 
       .visit-card {
         min-height: 360px;
+      }
+
+      .developer-photo,
+      .developer-photo img {
+        min-height: 360px;
+      }
+
+      .developer-contact {
+        grid-template-columns: 1fr;
       }
     }
 
@@ -2115,26 +2778,33 @@
         <a href="#gallery">الأجواء</a>
         <a href="#reviews">الآراء</a>
         <a href="#visit">زورنا</a>
+        <a href="developer.html">المطور</a>
+        <a href="admin.html">دخول الأدمن</a>
       </nav>
       <a class="btn btn-primary" href="#menu">شوف المنيو</a>
+      <a class="btn btn-secondary" href="admin.html">دخول الأدمن</a>
       <button class="mobile-toggle" id="mobileToggle" type="button" aria-label="فتح القائمة" aria-expanded="false">☰</button>
     </div>
   </header>
 
   <div class="drink-marquee" aria-label="مشروبات SEEU المتحركة">
     <div class="drink-marquee-track">
-      <span class="drink-pill"><img src="https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?auto=format&amp;fit=crop&amp;w=120&amp;q=80" alt="">Espresso</span>
-      <span class="drink-pill"><img src="https://images.unsplash.com/photo-1461023058943-07fcbe16d735?auto=format&amp;fit=crop&amp;w=120&amp;q=80" alt="">Iced Latte</span>
-      <span class="drink-pill"><img src="https://images.unsplash.com/photo-1621506289937-a8e4df240d0b?auto=format&amp;fit=crop&amp;w=120&amp;q=80" alt="">Fresh Juice</span>
-      <span class="drink-pill"><img src="https://images.unsplash.com/photo-1551538827-9c037cb4f32a?auto=format&amp;fit=crop&amp;w=120&amp;q=80" alt="">Mojito</span>
-      <span class="drink-pill"><img src="https://images.unsplash.com/photo-1572490122747-3968b75cc699?auto=format&amp;fit=crop&amp;w=120&amp;q=80" alt="">Milkshake</span>
-      <span class="drink-pill"><img src="https://images.unsplash.com/photo-1505252585461-04db1eb84625?auto=format&amp;fit=crop&amp;w=120&amp;q=80" alt="">Smoothie</span>
-      <span class="drink-pill"><img src="https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?auto=format&amp;fit=crop&amp;w=120&amp;q=80" alt="">Espresso</span>
-      <span class="drink-pill"><img src="https://images.unsplash.com/photo-1461023058943-07fcbe16d735?auto=format&amp;fit=crop&amp;w=120&amp;q=80" alt="">Iced Latte</span>
-      <span class="drink-pill"><img src="https://images.unsplash.com/photo-1621506289937-a8e4df240d0b?auto=format&amp;fit=crop&amp;w=120&amp;q=80" alt="">Fresh Juice</span>
-      <span class="drink-pill"><img src="https://images.unsplash.com/photo-1551538827-9c037cb4f32a?auto=format&amp;fit=crop&amp;w=120&amp;q=80" alt="">Mojito</span>
-      <span class="drink-pill"><img src="https://images.unsplash.com/photo-1572490122747-3968b75cc699?auto=format&amp;fit=crop&amp;w=120&amp;q=80" alt="">Milkshake</span>
-      <span class="drink-pill"><img src="https://images.unsplash.com/photo-1505252585461-04db1eb84625?auto=format&amp;fit=crop&amp;w=120&amp;q=80" alt="">Smoothie</span>
+      <span class="drink-pill"><img src="https://images.unsplash.com/photo-1551538827-9c037cb4f32a?auto=format&amp;fit=crop&amp;w=120&amp;q=80" alt="">Mojito Passion Fruit</span>
+      <span class="drink-pill"><img src="https://images.unsplash.com/photo-1499638673689-79a0b5115d87?auto=format&amp;fit=crop&amp;w=120&amp;q=80" alt="">Ice Tea Peach</span>
+      <span class="drink-pill"><img src="https://images.unsplash.com/photo-1572490122747-3968b75cc699?auto=format&amp;fit=crop&amp;w=120&amp;q=80" alt="">Caramel Milkshake</span>
+      <span class="drink-pill"><img src="https://images.unsplash.com/photo-1461023058943-07fcbe16d735?auto=format&amp;fit=crop&amp;w=120&amp;q=80" alt="">Ice Spanish Latte</span>
+      <span class="drink-pill"><img src="https://images.unsplash.com/photo-1541167760496-1628856ab772?auto=format&amp;fit=crop&amp;w=120&amp;q=80" alt="">Vanilla Frappe</span>
+      <span class="drink-pill"><img src="https://images.unsplash.com/photo-1570968915860-54d5c301fa9f?auto=format&amp;fit=crop&amp;w=120&amp;q=80" alt="">Caramel Frappuccino</span>
+      <span class="drink-pill"><img src="https://images.unsplash.com/photo-1505252585461-04db1eb84625?auto=format&amp;fit=crop&amp;w=120&amp;q=80" alt="">Watermelon Smoothie</span>
+      <span class="drink-pill"><img src="https://images.unsplash.com/photo-1568901839119-631418a3910d?auto=format&amp;fit=crop&amp;w=120&amp;q=80" alt="">Guava / Mango</span>
+      <span class="drink-pill"><img src="https://images.unsplash.com/photo-1562376552-0d160a2f238d?auto=format&amp;fit=crop&amp;w=120&amp;q=80" alt="">Chocolate Waffle</span>
+      <span class="drink-pill"><img src="https://images.unsplash.com/photo-1544787219-7f47ccb76574?auto=format&amp;fit=crop&amp;w=120&amp;q=80" alt="">Hot Chocolate</span>
+      <span class="drink-pill"><img src="https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?auto=format&amp;fit=crop&amp;w=120&amp;q=80" alt="">Spanish Latte</span>
+      <span class="drink-pill"><img src="https://images.unsplash.com/photo-1551538827-9c037cb4f32a?auto=format&amp;fit=crop&amp;w=120&amp;q=80" alt="">Mojito Blueberry</span>
+      <span class="drink-pill"><img src="https://images.unsplash.com/photo-1499638673689-79a0b5115d87?auto=format&amp;fit=crop&amp;w=120&amp;q=80" alt="">Ice Tea Lemon Mint</span>
+      <span class="drink-pill"><img src="https://images.unsplash.com/photo-1572490122747-3968b75cc699?auto=format&amp;fit=crop&amp;w=120&amp;q=80" alt="">Lotus Milkshake</span>
+      <span class="drink-pill"><img src="https://images.unsplash.com/photo-1461023058943-07fcbe16d735?auto=format&amp;fit=crop&amp;w=120&amp;q=80" alt="">Ice Cappuccino</span>
+      <span class="drink-pill"><img src="https://images.unsplash.com/photo-1562376552-0d160a2f238d?auto=format&amp;fit=crop&amp;w=120&amp;q=80" alt="">Lotus Waffle</span>
     </div>
   </div>
 
@@ -2145,15 +2815,15 @@
           <div class="eyebrow">قهوة ومزاج على أصوله</div>
           <h1>SEEU</h1>
           <h2 class="typing-title" aria-live="polite"><span id="heroTypedText">مش مجرد كافيه، دي تجربتك المفضلة كل مرة.</span><span class="typing-cursor" aria-hidden="true"></span></h2>
-          <p>في SEEU هتلاقي قهوتك المفضلة، مشروبات باردة وساخنة، عصائر فريش، وحلويات في مكان دافئ يليق بالخروجة واللمة والوقت الحلو.</p>
+          <p>في SEEU هتلاقي موهيتو، آيس تي، ميلك شيك، آيسد كوفي، فرابيه، فرابتشينو، سموذي، مشروبات سخنة ووافل في مكان دافئ يليق بالخروجة واللمة.</p>
           <div class="hero-actions">
             <a class="btn btn-primary" href="#menu">استكشف المنيو</a>
             <a class="btn btn-secondary" href="#visit">اعرف مكاننا</a>
           </div>
           <div class="quick-stats" aria-label="مميزات SEEU">
-            <div class="stat"><strong>60+</strong><span>اختيار في المنيو</span></div>
-            <div class="stat"><strong>Fresh</strong><span>عصائر ومشروبات يومية</span></div>
-            <div class="stat"><strong>Cozy</strong><span>قعدة مريحة وهادية</span></div>
+            <div class="stat"><strong>147</strong><span>صنف من المنيو الحقيقي</span></div>
+            <div class="stat"><strong>12</strong><span>تصنيف للمشروبات والوافل</span></div>
+            <div class="stat"><strong>123</strong><span>Majlis El-Madina St.</span></div>
           </div>
           <div class="signature-strip" aria-label="تجربة SEEU">
             <span>بن مختار</span>
@@ -2163,18 +2833,30 @@
           </div>
           <div class="motion-ticker" aria-hidden="true">
             <div class="ticker-track">
-              <span>Espresso Bar</span>
-              <span>Fresh Juice</span>
-              <span>Cold Coffee</span>
-              <span>Milkshake</span>
               <span>Mojito</span>
-              <span>Sweet Moments</span>
-              <span>Espresso Bar</span>
-              <span>Fresh Juice</span>
-              <span>Cold Coffee</span>
+              <span>Ice Tea</span>
+              <span>Iced Coffee</span>
               <span>Milkshake</span>
+              <span>Smoothie</span>
+              <span>Waffle</span>
+              <span>Frappe</span>
+              <span>Frappuccino</span>
+              <span>Espresso</span>
+              <span>Hot Drinks</span>
+              <span>Bon Bon</span>
+              <span>Seeu Specials</span>
               <span>Mojito</span>
-              <span>Sweet Moments</span>
+              <span>Ice Tea</span>
+              <span>Iced Coffee</span>
+              <span>Milkshake</span>
+              <span>Smoothie</span>
+              <span>Waffle</span>
+              <span>Frappe</span>
+              <span>Frappuccino</span>
+              <span>Espresso</span>
+              <span>Hot Drinks</span>
+              <span>Bon Bon</span>
+              <span>Seeu Specials</span>
             </div>
           </div>
         </div>
@@ -2182,20 +2864,20 @@
         <div class="hero-visual reveal" aria-label="صور من SEEU Cafe">
           <div class="hero-drinks-stage" aria-hidden="true">
             <div class="hero-drink-card">
-              <img src="https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?auto=format&amp;fit=crop&amp;w=220&amp;q=84" alt="">
-              <div><span>hot coffee</span><strong>Espresso</strong><small>مذاق مركز لبداية قوية</small></div>
+              <img src="https://images.unsplash.com/photo-1551538827-9c037cb4f32a?auto=format&amp;fit=crop&amp;w=220&amp;q=84" alt="">
+              <div><span>mojito</span><strong>Mojito Passion Fruit</strong><small>انتعاش فاكهي من منيو SEEU</small></div>
             </div>
             <div class="hero-drink-card">
               <img src="https://images.unsplash.com/photo-1461023058943-07fcbe16d735?auto=format&amp;fit=crop&amp;w=220&amp;q=84" alt="">
-              <div><span>cold coffee</span><strong>Iced Latte</strong><small>قهوة باردة وناعمة</small></div>
-            </div>
-            <div class="hero-drink-card">
-              <img src="https://images.unsplash.com/photo-1621506289937-a8e4df240d0b?auto=format&amp;fit=crop&amp;w=220&amp;q=84" alt="">
-              <div><span>fresh</span><strong>Fresh Juice</strong><small>انتعاش فريش كل يوم</small></div>
+              <div><span>iced coffee</span><strong>Ice Spanish Latte</strong><small>قهوة باردة بطعم غني وناعم</small></div>
             </div>
             <div class="hero-drink-card">
               <img src="https://images.unsplash.com/photo-1572490122747-3968b75cc699?auto=format&amp;fit=crop&amp;w=220&amp;q=84" alt="">
-              <div><span>milkshake</span><strong>Milkshake</strong><small>كريمي وحلو على المزاج</small></div>
+              <div><span>milkshake</span><strong>Caramel Milkshake</strong><small>كريمي وحلو على المزاج</small></div>
+            </div>
+            <div class="hero-drink-card">
+              <img src="https://images.unsplash.com/photo-1562376552-0d160a2f238d?auto=format&amp;fit=crop&amp;w=220&amp;q=84" alt="">
+              <div><span>waffle</span><strong>Chocolate Waffle</strong><small>تحلية تكمّل القعدة الحلوة</small></div>
             </div>
           </div>
           <div class="orbital-showcase" aria-hidden="true">
@@ -2255,7 +2937,7 @@
         <div class="section-head reveal">
           <span class="section-kicker">منيو SEEU</span>
           <h3>كل المشروبات اللي بتحبها</h3>
-          <p>اختار التصنيف وشوف مجموعة كبيرة من المشروبات الساخنة والباردة.</p>
+          <p>اختار التصنيف وشوف منيو المكان الحقيقي كامل: موهيتو، آيس تي، ميلك شيك، قهوة، سموذي، وافل وأكثر.</p>
         </div>
         <div class="filters-wrap reveal">
           <div class="menu-toolbar">
@@ -2298,7 +2980,7 @@
           <span class="section-kicker">آراء العملاء</span>
           <h3>تجارب بتتكلم عن نفسها</h3>
         </div>
-        <div class="reviews-grid">
+        <div class="reviews-grid" id="reviewsGrid">
           <article class="review reveal">
             <div class="stars" aria-label="5 نجوم">★★★★★</div>
             <p>القهوة مظبوطة جدًا والمكان هادي والخدمة محترمة.</p>
@@ -2315,6 +2997,31 @@
             <strong>عميل SEEU</strong>
           </article>
         </div>
+        <form class="review-form reveal" id="reviewForm">
+          <h4>اكتب رأيك في SEEU</h4>
+          <div class="form-grid">
+            <label>
+              اسمك
+              <input id="reviewName" type="text" placeholder="اسمك" required>
+            </label>
+            <label>
+              التقييم
+              <select id="reviewRating" required>
+                <option value="5">5 نجوم</option>
+                <option value="4">4 نجوم</option>
+                <option value="3">3 نجوم</option>
+                <option value="2">2 نجوم</option>
+                <option value="1">1 نجمة</option>
+              </select>
+            </label>
+            <label class="field-wide">
+              رأيك
+              <textarea id="reviewText" placeholder="اكتب تجربتك مع المكان أو المشروب" required></textarea>
+            </label>
+          </div>
+          <button class="btn btn-primary" type="submit">إرسال الرأي</button>
+          <p class="form-status" id="reviewStatus"></p>
+        </form>
       </div>
     </section>
 
@@ -2329,137 +3036,349 @@
           <h3>بيانات الزيارة</h3>
           <p>تعالى زورنا في مكان قريب وسهل الوصول.</p>
           <div class="info-list">
-            <span><b aria-hidden="true">📍</b> بجانب مديرية التربية والتعليم</span>
-            <span><b aria-hidden="true">📞</b> أضف رقم التواصل هنا</span>
+            <span><b aria-hidden="true">📍</b> 123 شارع مجلس المدينة، المنيا - بجانب مديرية التربية والتعليم</span>
+            <span><b aria-hidden="true">📞</b> 01027733790</span>
             <span><b aria-hidden="true">🕒</b> يوميًا من 8:00 صباحًا حتى 2:00 بعد منتصف الليل</span>
           </div>
         </aside>
       </div>
     </section>
+
+    <section class="developer-section" id="developer">
+      <div class="container developer-profile">
+        <div class="developer-photo reveal">
+          <img src="developer.jpg" alt="المهندس محمد رضا - مؤسس Code Plus" loading="lazy" onerror="this.remove()">
+        </div>
+        <div class="developer-copy reveal">
+          <span class="section-kicker">مطور الموقع</span>
+          <h3>محمد رضا</h3>
+          <p class="developer-title">مهندس برمجيات | مؤسس والرئيس التنفيذي لشركة <strong>Code Plus</strong></p>
+          <p class="developer-bio">يؤمن بأن الأفكار العظيمة لا تُولد مكتملة، بل تُصنع بالشغف والعمل المستمر. استطاع خلال رحلته أن يحوّل العديد من الأفكار إلى منتجات رقمية حقيقية تخدم آلاف المستخدمين، وأن يؤسس شركة متخصصة في تقديم حلول تقنية متطورة للشركات ورواد الأعمال.</p>
+          <p class="developer-bio">يقود مشاريعه بعقلية تعتمد على الابتكار والجودة والتطوير المستمر، ويسعى إلى بناء منظومة تقنية عربية تنافس بأعلى المعايير العالمية، مع إيمان راسخ بأن الأثر الحقيقي هو الإرث الذي يتركه الإنسان بعد كل إنجاز.</p>
+          <div class="developer-actions">
+            <a class="btn btn-primary" href="https://wa.me/201157977302" target="_blank" rel="noreferrer">تواصل واتساب</a>
+            <a class="btn btn-secondary" href="mailto:m.reda.tech@gmail.com">راسلني بالإيميل</a>
+          </div>
+          <div class="developer-contact" aria-label="بيانات تواصل المطور">
+            <a href="https://wa.me/201157977302" target="_blank" rel="noreferrer">WhatsApp: +20 115 797 7302</a>
+            <a href="mailto:m.reda.tech@gmail.com">m.reda.tech@gmail.com</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
   </main>
+
+  <button class="floating-order" id="openOrderModal" type="button" aria-label="فتح طلبك">
+    <span>طلبك</span>
+    <span class="cart-count" id="cartCount">0</span>
+  </button>
+
+  <div class="modal" id="orderModal" role="dialog" aria-modal="true" aria-labelledby="orderModalTitle">
+    <div class="modal-panel">
+      <div class="modal-head">
+        <h3 id="orderModalTitle">طلب التربيزة</h3>
+        <button class="icon-btn" id="closeOrderModal" type="button" aria-label="إغلاق">×</button>
+      </div>
+      <div class="modal-body">
+        <p class="cart-empty">اختار أكتر من مشروب في نفس الطلب، وبعدها اكتب رقم الترابيزة وابعت الطلب مرة واحدة.</p>
+        <div class="cart-items" id="cartItems"></div>
+        <form class="order-form" id="orderForm">
+          <div class="service-switch" role="radiogroup" aria-label="نوع الطلب">
+            <label><input type="radio" name="serviceType" value="inside" checked> جوه الكافيه</label>
+            <label><input type="radio" name="serviceType" value="delivery"> توصيل خارج الكافيه</label>
+          </div>
+
+          <div class="form-grid inside-fields">
+            <label>
+              رقم الترابيزة
+              <input id="tableNumber" type="number" min="1" inputmode="numeric" placeholder="مثال: 7">
+            </label>
+            <label>
+              ملاحظات
+              <input id="insideNotes" type="text" placeholder="سكر قليل، تلج زيادة...">
+            </label>
+          </div>
+
+          <div class="form-grid delivery-fields">
+            <label>
+              الاسم
+              <input id="customerName" type="text" autocomplete="name" placeholder="اسمك">
+            </label>
+            <label>
+              رقم الموبايل
+              <input id="customerPhone" type="tel" autocomplete="tel" placeholder="01xxxxxxxxx">
+            </label>
+            <label class="field-wide">
+              العنوان
+              <textarea id="customerAddress" autocomplete="street-address" placeholder="اكتب العنوان بالتفصيل"></textarea>
+            </label>
+            <label class="field-wide">
+              ملاحظات
+              <textarea id="deliveryNotes" placeholder="علامة مميزة أو تفاصيل الطلب"></textarea>
+            </label>
+          </div>
+
+          <p class="form-status" id="orderStatus"></p>
+          <div class="modal-actions">
+            <button class="btn btn-secondary" id="continueShopping" type="button">كمل اختيار مشروبات</button>
+            <button class="btn btn-secondary" id="clearCart" type="button">مسح الطلب</button>
+            <button class="btn btn-primary" id="submitOrder" type="submit">إرسال الطلب للأدمن</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
 
   <footer>
     <div class="container footer-inner">
       <div class="footer-logo">SEEU</div>
       <div>
         <p>© 2026 SEEU Cafe. جميع الحقوق محفوظة.</p>
-        <p class="developer-credit">تم تطوير الموقع بواسطة المهندس محمد رضا</p>
+      </div>
+      <div class="developer-credit" aria-label="مطور الموقع">
+        <span>تطوير وتصميم الموقع</span>
+        <strong><a href="developer.html">المهندس محمد رضا</a></strong>
+        <b>مؤسس شركة Code Plus</b>
       </div>
     </div>
   </footer>
 
-  <script>
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-app.js";
+    import { getAnalytics, isSupported } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-analytics.js";
+    import {
+      addDoc,
+      collection,
+      getFirestore,
+      limit,
+      onSnapshot,
+      orderBy,
+      query,
+      serverTimestamp
+    } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-firestore.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyDPjDrx7vQn0MsyonTLUBf65EHjg42xY-I",
+      authDomain: "seeu-f688b.firebaseapp.com",
+      projectId: "seeu-f688b",
+      storageBucket: "seeu-f688b.firebasestorage.app",
+      messagingSenderId: "1034264729903",
+      appId: "1:1034264729903:web:502364ccb9884572b769da",
+      measurementId: "G-NB3KRVM3R4"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app);
+
+    isSupported().then((supported) => {
+      if (supported) getAnalytics(app);
+    }).catch(() => {});
+
     const imageMap = {
-      hotCoffee: "https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?auto=format&fit=crop&w=720&q=82",
-      coldCoffee: "https://images.unsplash.com/photo-1461023058943-07fcbe16d735?auto=format&fit=crop&w=720&q=82",
-      hotDrinks: "https://images.unsplash.com/photo-1544787219-7f47ccb76574?auto=format&fit=crop&w=720&q=82",
-      fresh: "https://images.unsplash.com/photo-1621506289937-a8e4df240d0b?auto=format&fit=crop&w=720&q=82",
       mojito: "https://images.unsplash.com/photo-1551538827-9c037cb4f32a?auto=format&fit=crop&w=720&q=82",
+      iceTea: "https://images.unsplash.com/photo-1499638673689-79a0b5115d87?auto=format&fit=crop&w=720&q=82",
       milkshake: "https://images.unsplash.com/photo-1572490122747-3968b75cc699?auto=format&fit=crop&w=720&q=82",
+      icedCoffee: "https://images.unsplash.com/photo-1461023058943-07fcbe16d735?auto=format&fit=crop&w=720&q=82",
+      frappe: "https://images.unsplash.com/photo-1541167760496-1628856ab772?auto=format&fit=crop&w=720&q=82",
+      frappuccino: "https://images.unsplash.com/photo-1570968915860-54d5c301fa9f?auto=format&fit=crop&w=720&q=82",
       smoothie: "https://images.unsplash.com/photo-1505252585461-04db1eb84625?auto=format&fit=crop&w=720&q=82",
-      soft: "https://images.unsplash.com/photo-1527960471264-932f39eb5846?auto=format&fit=crop&w=720&q=82"
+      bonbon: "https://images.unsplash.com/photo-1568901839119-631418a3910d?auto=format&fit=crop&w=720&q=82",
+      hotDrinks: "https://images.unsplash.com/photo-1544787219-7f47ccb76574?auto=format&fit=crop&w=720&q=82",
+      espresso: "https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?auto=format&fit=crop&w=720&q=82",
+      waffle: "https://images.unsplash.com/photo-1562376552-0d160a2f238d?auto=format&fit=crop&w=720&q=82"
     };
 
     const categories = [
       { id: "all", label: "الكل" },
-      { id: "hot-coffee", label: "قهوة ساخنة" },
-      { id: "cold-coffee", label: "قهوة باردة" },
-      { id: "hot-drinks", label: "مشروبات ساخنة" },
-      { id: "fresh", label: "عصائر فريش" },
-      { id: "mojito", label: "موهيتو وصودا" },
+      { id: "mojito", label: "موهيتو" },
+      { id: "mojito-mix", label: "ميكس موهيتو" },
+      { id: "ice-tea", label: "آيس تي" },
       { id: "milkshake", label: "ميلك شيك" },
+      { id: "iced-coffee", label: "آيسد كوفي" },
+      { id: "frappe", label: "فرابيه" },
+      { id: "frappuccino", label: "فرابتشينو" },
       { id: "smoothie", label: "سموذي" },
-      { id: "soft", label: "مشروبات غازية ومياه" }
+      { id: "bonbon", label: "بون بون" },
+      { id: "hot-drinks", label: "مشروبات ساخنة" },
+      { id: "espresso", label: "إسبريسو" },
+      { id: "waffle", label: "وافل" }
     ];
 
     const menuItems = [
-      ["hot-coffee", "hot coffee", "Espresso", "سنجل أو دبل", imageMap.hotCoffee],
-      ["hot-coffee", "hot coffee", "Americano", "إسبريسو ومياه ساخنة", imageMap.hotCoffee],
-      ["hot-coffee", "hot coffee", "Cappuccino", "إسبريسو وحليب وفوم", imageMap.hotCoffee],
-      ["hot-coffee", "hot coffee", "Cafe Latte", "قهوة بالحليب الناعم", imageMap.hotCoffee],
-      ["hot-coffee", "hot coffee", "Flat White", "إسبريسو مركز بحليب", imageMap.hotCoffee],
-      ["hot-coffee", "hot coffee", "Cortado", "إسبريسو بحليب متوازن", imageMap.hotCoffee],
-      ["hot-coffee", "hot coffee", "Mocha", "قهوة وشوكولاتة وحليب", imageMap.hotCoffee],
-      ["hot-coffee", "hot coffee", "Macchiato", "إسبريسو بلمسة فوم", imageMap.hotCoffee],
-      ["hot-coffee", "hot coffee", "Turkish Coffee", "سادة أو مظبوط أو زيادة", imageMap.hotCoffee],
-      ["hot-coffee", "hot coffee", "French Coffee", "قهوة فرنش غنية", imageMap.hotCoffee],
-      ["hot-coffee", "hot coffee", "Spanish Latte Hot", "إسبريسو وحليب مكثف", imageMap.hotCoffee],
-      ["hot-coffee", "hot coffee", "Caramel Latte Hot", "لاتيه بصوص الكراميل", imageMap.hotCoffee],
-      ["hot-coffee", "hot coffee", "Hazelnut Latte Hot", "لاتيه بطعم البندق", imageMap.hotCoffee],
-      ["hot-coffee", "hot coffee", "Vanilla Latte Hot", "لاتيه بالفانيليا", imageMap.hotCoffee],
-      ["cold-coffee", "cold coffee", "Iced Americano", "إسبريسو بارد ومنعش", imageMap.coldCoffee],
-      ["cold-coffee", "cold coffee", "Iced Latte", "إسبريسو وحليب وثلج", imageMap.coldCoffee],
-      ["cold-coffee", "cold coffee", "Iced Mocha", "قهوة باردة وشوكولاتة", imageMap.coldCoffee],
-      ["cold-coffee", "cold coffee", "Iced Spanish Latte", "قهوة باردة وحليب مكثف", imageMap.coldCoffee],
-      ["cold-coffee", "cold coffee", "Iced Caramel Macchiato", "كراميل وقهوة وحليب", imageMap.coldCoffee],
-      ["cold-coffee", "cold coffee", "Iced Vanilla Latte", "لاتيه بارد بالفانيليا", imageMap.coldCoffee],
-      ["cold-coffee", "cold coffee", "Iced Hazelnut Latte", "لاتيه بارد بالبندق", imageMap.coldCoffee],
-      ["cold-coffee", "cold coffee", "Cold Brew", "قهوة منقوعة على البارد", imageMap.coldCoffee],
-      ["cold-coffee", "cold coffee", "Frappuccino", "قهوة مثلجة كريمي", imageMap.coldCoffee],
-      ["cold-coffee", "cold coffee", "Caramel Frappe", "قهوة مثلجة بالكراميل", imageMap.coldCoffee],
-      ["cold-coffee", "cold coffee", "Mocha Frappe", "قهوة مثلجة بالشوكولاتة", imageMap.coldCoffee],
-      ["hot-drinks", "hot drinks", "Tea", "شاي أحمر كلاسيك", imageMap.hotDrinks],
-      ["hot-drinks", "hot drinks", "Green Tea", "شاي أخضر", imageMap.hotDrinks],
-      ["hot-drinks", "hot drinks", "Tea with Mint", "شاي بالنعناع", imageMap.hotDrinks],
-      ["hot-drinks", "hot drinks", "Tea with Milk", "شاي بالحليب", imageMap.hotDrinks],
-      ["hot-drinks", "hot drinks", "Hot Chocolate", "شوكولاتة ساخنة كريمي", imageMap.hotDrinks],
-      ["hot-drinks", "hot drinks", "White Hot Chocolate", "شوكولاتة بيضاء ساخنة", imageMap.hotDrinks],
-      ["hot-drinks", "hot drinks", "Sahlab", "سحلب غني ودافئ", imageMap.hotDrinks],
-      ["hot-drinks", "hot drinks", "Cinnamon", "قرفة ساخنة", imageMap.hotDrinks],
-      ["hot-drinks", "hot drinks", "Ginger", "جنزبيل ساخن", imageMap.hotDrinks],
-      ["hot-drinks", "hot drinks", "Lemon & Ginger", "ليمون بالجنزبيل", imageMap.hotDrinks],
-      ["hot-drinks", "hot drinks", "Anise", "يانسون دافئ", imageMap.hotDrinks],
-      ["hot-drinks", "hot drinks", "Hibiscus Hot", "كركديه ساخن", imageMap.hotDrinks],
-      ["hot-drinks", "hot drinks", "Orchid Herbs", "أعشاب مشكلة", imageMap.hotDrinks],
-      ["fresh", "fresh", "Orange Juice", "برتقال فريش", imageMap.fresh],
-      ["fresh", "fresh", "Mango Juice", "مانجو فريش", imageMap.fresh],
-      ["fresh", "fresh", "Strawberry Juice", "فراولة فريش", imageMap.fresh],
-      ["fresh", "fresh", "Guava Juice", "جوافة فريش", imageMap.fresh],
-      ["fresh", "fresh", "Lemon Juice", "ليمون منعش", imageMap.fresh],
-      ["fresh", "fresh", "Lemon Mint", "ليمون بالنعناع", imageMap.fresh],
-      ["fresh", "fresh", "Watermelon Juice", "بطيخ فريش", imageMap.fresh],
-      ["fresh", "fresh", "Pineapple Juice", "أناناس فريش", imageMap.fresh],
-      ["fresh", "fresh", "Kiwi Juice", "كيوي فريش", imageMap.fresh],
-      ["fresh", "fresh", "Pomegranate Juice", "رمان فريش", imageMap.fresh],
-      ["fresh", "fresh", "Avocado Juice", "أفوكادو كريمي", imageMap.fresh],
-      ["fresh", "fresh", "Fruit Cocktail", "كوكتيل فواكه", imageMap.fresh],
-      ["mojito", "mojito", "Classic Mojito", "ليمون ونعناع وصودا", imageMap.mojito],
-      ["mojito", "mojito", "Blue Mojito", "موهيتو بلو منعش", imageMap.mojito],
-      ["mojito", "mojito", "Strawberry Mojito", "موهيتو فراولة", imageMap.mojito],
-      ["mojito", "mojito", "Passion Fruit Mojito", "موهيتو باشن فروت", imageMap.mojito],
-      ["mojito", "mojito", "Peach Mojito", "موهيتو خوخ", imageMap.mojito],
-      ["mojito", "mojito", "Green Apple Mojito", "موهيتو تفاح أخضر", imageMap.mojito],
-      ["mojito", "mojito", "Berry Mojito", "موهيتو توت", imageMap.mojito],
-      ["mojito", "mojito", "Energy Mojito", "موهيتو إنرجي", imageMap.mojito],
-      ["mojito", "mojito", "Soda Mix", "صودا بنكهات مختلفة", imageMap.mojito],
-      ["milkshake", "milkshake", "Vanilla Milkshake", "ميلك شيك فانيليا", imageMap.milkshake],
-      ["milkshake", "milkshake", "Chocolate Milkshake", "ميلك شيك شوكولاتة", imageMap.milkshake],
-      ["milkshake", "milkshake", "Strawberry Milkshake", "ميلك شيك فراولة", imageMap.milkshake],
-      ["milkshake", "milkshake", "Oreo Milkshake", "ميلك شيك أوريو", imageMap.milkshake],
-      ["milkshake", "milkshake", "Lotus Milkshake", "ميلك شيك لوتس", imageMap.milkshake],
+      ["mojito", "mojito", "Mojito Passion Fruit", "موهيتو باشن فروت", imageMap.mojito],
+      ["mojito", "mojito", "Mojito Blueberry", "موهيتو بلو بيري", imageMap.mojito],
+      ["mojito", "mojito", "Mojito Blue Curacao", "موهيتو بلو كوراساو", imageMap.mojito],
+      ["mojito", "mojito", "Mojito Cola", "موهيتو كولا", imageMap.mojito],
+      ["mojito", "mojito", "Mojito Red Bull", "موهيتو ريد بول", imageMap.mojito],
+      ["mojito", "mojito", "Mojito Red Berry", "موهيتو توت أحمر", imageMap.mojito],
+      ["mojito", "mojito", "Mojito Cherry", "موهيتو كرز", imageMap.mojito],
+      ["mojito", "mojito", "Mojito Cherry Cola", "موهيتو شيري كولا", imageMap.mojito],
+      ["mojito", "mojito", "Mojito Watermelon", "موهيتو بطيخ", imageMap.mojito],
+      ["mojito", "mojito", "Mojito Strawberry", "موهيتو فراولة", imageMap.mojito],
+      ["mojito", "mojito", "Mojito Pineapple", "موهيتو أناناس", imageMap.mojito],
+      ["mojito", "mojito", "Mojito Peach", "موهيتو خوخ", imageMap.mojito],
+      ["mojito", "mojito", "Mojito Sunrise", "موهيتو صن رايز", imageMap.mojito],
+      ["mojito", "mojito", "Mojito Sunshine", "موهيتو صن شاين", imageMap.mojito],
+      ["mojito-mix", "mojito mix", "Mix Peach / Apple", "ميكس خوخ / تفاح", imageMap.mojito],
+      ["mojito-mix", "mojito mix", "Mix Peach / Strawberry", "ميكس خوخ / فراولة", imageMap.mojito],
+      ["mojito-mix", "mojito mix", "Mix Peach / Pineapple", "ميكس خوخ / أناناس", imageMap.mojito],
+      ["mojito-mix", "mojito mix", "Mix Pineapple / Strawberry", "ميكس أناناس / فراولة", imageMap.mojito],
+      ["mojito-mix", "mojito mix", "Mix Pineapple / Passion Fruit", "ميكس أناناس / باشن فروت", imageMap.mojito],
+      ["mojito-mix", "mojito mix", "Mix Passion Fruit / Strawberry", "ميكس باشن فروت / فراولة", imageMap.mojito],
+
+      ["ice-tea", "ice tea", "Ice Tea Cherry Lemon", "آيس تي كرز ليمون", imageMap.iceTea],
+      ["ice-tea", "ice tea", "Ice Tea Pomegranate", "آيس تي رمان", imageMap.iceTea],
+      ["ice-tea", "ice tea", "Ice Tea Pomegranate Mint", "آيس تي رمان نعناع", imageMap.iceTea],
+      ["ice-tea", "ice tea", "Ice Tea Pineapple", "آيس تي أناناس", imageMap.iceTea],
+      ["ice-tea", "ice tea", "Ice Tea Strawberry", "آيس تي فراولة", imageMap.iceTea],
+      ["ice-tea", "ice tea", "Ice Tea Peach Passion Fruit", "آيس تي خوخ باشن فروت", imageMap.iceTea],
+      ["ice-tea", "ice tea", "Ice Tea Blueberry", "آيس تي بلو بيري", imageMap.iceTea],
+      ["ice-tea", "ice tea", "Ice Tea Cherry", "آيس تي كرز", imageMap.iceTea],
+      ["ice-tea", "ice tea", "Blue Ice Tea", "بلو آيس تي", imageMap.iceTea],
+      ["ice-tea", "ice tea", "Ice Tea", "آيس تي", imageMap.iceTea],
+      ["ice-tea", "ice tea", "Ice Tea Lemon", "آيس تي ليمون", imageMap.iceTea],
+      ["ice-tea", "ice tea", "Ice Tea Passion Fruit", "آيس تي باشن فروت", imageMap.iceTea],
+      ["ice-tea", "ice tea", "Ice Tea Lemon Mint", "آيس تي ليمون نعناع", imageMap.iceTea],
+      ["ice-tea", "ice tea", "Ice Tea Peach", "آيس تي خوخ", imageMap.iceTea],
+
       ["milkshake", "milkshake", "Caramel Milkshake", "ميلك شيك كراميل", imageMap.milkshake],
-      ["milkshake", "milkshake", "Nutella Milkshake", "ميلك شيك نوتيلا", imageMap.milkshake],
-      ["milkshake", "milkshake", "Blueberry Milkshake", "ميلك شيك توت أزرق", imageMap.milkshake],
-      ["milkshake", "milkshake", "Mango Milkshake", "ميلك شيك مانجو", imageMap.milkshake],
-      ["smoothie", "smoothie", "Mango Smoothie", "سموذي مانجو", imageMap.smoothie],
-      ["smoothie", "smoothie", "Strawberry Smoothie", "سموذي فراولة", imageMap.smoothie],
-      ["smoothie", "smoothie", "Berry Smoothie", "سموذي توت", imageMap.smoothie],
-      ["smoothie", "smoothie", "Peach Smoothie", "سموذي خوخ", imageMap.smoothie],
-      ["smoothie", "smoothie", "Passion Fruit Smoothie", "سموذي باشن فروت", imageMap.smoothie],
-      ["smoothie", "smoothie", "Kiwi Smoothie", "سموذي كيوي", imageMap.smoothie],
-      ["smoothie", "smoothie", "Mix Berry Smoothie", "سموذي ميكس بيري", imageMap.smoothie],
-      ["soft", "soft", "Cola", "مشروب غازي", imageMap.soft],
-      ["soft", "soft", "Diet Cola", "كولا دايت", imageMap.soft],
-      ["soft", "soft", "Sprite / Lemon Soda", "مشروب ليمون غازي", imageMap.soft],
-      ["soft", "soft", "Orange Soda", "مشروب برتقال غازي", imageMap.soft],
-      ["soft", "soft", "Energy Drink", "مشروب طاقة", imageMap.soft],
-      ["soft", "soft", "Mineral Water", "مياه معدنية", imageMap.soft],
-      ["soft", "soft", "Sparkling Water", "مياه غازية", imageMap.soft]
+      ["milkshake", "milkshake", "Chocolate Milkshake", "ميلك شيك شوكولاتة", imageMap.milkshake],
+      ["milkshake", "milkshake", "Vanilla Milkshake", "ميلك شيك فانيليا", imageMap.milkshake],
+      ["milkshake", "milkshake", "Oreo Milkshake", "ميلك شيك أوريو", imageMap.milkshake],
+      ["milkshake", "milkshake", "Banana Milkshake", "ميلك شيك موز", imageMap.milkshake],
+      ["milkshake", "milkshake", "Lotus Milkshake", "ميلك شيك لوتس", imageMap.milkshake],
+      ["milkshake", "milkshake", "Blueberry Milkshake", "ميلك شيك بلو بيري", imageMap.milkshake],
+      ["milkshake", "milkshake", "Kiwi Milkshake", "ميلك شيك كيوي", imageMap.milkshake],
+      ["milkshake", "milkshake", "Pineapple Milkshake", "ميلك شيك أناناس", imageMap.milkshake],
+      ["milkshake", "milkshake", "Peach Milkshake", "ميلك شيك خوخ", imageMap.milkshake],
+      ["milkshake", "milkshake", "Strawberry Milkshake", "ميلك شيك فراولة", imageMap.milkshake],
+      ["milkshake", "milkshake", "Cantaloupe Milkshake", "ميلك شيك كنتالوب", imageMap.milkshake],
+      ["milkshake", "milkshake", "Passion Fruit Milkshake", "ميلك شيك باشن فروت", imageMap.milkshake],
+      ["milkshake", "milkshake", "Watermelon Milkshake", "ميلك شيك بطيخ", imageMap.milkshake],
+      ["milkshake", "milkshake", "Guava Milkshake", "ميلك شيك جوافة", imageMap.milkshake],
+      ["milkshake", "milkshake", "Mango Milkshake", "ميلك شيك مانجا", imageMap.milkshake],
+
+      ["iced-coffee", "iced coffee", "Ice Latte", "آيس لاتيه", imageMap.icedCoffee],
+      ["iced-coffee", "iced coffee", "Ice Mocha", "آيس موكا", imageMap.icedCoffee],
+      ["iced-coffee", "iced coffee", "Ice Caramel", "آيس كراميل", imageMap.icedCoffee],
+      ["iced-coffee", "iced coffee", "Iced Vanilla", "آيس فانيليا", imageMap.icedCoffee],
+      ["iced-coffee", "iced coffee", "Ice Latte Hazelnut", "آيس لاتيه بندق", imageMap.icedCoffee],
+      ["iced-coffee", "iced coffee", "Caramel Macchiato", "آيس كراميل ميكاتو", imageMap.icedCoffee],
+      ["iced-coffee", "iced coffee", "Ice Matcha", "آيس ماتشا", imageMap.icedCoffee],
+      ["iced-coffee", "iced coffee", "Ice Americano", "آيس أمريكانو", imageMap.icedCoffee],
+      ["iced-coffee", "iced coffee", "Ice Cappuccino Classic", "آيس كابتشينو كلاسيك", imageMap.icedCoffee],
+      ["iced-coffee", "iced coffee", "Ice Cappuccino Caramel", "آيس كابتشينو كراميل", imageMap.icedCoffee],
+      ["iced-coffee", "iced coffee", "Ice Cappuccino Hazelnut", "آيس كابتشينو بندق", imageMap.icedCoffee],
+      ["iced-coffee", "iced coffee", "Ice Cappuccino Vanilla", "آيس كابتشينو فانيليا", imageMap.icedCoffee],
+      ["iced-coffee", "iced coffee", "Ice Spanish Latte Classic", "آيس سبانش لاتيه كلاسيك", imageMap.icedCoffee],
+      ["iced-coffee", "iced coffee", "Ice Spanish Latte Vanilla", "آيس سبانش لاتيه فانيليا", imageMap.icedCoffee],
+      ["iced-coffee", "iced coffee", "Ice Spanish Latte Hazelnut", "آيس سبانش لاتيه بندق", imageMap.icedCoffee],
+
+      ["frappe", "frappe", "Vanilla Frappe", "فرابيه فانيليا", imageMap.frappe],
+      ["frappe", "frappe", "Frappe Chocolate", "فرابيه شوكولاتة", imageMap.frappe],
+      ["frappe", "frappe", "Frappe Caramel", "فرابيه كراميل", imageMap.frappe],
+      ["frappe", "frappe", "Frappe Lotus", "فرابيه لوتس", imageMap.frappe],
+      ["frappe", "frappe", "Frappe Hazelnut", "فرابيه بندق", imageMap.frappe],
+      ["frappe", "frappe", "Frappe Matcha", "فرابيه ماتشا", imageMap.frappe],
+      ["frappe", "frappe", "Frappe Chocolate Lotus", "فرابيه شوكولاتة لوتس", imageMap.frappe],
+      ["frappuccino", "frappuccino", "Caramel Frappuccino", "فرابتشينو كراميل", imageMap.frappuccino],
+      ["frappuccino", "frappuccino", "Chocolate Frappuccino", "فرابتشينو شوكولاتة", imageMap.frappuccino],
+      ["frappuccino", "frappuccino", "Hazelnut Frappuccino", "فرابتشينو بندق", imageMap.frappuccino],
+      ["frappuccino", "frappuccino", "Vanilla Frappuccino", "فرابتشينو فانيليا", imageMap.frappuccino],
+      ["frappuccino", "frappuccino", "Matcha Frappuccino", "فرابتشينو ماتشا", imageMap.frappuccino],
+      ["frappuccino", "frappuccino", "Lotus Frappuccino", "فرابتشينو لوتس", imageMap.frappuccino],
+
+      ["smoothie", "smoothie", "Watermelon Smoothie", "سموزي بطيخ", imageMap.smoothie],
+      ["smoothie", "smoothie", "Watermelon Mint Smoothie", "سموزي بطيخ نعناع", imageMap.smoothie],
+      ["smoothie", "smoothie", "Watermelon Lemon Smoothie", "سموزي بطيخ ليمون", imageMap.smoothie],
+      ["smoothie", "smoothie", "Watermelon Lemon Mint Smoothie", "سموزي بطيخ ليمون نعناع", imageMap.smoothie],
+      ["smoothie", "smoothie", "Watermelon Pineapple Smoothie", "سموزي بطيخ أناناس", imageMap.smoothie],
+      ["smoothie", "smoothie", "Watermelon Pineapple Lemon Smoothie", "سموزي بطيخ أناناس ليمون", imageMap.smoothie],
+      ["smoothie", "smoothie", "Blueberry Strawberry Smoothie", "سموزي بلو بيري فراولة", imageMap.smoothie],
+      ["smoothie", "smoothie", "Pineapple Smoothie", "سموزي أناناس", imageMap.smoothie],
+      ["smoothie", "smoothie", "Lemon Smoothie", "سموزي ليمون", imageMap.smoothie],
+      ["smoothie", "smoothie", "Lemon Peach Smoothie", "سموزي ليمون خوخ", imageMap.smoothie],
+      ["smoothie", "smoothie", "Lemon Strawberry Smoothie", "سموزي ليمون فراولة", imageMap.smoothie],
+      ["smoothie", "smoothie", "Lemon Blueberry Smoothie", "سموزي ليمون بلو بيري", imageMap.smoothie],
+      ["smoothie", "smoothie", "Lemon Kiwi Smoothie", "سموزي ليمون كيوي", imageMap.smoothie],
+      ["smoothie", "smoothie", "Lemon Coconut Smoothie", "سموزي ليمون كوكوت", imageMap.smoothie],
+      ["smoothie", "smoothie", "Peach Smoothie", "سموزي خوخ", imageMap.smoothie],
+      ["smoothie", "smoothie", "Kiwi Smoothie", "سموزي كيوي", imageMap.smoothie],
+      ["smoothie", "smoothie", "Passion Fruit Smoothie", "سموزي باشن فروت", imageMap.smoothie],
+      ["smoothie", "smoothie", "Mango Smoothie", "سموزي مانجا", imageMap.smoothie],
+      ["smoothie", "smoothie", "Blueberry Smoothie", "سموزي بلو بيري", imageMap.smoothie],
+      ["smoothie", "smoothie", "Strawberry Smoothie", "سموزي فراولة", imageMap.smoothie],
+      ["smoothie", "smoothie", "Strawberry Mint Smoothie", "سموزي فراولة نعناع", imageMap.smoothie],
+      ["smoothie", "smoothie", "Blueberry Lemon Smoothie", "سموزي بلو بيري ليمون", imageMap.smoothie],
+
+      ["bonbon", "bon bon", "Guava / Pineapple", "جوافة / أناناس", imageMap.bonbon],
+      ["bonbon", "bon bon", "Guava / Passion Fruit", "جوافة / باشن فروت", imageMap.bonbon],
+      ["bonbon", "bon bon", "Guava / Peach", "جوافة / خوخ", imageMap.bonbon],
+      ["bonbon", "bon bon", "Guava / Strawberry", "جوافة / فراولة", imageMap.bonbon],
+      ["bonbon", "bon bon", "Guava / Blueberry", "جوافة / بلو بيري", imageMap.bonbon],
+      ["bonbon", "bon bon", "Guava / Coconut", "جوافة / كوكوت", imageMap.bonbon],
+      ["bonbon", "bon bon", "Guava / Mango", "جوافة / مانجا", imageMap.bonbon],
+
+      ["hot-drinks", "hot drink", "Flavored Tea", "شاي نكهات", imageMap.hotDrinks],
+      ["hot-drinks", "hot drink", "Coffee", "قهوة تركي", imageMap.hotDrinks],
+      ["hot-drinks", "hot drink", "Turkish Coffee", "قهوة تركية", imageMap.hotDrinks],
+      ["hot-drinks", "hot drink", "French Coffee", "قهوة فرنسية", imageMap.hotDrinks],
+      ["hot-drinks", "hot drink", "Cinnamon Milk", "حلبة بالحليب", imageMap.hotDrinks],
+      ["hot-drinks", "hot drink", "Fenugreek Milk", "حلبة بالحليب", imageMap.hotDrinks],
+      ["hot-drinks", "hot drink", "Anise", "ينسون", imageMap.hotDrinks],
+      ["hot-drinks", "hot drink", "Hibiscus", "كركديه", imageMap.hotDrinks],
+      ["hot-drinks", "hot drink", "Ginger", "جنزبيل", imageMap.hotDrinks],
+      ["hot-drinks", "hot drink", "Lotus Coffee Vanilla", "لوتس كوفي فانيليا", imageMap.hotDrinks],
+      ["hot-drinks", "hot drink", "Lotus Coffee Hazelnut", "لوتس كوفي بندق", imageMap.hotDrinks],
+      ["hot-drinks", "hot drink", "Lotus Coffee Marshmallow", "لوتس كوفي مارشميلو", imageMap.hotDrinks],
+      ["hot-drinks", "hot drink", "Hot Chocolate", "هوت شوكولاتة", imageMap.hotDrinks],
+      ["hot-drinks", "hot drink", "Lotus Hot Chocolate", "هوت شوكولاتة لوتس", imageMap.hotDrinks],
+      ["hot-drinks", "hot drink", "Hazelnut Hot Chocolate", "هوت شوكولاتة بندق", imageMap.hotDrinks],
+      ["hot-drinks", "hot drink", "Marshmallow Hot Chocolate", "هوت شوكولاتة مارشميلو", imageMap.hotDrinks],
+      ["hot-drinks", "hot drink", "Vanilla Hot Chocolate", "هوت شوكولاتة فانيليا", imageMap.hotDrinks],
+      ["espresso", "espresso", "Espresso", "إسبريسو", imageMap.espresso],
+      ["espresso", "espresso", "Americano", "أمريكانو", imageMap.espresso],
+      ["espresso", "espresso", "Macchiato", "ميكاتو", imageMap.espresso],
+      ["espresso", "espresso", "Latte", "لاتيه", imageMap.espresso],
+      ["espresso", "espresso", "Mocha Latte", "موكا لاتيه", imageMap.espresso],
+      ["espresso", "espresso", "Caramel Latte", "كراميل لاتيه", imageMap.espresso],
+      ["espresso", "espresso", "Hazelnut Latte", "بندق لاتيه", imageMap.espresso],
+      ["espresso", "espresso", "Caramel Macchiato", "كراميل ميكاتو", imageMap.espresso],
+      ["espresso", "espresso", "Marshmallow Latte", "مارشميلو لاتيه", imageMap.espresso],
+      ["espresso", "espresso", "Caramel Macchiato Latte", "كراميل ميكاتو لاتيه", imageMap.espresso],
+      ["espresso", "espresso", "Spanish Latte", "سبانش لاتيه", imageMap.espresso],
+      ["espresso", "espresso", "Spanish Latte Hazelnut", "سبانش لاتيه بندق", imageMap.espresso],
+      ["espresso", "espresso", "Spanish Latte Vanilla", "سبانش لاتيه فانيليا", imageMap.espresso],
+
+      ["waffle", "waffle", "Chocolate Waffle", "وافل شوكولاتة", imageMap.waffle],
+      ["waffle", "waffle", "Caramel Waffle", "وافل كراميل", imageMap.waffle],
+      ["waffle", "waffle", "Lotus Waffle", "وافل لوتس", imageMap.waffle],
+      ["waffle", "waffle", "White Chocolate Waffle", "وافل وايت شوكولاتة", imageMap.waffle],
+      ["waffle", "waffle", "Mix Chocolate & Caramel Waffle", "وافل ميكس شوكولاتة وكراميل", imageMap.waffle],
+      ["waffle", "waffle", "Mix Caramel & White Chocolate Waffle", "وافل ميكس كراميل ووايت شوكولاتة", imageMap.waffle],
+      ["waffle", "waffle", "Mix Oreo & Chocolate Waffle", "وافل ميكس أوريو وشوكولاتة", imageMap.waffle],
+      ["waffle", "waffle", "Mix Oreo & Caramel Waffle", "وافل ميكس أوريو وكراميل", imageMap.waffle],
+      ["waffle", "waffle", "Mix Chocolate & Ice Cream Waffle", "وافل ميكس شوكولاتة وآيس كريم", imageMap.waffle],
+      ["waffle", "waffle", "Mix Lotus & Ice Cream Waffle", "وافل ميكس لوتس وآيس كريم", imageMap.waffle]
     ];
 
     const filters = document.getElementById("filters");
     const menuGrid = document.getElementById("menuGrid");
     const menuCount = document.getElementById("menuCount");
+    const openOrderModal = document.getElementById("openOrderModal");
+    const closeOrderModal = document.getElementById("closeOrderModal");
+    const orderModal = document.getElementById("orderModal");
+    const cartCount = document.getElementById("cartCount");
+    const cartItems = document.getElementById("cartItems");
+    const orderForm = document.getElementById("orderForm");
+    const orderStatus = document.getElementById("orderStatus");
+    const continueShopping = document.getElementById("continueShopping");
+    const clearCart = document.getElementById("clearCart");
+    const reviewsGrid = document.getElementById("reviewsGrid");
+    const reviewForm = document.getElementById("reviewForm");
+    const reviewStatus = document.getElementById("reviewStatus");
+    let cart = [];
 
     function updateMenuCount(filter, cards) {
       const visibleCount = Array.from(cards).filter((card) => !card.classList.contains("hide")).length;
@@ -2533,7 +3452,39 @@
         order.textContent = `#${String(index + 1).padStart(2, "0")}`;
 
         meta.append(chip, order);
-        body.append(tag, heading, text, meta);
+
+        const itemId = `${category}-${title}`;
+        const controls = document.createElement("div");
+        controls.className = "order-controls";
+
+        const quickCheck = document.createElement("label");
+        quickCheck.className = "quick-check";
+
+        const checkbox = document.createElement("input");
+        checkbox.type = "checkbox";
+        checkbox.dataset.cartId = itemId;
+        checkbox.addEventListener("change", () => {
+          toggleCartItem(
+            { id: itemId, category, label, title, description, image },
+            checkbox.checked
+          );
+        });
+
+        const checkText = document.createElement("span");
+        checkText.textContent = "اختيار مع طلبات تانية";
+
+        const orderButton = document.createElement("button");
+        orderButton.className = "order-card-btn";
+        orderButton.type = "button";
+        orderButton.textContent = "اطلب لوحده";
+        orderButton.addEventListener("click", () => {
+          addToCart({ id: itemId, category, label, title, description, image });
+          openModal();
+        });
+
+        quickCheck.append(checkbox, checkText);
+        controls.append(quickCheck, orderButton);
+        body.append(tag, heading, text, meta, controls);
         card.append(imageWrap, body);
         fragment.appendChild(card);
       });
@@ -2558,6 +3509,257 @@
 
           updateMenuCount(filter, cards);
         });
+      });
+    }
+
+    function getCartTotal() {
+      return cart.reduce((total, item) => total + item.qty, 0);
+    }
+
+    function openModal() {
+      orderModal.classList.add("open");
+      document.body.style.overflow = "hidden";
+    }
+
+    function closeModal() {
+      orderModal.classList.remove("open");
+      document.body.style.overflow = "";
+    }
+
+    function syncMenuSelection() {
+      document.querySelectorAll(".menu-card").forEach((card) => {
+        const checkbox = card.querySelector('input[data-cart-id]');
+        if (!checkbox) return;
+        const selected = cart.some((cartItem) => cartItem.id === checkbox.dataset.cartId);
+        checkbox.checked = selected;
+        card.classList.toggle("is-selected", selected);
+      });
+    }
+
+    function toggleCartItem(item, selected) {
+      if (selected) {
+        addToCart(item);
+      } else {
+        setCartQty(item.id, 0);
+        orderStatus.textContent = `اتشال من الطلب. في الطلب دلوقتي ${getCartTotal()} مشروب.`;
+      }
+    }
+
+    function addToCart(item) {
+      const existing = cart.find((cartItem) => cartItem.id === item.id);
+      if (existing) {
+        existing.qty = Math.max(existing.qty, 1);
+      } else {
+        cart.push({ ...item, qty: 1 });
+      }
+
+      renderCart();
+      orderStatus.textContent = `اتضاف لطلبك. في الطلب دلوقتي ${getCartTotal()} مشروب.`;
+    }
+
+    function setCartQty(id, nextQty) {
+      cart = cart
+        .map((item) => item.id === id ? { ...item, qty: nextQty } : item)
+        .filter((item) => item.qty > 0);
+      renderCart();
+    }
+
+    function renderCart() {
+      const total = getCartTotal();
+      cartCount.textContent = String(total);
+      syncMenuSelection();
+
+      if (!cart.length) {
+        cartItems.innerHTML = '<div class="cart-empty">لسه ما اخترتش أي حاجة من المنيو.</div>';
+        return;
+      }
+
+      cartItems.replaceChildren(...cart.map((item) => {
+        const row = document.createElement("div");
+        row.className = "cart-item";
+        row.innerHTML = `
+          <img src="${item.image}" alt="">
+          <div>
+            <strong>${item.title}</strong>
+            <small>${item.description}</small>
+          </div>
+          <div class="qty-controls" aria-label="كمية ${item.title}">
+            <button type="button" data-action="decrease" data-id="${item.id}">-</button>
+            <strong>${item.qty}</strong>
+            <button type="button" data-action="increase" data-id="${item.id}">+</button>
+          </div>
+        `;
+        return row;
+      }));
+    }
+
+    function getOrderPayload() {
+      const serviceType = new FormData(orderForm).get("serviceType");
+
+      if (!cart.length) {
+        throw new Error("اختار مشروب واحد على الأقل من المنيو.");
+      }
+
+      const payload = {
+        serviceType,
+        status: "new",
+        totalItems: getCartTotal(),
+        items: cart.map(({ id, category, label, title, description, qty }) => ({
+          id,
+          category,
+          label,
+          title,
+          arabicName: description,
+          qty
+        })),
+        createdAt: serverTimestamp()
+      };
+
+      if (serviceType === "inside") {
+        const tableNumber = document.getElementById("tableNumber").value.trim();
+        if (!tableNumber) throw new Error("اكتب رقم الترابيزة.");
+
+        payload.tableNumber = tableNumber;
+        payload.notes = document.getElementById("insideNotes").value.trim();
+        return payload;
+      }
+
+      const customerName = document.getElementById("customerName").value.trim();
+      const customerPhone = document.getElementById("customerPhone").value.trim();
+      const customerAddress = document.getElementById("customerAddress").value.trim();
+
+      if (!customerName || !customerPhone || !customerAddress) {
+        throw new Error("للتوصيل لازم تكتب الاسم ورقم الموبايل والعنوان.");
+      }
+
+      payload.customer = {
+        name: customerName,
+        phone: customerPhone,
+        address: customerAddress
+      };
+      payload.notes = document.getElementById("deliveryNotes").value.trim();
+      return payload;
+    }
+
+    function initOrdersUi() {
+      openOrderModal.addEventListener("click", openModal);
+      closeOrderModal.addEventListener("click", closeModal);
+      continueShopping.addEventListener("click", closeModal);
+      orderModal.addEventListener("click", (event) => {
+        if (event.target === orderModal) closeModal();
+      });
+
+      document.addEventListener("keydown", (event) => {
+        if (event.key === "Escape" && orderModal.classList.contains("open")) closeModal();
+      });
+
+      cartItems.addEventListener("click", (event) => {
+        const button = event.target.closest("button[data-action]");
+        if (!button) return;
+
+        const item = cart.find((cartItem) => cartItem.id === button.dataset.id);
+        if (!item) return;
+
+        setCartQty(item.id, item.qty + (button.dataset.action === "increase" ? 1 : -1));
+      });
+
+      clearCart.addEventListener("click", () => {
+        cart = [];
+        renderCart();
+        orderStatus.textContent = "اتمسح الطلب.";
+      });
+
+      orderForm.querySelectorAll('input[name="serviceType"]').forEach((radio) => {
+        radio.addEventListener("change", () => {
+          orderForm.classList.toggle("delivery-mode", radio.value === "delivery" && radio.checked);
+          orderStatus.textContent = radio.value === "inside" && radio.checked
+            ? "اكتب رقم الترابيزة وهيظهر الطلب عند الأدمن."
+            : "اكتب بيانات التوصيل كاملة وهيظهر الطلب عند الأدمن.";
+        });
+      });
+
+      orderForm.addEventListener("submit", async (event) => {
+        event.preventDefault();
+        const submitButton = document.getElementById("submitOrder");
+        submitButton.disabled = true;
+        orderStatus.textContent = "جاري إرسال الطلب...";
+
+        try {
+          const payload = getOrderPayload();
+          await addDoc(collection(db, "orders"), payload);
+          cart = [];
+          renderCart();
+          orderForm.reset();
+          orderForm.classList.remove("delivery-mode");
+          orderStatus.textContent = "تم إرسال الطلب للأدمن بنجاح.";
+        } catch (error) {
+          orderStatus.textContent = error.code === "permission-denied"
+            ? "Firestore Rules لسه مش منشورة على Firebase. انشر firestore.rules على مشروع seeu-f688b."
+            : error.message || "حصل خطأ أثناء إرسال الطلب.";
+        } finally {
+          submitButton.disabled = false;
+        }
+      });
+
+      renderCart();
+    }
+
+    function initReviewsForm() {
+      reviewForm.addEventListener("submit", async (event) => {
+        event.preventDefault();
+        const submitButton = reviewForm.querySelector("button[type='submit']");
+        submitButton.disabled = true;
+        reviewStatus.textContent = "جاري حفظ رأيك...";
+
+        try {
+          await addDoc(collection(db, "reviews"), {
+            name: document.getElementById("reviewName").value.trim(),
+            rating: Number(document.getElementById("reviewRating").value),
+            text: document.getElementById("reviewText").value.trim(),
+            status: "new",
+            createdAt: serverTimestamp()
+          });
+          reviewForm.reset();
+          reviewStatus.textContent = "اتحفظ رأيك بنجاح. شكرًا ليك.";
+        } catch (error) {
+          reviewStatus.textContent = error.code === "permission-denied"
+            ? "Firestore Rules لسه مش منشورة على Firebase. انشر firestore.rules على مشروع seeu-f688b."
+            : error.message || "حصل خطأ أثناء حفظ الرأي.";
+        } finally {
+          submitButton.disabled = false;
+        }
+      });
+    }
+
+    function renderLiveReviews(snapshot) {
+      const reviews = snapshot.docs.map((reviewDoc) => reviewDoc.data());
+
+      if (!reviews.length) return;
+
+      reviewsGrid.replaceChildren(...reviews.map((review) => {
+        const card = document.createElement("article");
+        card.className = "review reveal visible";
+        const rating = Math.max(1, Math.min(5, Number(review.rating) || 5));
+        card.innerHTML = `
+          <div class="stars" aria-label="${rating} نجوم">${"★".repeat(rating)}${"☆".repeat(5 - rating)}</div>
+          <p>${review.text || "تجربة جميلة في SEEU."}</p>
+          <strong>${review.name || "عميل SEEU"}</strong>
+        `;
+        return card;
+      }));
+    }
+
+    function initLiveReviews() {
+      const reviewsQuery = query(
+        collection(db, "reviews"),
+        orderBy("createdAt", "desc"),
+        limit(6)
+      );
+
+      onSnapshot(reviewsQuery, renderLiveReviews, (error) => {
+        if (error.code === "permission-denied") {
+          reviewStatus.textContent = "Firestore Rules مانعة ظهور التقييمات في الموقع.";
+        }
       });
     }
 
@@ -2610,10 +3812,10 @@
       if (!typedText) return;
 
       const lines = [
-        "مش مجرد كافيه، دي تجربتك المفضلة كل مرة.",
-        "قهوة مظبوطة ومشروبات بتتعمل على مزاجك.",
-        "اختار مشروبك وسيب الباقي على SEEU.",
-        "لمة حلوة، قعدة هادية، وطعم فاكرينه."
+        "147 صنف من منيو SEEU الحقيقي مستنيينك.",
+        "موهيتو، آيس تي، ميلك شيك، آيسد كوفي ووافل.",
+        "اختار تصنيفك وشوف كل المشروبات بتتحرك قدامك.",
+        "قعدة حلوة جنب مديرية التربية والتعليم."
       ];
 
       if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
@@ -2661,6 +3863,9 @@
     initNavigation();
     initReveal();
     initHeroTyping();
+    initOrdersUi();
+    initReviewsForm();
+    initLiveReviews();
   </script>
 </body>
 </html>

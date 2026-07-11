@@ -1,0 +1,635 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SEEU Admin | Code Plus</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&amp;family=Playfair+Display:wght@700&amp;display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --ink: #211916;
+      --coffee: #493027;
+      --espresso: #2a1a15;
+      --caramel: #c88752;
+      --honey: #f3c77a;
+      --mint: #3f8f86;
+      --berry: #b24768;
+      --paper: #fff9f1;
+      --muted: #75655c;
+      --line: rgba(73, 48, 39, .14);
+      --white: #fff;
+      --radius: 8px;
+      --shadow: 0 22px 55px rgba(20, 10, 7, .22);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      min-height: 100vh;
+      font-family: "Cairo", sans-serif;
+      color: var(--white);
+      background:
+        linear-gradient(135deg, rgba(35, 77, 73, .96), rgba(42, 26, 21, .96)),
+        url("https://images.unsplash.com/photo-1554118811-1e0d58224f24?auto=format&fit=crop&w=1800&q=80") center / cover fixed;
+      line-height: 1.7;
+    }
+
+    button,
+    input,
+    select {
+      font: inherit;
+    }
+
+    button {
+      cursor: pointer;
+    }
+
+    .container {
+      width: min(1180px, calc(100% - 28px));
+      margin-inline: auto;
+    }
+
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      background: rgba(255, 249, 241, .92);
+      border-bottom: 1px solid rgba(73, 48, 39, .12);
+      backdrop-filter: blur(18px);
+    }
+
+    .topbar-inner {
+      min-height: 72px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+    }
+
+    .logo {
+      color: var(--coffee);
+      font-family: "Playfair Display", serif;
+      font-size: 2rem;
+      letter-spacing: 4px;
+      direction: ltr;
+    }
+
+    .brand-block {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
+
+    .developer-badge {
+      display: grid;
+      gap: 2px;
+      padding: 8px 12px;
+      color: var(--coffee);
+      background: rgba(255, 255, 255, .7);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+    }
+
+    .developer-badge span {
+      color: var(--muted);
+      font-size: .76rem;
+      font-weight: 800;
+    }
+
+    .developer-badge strong {
+      color: var(--berry);
+      font-size: .9rem;
+      font-weight: 900;
+    }
+
+    main {
+      padding: 34px 0;
+    }
+
+    .hero {
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+      gap: 18px;
+      margin-bottom: 20px;
+    }
+
+    .hero h1 {
+      font-size: clamp(2rem, 5vw, 3.4rem);
+      line-height: 1.2;
+    }
+
+    .hero p {
+      color: rgba(255, 255, 255, .75);
+      font-weight: 700;
+    }
+
+    .hero .credit-line {
+      color: var(--honey);
+      font-weight: 900;
+    }
+
+    .btn {
+      min-height: 44px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 9px 16px;
+      border: 1px solid transparent;
+      border-radius: var(--radius);
+      font-weight: 900;
+      text-decoration: none;
+    }
+
+    .btn-primary {
+      color: var(--espresso);
+      background: linear-gradient(135deg, var(--honey), var(--caramel));
+    }
+
+    .btn-secondary {
+      color: var(--white);
+      background: rgba(255, 255, 255, .1);
+      border-color: rgba(255, 255, 255, .18);
+    }
+
+    .btn-danger {
+      color: var(--white);
+      background: linear-gradient(135deg, #b92e4a, #6e1726);
+    }
+
+    .panel {
+      padding: 18px;
+      background: rgba(255, 255, 255, .1);
+      border: 1px solid rgba(255, 255, 255, .16);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(14px);
+    }
+
+    .login-panel {
+      max-width: 680px;
+      margin: 38px auto 0;
+    }
+
+    .login-panel form {
+      display: grid;
+      grid-template-columns: 1fr 1fr auto;
+      gap: 10px;
+      margin-top: 14px;
+    }
+
+    input,
+    select {
+      width: 100%;
+      min-height: 44px;
+      padding: 10px 12px;
+      color: var(--ink);
+      background: var(--paper);
+      border: 1px solid rgba(255, 255, 255, .18);
+      border-radius: var(--radius);
+      outline: none;
+    }
+
+    .status {
+      min-height: 26px;
+      margin-top: 10px;
+      color: rgba(255, 255, 255, .78);
+      font-weight: 800;
+    }
+
+    .dashboard[hidden],
+    .login-panel[hidden] {
+      display: none;
+    }
+
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 12px;
+      margin-bottom: 18px;
+    }
+
+    .stat {
+      padding: 16px;
+      color: var(--ink);
+      background: rgba(255, 249, 241, .92);
+      border: 1px solid rgba(255, 255, 255, .2);
+      border-radius: var(--radius);
+    }
+
+    .stat strong {
+      display: block;
+      color: var(--coffee);
+      font-size: 1.8rem;
+      line-height: 1;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: 1.25fr .75fr;
+      gap: 16px;
+      align-items: start;
+    }
+
+    .panel-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 12px;
+    }
+
+    .list {
+      display: grid;
+      gap: 12px;
+    }
+
+    .empty {
+      padding: 18px;
+      color: var(--muted);
+      background: rgba(255, 249, 241, .9);
+      border: 1px dashed var(--line);
+      border-radius: var(--radius);
+      text-align: center;
+      font-weight: 900;
+    }
+
+    .order-card,
+    .review-card {
+      display: grid;
+      gap: 10px;
+      padding: 14px;
+      color: var(--ink);
+      background: rgba(255, 249, 241, .94);
+      border: 1px solid rgba(255, 255, 255, .2);
+      border-radius: var(--radius);
+    }
+
+    .order-card header,
+    .review-card header {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      min-height: 28px;
+      padding: 4px 10px;
+      color: var(--white);
+      background: var(--berry);
+      border-radius: 999px;
+      font-size: .82rem;
+      font-weight: 900;
+    }
+
+    .badge.done {
+      background: var(--mint);
+    }
+
+    .badge.preparing {
+      background: #8a6721;
+    }
+
+    ul {
+      display: grid;
+      gap: 4px;
+      list-style: none;
+    }
+
+    .actions {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    @media (max-width: 900px) {
+      .grid,
+      .stats,
+      .login-panel form {
+        grid-template-columns: 1fr;
+      }
+
+      .hero,
+      .topbar-inner {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <div class="container topbar-inner">
+      <div class="brand-block">
+        <div class="logo">SEEU</div>
+        <div class="developer-badge">
+          <span>Developed by</span>
+          <strong>Code Plus</strong>
+        </div>
+      </div>
+      <a class="btn btn-secondary" href="index.html">رجوع للموقع</a>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="hero">
+      <div>
+        <h1>لوحة أدمن SEEU</h1>
+        <p>طلبات العملاء وآرائهم في صفحة منفصلة عن الموقع الرئيسي.</p>
+        <p class="credit-line">تم تطوير النظام بواسطة المهندس محمد رضا، مؤسس شركة Code Plus.</p>
+      </div>
+      <button class="btn btn-secondary" id="logoutBtn" type="button" hidden>تسجيل خروج</button>
+    </section>
+
+    <section class="panel login-panel" id="loginPanel">
+      <h2>تسجيل دخول الأدمن</h2>
+      <form id="loginForm">
+        <input id="adminEmail" type="email" autocomplete="username" value="admin@gmail.com" required>
+        <input id="adminPassword" type="password" autocomplete="current-password" placeholder="باسورد الأدمن" required>
+        <button class="btn btn-primary" type="submit">دخول</button>
+      </form>
+      <p class="status" id="loginStatus"></p>
+    </section>
+
+    <section class="dashboard" id="dashboard" hidden>
+      <div class="stats">
+        <div class="stat"><strong id="totalOrders">0</strong><span>كل الطلبات</span></div>
+        <div class="stat"><strong id="newOrders">0</strong><span>طلبات جديدة</span></div>
+        <div class="stat"><strong id="insideOrders">0</strong><span>تربيزات جوه الكافيه</span></div>
+        <div class="stat"><strong id="reviewsCount">0</strong><span>آراء محفوظة</span></div>
+      </div>
+
+      <div class="grid">
+        <section class="panel">
+          <div class="panel-head">
+            <h2>الطلبات</h2>
+            <p id="ordersStatus">تحميل الطلبات...</p>
+          </div>
+          <div class="list" id="ordersList"></div>
+        </section>
+
+        <section class="panel">
+          <div class="panel-head">
+            <h2>آراء العملاء</h2>
+            <p id="reviewsStatus">تحميل الآراء...</p>
+          </div>
+          <div class="list" id="reviewsList"></div>
+        </section>
+      </div>
+    </section>
+  </main>
+
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-app.js";
+    import {
+      collection,
+      deleteDoc,
+      doc,
+      getFirestore,
+      limit,
+      onSnapshot,
+      orderBy,
+      query,
+      serverTimestamp,
+      updateDoc
+    } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-firestore.js";
+    import {
+      getAuth,
+      onAuthStateChanged,
+      signInWithEmailAndPassword,
+      signOut
+    } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-auth.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyDPjDrx7vQn0MsyonTLUBf65EHjg42xY-I",
+      authDomain: "seeu-f688b.firebaseapp.com",
+      projectId: "seeu-f688b",
+      storageBucket: "seeu-f688b.firebasestorage.app",
+      messagingSenderId: "1034264729903",
+      appId: "1:1034264729903:web:502364ccb9884572b769da",
+      measurementId: "G-NB3KRVM3R4"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app);
+    const auth = getAuth(app);
+    const ADMIN_EMAIL = "admin@gmail.com";
+
+    const loginPanel = document.getElementById("loginPanel");
+    const dashboard = document.getElementById("dashboard");
+    const loginForm = document.getElementById("loginForm");
+    const loginStatus = document.getElementById("loginStatus");
+    const logoutBtn = document.getElementById("logoutBtn");
+    const ordersList = document.getElementById("ordersList");
+    const reviewsList = document.getElementById("reviewsList");
+    const ordersStatus = document.getElementById("ordersStatus");
+    const reviewsStatus = document.getElementById("reviewsStatus");
+    const totalOrders = document.getElementById("totalOrders");
+    const newOrders = document.getElementById("newOrders");
+    const insideOrders = document.getElementById("insideOrders");
+    const reviewsCount = document.getElementById("reviewsCount");
+    let unsubscribeOrders = null;
+    let unsubscribeReviews = null;
+
+    function formatDate(createdAt) {
+      const date = createdAt?.toDate?.();
+      if (!date) return "الآن";
+      return new Intl.DateTimeFormat("ar-EG", {
+        dateStyle: "short",
+        timeStyle: "short"
+      }).format(date);
+    }
+
+    function statusLabel(status) {
+      return {
+        new: "جديد",
+        preparing: "قيد التحضير",
+        done: "تم التنفيذ"
+      }[status] || "جديد";
+    }
+
+    function renderOrders(snapshot) {
+      const orders = snapshot.docs.map((orderDoc) => ({ id: orderDoc.id, ...orderDoc.data() }));
+      totalOrders.textContent = String(orders.length);
+      newOrders.textContent = String(orders.filter((order) => order.status === "new").length);
+      insideOrders.textContent = String(orders.filter((order) => order.serviceType === "inside").length);
+      ordersStatus.textContent = orders.length ? `${orders.length} طلب` : "مفيش طلبات";
+
+      if (!orders.length) {
+        ordersList.innerHTML = '<div class="empty">مفيش طلبات حاليًا.</div>';
+        return;
+      }
+
+      ordersList.replaceChildren(...orders.map((order) => {
+        const card = document.createElement("article");
+        card.className = "order-card";
+        const isInside = order.serviceType === "inside";
+        const title = isInside
+          ? `ترابيزة ${order.tableNumber || "-"}`
+          : `توصيل - ${order.customer?.name || "عميل"}`;
+        const contact = isInside
+          ? ""
+          : `<p><strong>موبايل:</strong> ${order.customer?.phone || "-"} | <strong>عنوان:</strong> ${order.customer?.address || "-"}</p>`;
+        const items = (order.items || [])
+          .map((item) => `<li>${item.qty}× ${item.title} - ${item.arabicName}</li>`)
+          .join("");
+
+        card.innerHTML = `
+          <header>
+            <div>
+              <strong>${title}</strong>
+              <p>${formatDate(order.createdAt)} | ${order.totalItems || 0} صنف</p>
+            </div>
+            <span class="badge ${order.status || "new"}">${statusLabel(order.status)}</span>
+          </header>
+          ${contact}
+          <ul>${items}</ul>
+          ${order.notes ? `<p><strong>ملاحظات:</strong> ${order.notes}</p>` : ""}
+          <div class="actions">
+            <button class="btn btn-secondary" type="button" data-action="preparing" data-id="${order.id}">قيد التحضير</button>
+            <button class="btn btn-primary" type="button" data-action="done" data-id="${order.id}">تم التنفيذ</button>
+            <button class="btn btn-danger" type="button" data-action="delete" data-id="${order.id}">مسح الترابيزة/الطلب</button>
+          </div>
+        `;
+        return card;
+      }));
+    }
+
+    function renderReviews(snapshot) {
+      const reviews = snapshot.docs.map((reviewDoc) => ({ id: reviewDoc.id, ...reviewDoc.data() }));
+      reviewsCount.textContent = String(reviews.length);
+      reviewsStatus.textContent = reviews.length ? `${reviews.length} رأي` : "مفيش آراء";
+
+      if (!reviews.length) {
+        reviewsList.innerHTML = '<div class="empty">آراء العملاء هتظهر هنا.</div>';
+        return;
+      }
+
+      reviewsList.replaceChildren(...reviews.map((review) => {
+        const card = document.createElement("article");
+        card.className = "review-card";
+        card.innerHTML = `
+          <header>
+            <strong>${review.name || "عميل SEEU"}</strong>
+            <span class="badge">${"★".repeat(Number(review.rating) || 5)}</span>
+          </header>
+          <p>${review.text || ""}</p>
+          <small>${formatDate(review.createdAt)}</small>
+          <div class="actions">
+            <button class="btn btn-danger" type="button" data-review-delete="${review.id}">مسح الرأي</button>
+          </div>
+        `;
+        return card;
+      }));
+    }
+
+    function subscribeDashboard() {
+      if (unsubscribeOrders) unsubscribeOrders();
+      if (unsubscribeReviews) unsubscribeReviews();
+
+      unsubscribeOrders = onSnapshot(
+        query(collection(db, "orders"), orderBy("createdAt", "desc"), limit(80)),
+        renderOrders,
+        (error) => {
+          ordersStatus.textContent = error.code === "permission-denied"
+            ? "Firebase Rules مانعة قراءة الطلبات."
+            : error.message || "خطأ في قراءة الطلبات.";
+        }
+      );
+
+      unsubscribeReviews = onSnapshot(
+        query(collection(db, "reviews"), orderBy("createdAt", "desc"), limit(50)),
+        renderReviews,
+        (error) => {
+          reviewsStatus.textContent = error.code === "permission-denied"
+            ? "Firebase Rules مانعة قراءة الآراء."
+            : error.message || "خطأ في قراءة الآراء.";
+        }
+      );
+    }
+
+    loginForm.addEventListener("submit", async (event) => {
+      event.preventDefault();
+      loginStatus.textContent = "جاري تسجيل الدخول...";
+
+      try {
+        await signInWithEmailAndPassword(
+          auth,
+          document.getElementById("adminEmail").value.trim(),
+          document.getElementById("adminPassword").value
+        );
+        loginStatus.textContent = "";
+      } catch (error) {
+        loginStatus.textContent = error.message || "بيانات الدخول غير صحيحة.";
+      }
+    });
+
+    logoutBtn.addEventListener("click", () => signOut(auth));
+
+    ordersList.addEventListener("click", async (event) => {
+      const button = event.target.closest("button[data-action]");
+      if (!button) return;
+
+      button.disabled = true;
+      try {
+        if (button.dataset.action === "delete") {
+          await deleteDoc(doc(db, "orders", button.dataset.id));
+          return;
+        }
+
+        await updateDoc(doc(db, "orders", button.dataset.id), {
+          status: button.dataset.action,
+          updatedAt: serverTimestamp()
+        });
+      } catch (error) {
+        ordersStatus.textContent = error.message || "مش قادرين نحدث الطلب.";
+      } finally {
+        button.disabled = false;
+      }
+    });
+
+    reviewsList.addEventListener("click", async (event) => {
+      const button = event.target.closest("button[data-review-delete]");
+      if (!button) return;
+
+      button.disabled = true;
+      try {
+        await deleteDoc(doc(db, "reviews", button.dataset.reviewDelete));
+      } catch (error) {
+        reviewsStatus.textContent = error.message || "مش قادرين نمسح الرأي.";
+      } finally {
+        button.disabled = false;
+      }
+    });
+
+    onAuthStateChanged(auth, (user) => {
+      const isAdmin = user?.email === ADMIN_EMAIL;
+      loginPanel.hidden = isAdmin;
+      dashboard.hidden = !isAdmin;
+      logoutBtn.hidden = !isAdmin;
+
+      if (isAdmin) {
+        subscribeDashboard();
+        return;
+      }
+
+      if (unsubscribeOrders) unsubscribeOrders();
+      if (unsubscribeReviews) unsubscribeReviews();
+      unsubscribeOrders = null;
+      unsubscribeReviews = null;
+    });
+  </script>
+</body>
+</html>
