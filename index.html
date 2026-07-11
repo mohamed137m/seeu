@@ -888,7 +888,7 @@
 
     .about-grid {
       display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
+      grid-template-columns: repeat(4, minmax(0, 1fr));
       gap: 18px;
     }
 
@@ -943,6 +943,10 @@
 
     .feature-card:nth-child(3) .feature-icon {
       background: var(--berry);
+    }
+
+    .feature-card:nth-child(4) .feature-icon {
+      background: var(--blue);
     }
 
     .feature-card h4 {
@@ -2778,7 +2782,7 @@
         <a href="#gallery">الأجواء</a>
         <a href="#reviews">الآراء</a>
         <a href="#visit">زورنا</a>
-        <a href="developer.html">المطور</a>
+        <a href="developer.html">المهندس</a>
         <a href="admin.html">دخول الأدمن</a>
       </nav>
       <a class="btn btn-primary" href="#menu">شوف المنيو</a>
@@ -2928,6 +2932,11 @@
             <h4>خدمة باهتمام</h4>
             <p>فريقنا هدفه يخلي تجربتك سهلة ومريحة من أول الطلب لآخر رشفة.</p>
           </article>
+          <article class="feature-card reveal">
+            <div class="feature-icon" aria-hidden="true">Wi</div>
+            <h4>واي فاي في المكان</h4>
+            <p>متاح إنترنت داخل SEEU علشان تذاكر، تشتغل، أو تقضي وقتك براحتك.</p>
+          </article>
         </div>
       </div>
     </section>
@@ -3038,6 +3047,7 @@
           <div class="info-list">
             <span><b aria-hidden="true">📍</b> 123 شارع مجلس المدينة، المنيا - بجانب مديرية التربية والتعليم</span>
             <span><b aria-hidden="true">📞</b> 01027733790</span>
+            <span><b aria-hidden="true">Wi</b> واي فاي متاح داخل المكان</span>
             <span><b aria-hidden="true">🕒</b> يوميًا من 8:00 صباحًا حتى 2:00 بعد منتصف الليل</span>
           </div>
         </aside>
@@ -3050,18 +3060,20 @@
           <img src="developer.jpg" alt="المهندس محمد رضا - مؤسس Code Plus" loading="lazy" onerror="this.remove()">
         </div>
         <div class="developer-copy reveal">
-          <span class="section-kicker">مطور الموقع</span>
+          <span class="section-kicker">مهندس الموقع</span>
           <h3>محمد رضا</h3>
           <p class="developer-title">مهندس برمجيات | مؤسس والرئيس التنفيذي لشركة <strong>Code Plus</strong></p>
           <p class="developer-bio">يؤمن بأن الأفكار العظيمة لا تُولد مكتملة، بل تُصنع بالشغف والعمل المستمر. استطاع خلال رحلته أن يحوّل العديد من الأفكار إلى منتجات رقمية حقيقية تخدم آلاف المستخدمين، وأن يؤسس شركة متخصصة في تقديم حلول تقنية متطورة للشركات ورواد الأعمال.</p>
           <p class="developer-bio">يقود مشاريعه بعقلية تعتمد على الابتكار والجودة والتطوير المستمر، ويسعى إلى بناء منظومة تقنية عربية تنافس بأعلى المعايير العالمية، مع إيمان راسخ بأن الأثر الحقيقي هو الإرث الذي يتركه الإنسان بعد كل إنجاز.</p>
           <div class="developer-actions">
             <a class="btn btn-primary" href="https://wa.me/201157977302" target="_blank" rel="noreferrer">تواصل واتساب</a>
-            <a class="btn btn-secondary" href="mailto:m.reda.tech@gmail.com">راسلني بالإيميل</a>
+            <a class="btn btn-secondary" href="https://www.instagram.com/mo.reda_0?igsh=Y2lqdTFjNHJieGc2" target="_blank" rel="noreferrer">Instagram</a>
+            <a class="btn btn-secondary" href="https://www.facebook.com/share/19CaS5427H/" target="_blank" rel="noreferrer">Facebook</a>
           </div>
-          <div class="developer-contact" aria-label="بيانات تواصل المطور">
+          <div class="developer-contact" aria-label="بيانات تواصل المهندس">
             <a href="https://wa.me/201157977302" target="_blank" rel="noreferrer">WhatsApp: +20 115 797 7302</a>
-            <a href="mailto:m.reda.tech@gmail.com">m.reda.tech@gmail.com</a>
+            <a href="https://www.instagram.com/mo.reda_0?igsh=Y2lqdTFjNHJieGc2" target="_blank" rel="noreferrer">Instagram: mo.reda_0</a>
+            <a href="https://www.facebook.com/share/19CaS5427H/" target="_blank" rel="noreferrer">Facebook Profile</a>
           </div>
         </div>
       </div>
@@ -3136,7 +3148,7 @@
       <div>
         <p>© 2026 SEEU Cafe. جميع الحقوق محفوظة.</p>
       </div>
-      <div class="developer-credit" aria-label="مطور الموقع">
+      <div class="developer-credit" aria-label="مهندس الموقع">
         <span>تطوير وتصميم الموقع</span>
         <strong><a href="developer.html">المهندس محمد رضا</a></strong>
         <b>مؤسس شركة Code Plus</b>
@@ -3691,7 +3703,8 @@
           renderCart();
           orderForm.reset();
           orderForm.classList.remove("delivery-mode");
-          orderStatus.textContent = "تم إرسال الطلب للأدمن بنجاح.";
+          openModal();
+          orderStatus.textContent = "تم إرسال الطلب بنجاح. جاري التحضير الآن، خليك مكانك وطلبك هيوصلك.";
         } catch (error) {
           orderStatus.textContent = error.code === "permission-denied"
             ? "Firestore Rules لسه مش منشورة على Firebase. انشر firestore.rules على مشروع seeu-f688b."
