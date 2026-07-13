@@ -1491,6 +1491,38 @@
       padding: 18px;
     }
 
+    .success-panel {
+      width: min(460px, 100%);
+      padding: 28px 22px;
+      text-align: center;
+    }
+
+    .success-mark {
+      width: 72px;
+      height: 72px;
+      display: grid;
+      place-items: center;
+      margin: 0 auto 16px;
+      color: var(--white);
+      background: linear-gradient(135deg, var(--mint), var(--coffee));
+      border-radius: 50%;
+      font-size: 2.2rem;
+      font-weight: 900;
+      box-shadow: 0 18px 34px rgba(63, 143, 134, .24);
+    }
+
+    .success-panel h3 {
+      color: var(--coffee);
+      font-size: 1.45rem;
+      margin-bottom: 10px;
+    }
+
+    .success-panel p {
+      color: var(--muted);
+      font-weight: 800;
+      margin-bottom: 20px;
+    }
+
     .cart-items {
       display: grid;
       gap: 10px;
@@ -3216,6 +3248,15 @@
     </div>
   </div>
 
+  <div class="modal" id="successModal" role="dialog" aria-modal="true" aria-labelledby="successModalTitle">
+    <div class="modal-panel success-panel">
+      <div class="success-mark" aria-hidden="true">✓</div>
+      <h3 id="successModalTitle">تم طلب الأوردر بنجاح</h3>
+      <p>انتظر، بيتحضرلك في أسرع وقت.</p>
+      <button class="btn btn-primary" id="closeSuccessModal" type="button">تمام</button>
+    </div>
+  </div>
+
   <footer>
     <div class="container footer-inner">
       <div class="footer-logo">SEEU</div>
@@ -3236,11 +3277,13 @@
     import {
       addDoc,
       collection,
+      doc,
       getFirestore,
       limit,
       onSnapshot,
       orderBy,
       query,
+      runTransaction,
       serverTimestamp
     } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-firestore.js";
 
@@ -3471,6 +3514,8 @@
     const openOrderModal = document.getElementById("openOrderModal");
     const closeOrderModal = document.getElementById("closeOrderModal");
     const orderModal = document.getElementById("orderModal");
+    const successModal = document.getElementById("successModal");
+    const closeSuccessModal = document.getElementById("closeSuccessModal");
     const cartCount = document.getElementById("cartCount");
     const cartItems = document.getElementById("cartItems");
     const cartTotal = document.getElementById("cartTotal");
@@ -3504,6 +3549,10 @@
 
     function getCartGrandTotal() {
       return cart.reduce((total, item) => total + (getItemPrice(item.id) * item.qty), 0);
+    }
+
+    function tableLockId(tableNumber) {
+      return encodeURIComponent(String(tableNumber).trim());
     }
 
     function updateVisiblePrices() {
@@ -3665,6 +3714,16 @@
       document.body.style.overflow = "";
     }
 
+    function openSuccessDialog() {
+      successModal.classList.add("open");
+      document.body.style.overflow = "hidden";
+    }
+
+    function closeSuccessDialog() {
+      successModal.classList.remove("open");
+      document.body.style.overflow = "";
+    }
+
     function syncMenuSelection() {
       document.querySelectorAll(".menu-card").forEach((card) => {
         const checkbox = card.querySelector('input[data-cart-id]');
@@ -3793,6 +3852,30 @@
       return payload;
     }
 
+    async function submitOrderPayload(payload) {
+      if (payload.serviceType !== "inside") {
+        await addDoc(collection(db, "orders"), payload);
+        return;
+      }
+
+      const lockRef = doc(db, "activeTables", tableLockId(payload.tableNumber));
+      const orderRef = doc(collection(db, "orders"));
+
+      await runTransaction(db, async (transaction) => {
+        const activeTable = await transaction.get(lockRef);
+        if (activeTable.exists()) {
+          throw new Error(`ترابيزة ${payload.tableNumber} عندها طلب شغال بالفعل. استنى الأدمن يمسح الطلب الحالي من الداشبورد.`);
+        }
+
+        transaction.set(orderRef, payload);
+        transaction.set(lockRef, {
+          tableNumber: payload.tableNumber,
+          orderId: orderRef.id,
+          createdAt: serverTimestamp()
+        });
+      });
+    }
+
     function initOrdersUi() {
       openOrderModal.addEventListener("click", openModal);
       closeOrderModal.addEventListener("click", closeModal);
@@ -3800,9 +3883,14 @@
       orderModal.addEventListener("click", (event) => {
         if (event.target === orderModal) closeModal();
       });
+      closeSuccessModal.addEventListener("click", closeSuccessDialog);
+      successModal.addEventListener("click", (event) => {
+        if (event.target === successModal) closeSuccessDialog();
+      });
 
       document.addEventListener("keydown", (event) => {
         if (event.key === "Escape" && orderModal.classList.contains("open")) closeModal();
+        if (event.key === "Escape" && successModal.classList.contains("open")) closeSuccessDialog();
       });
 
       cartItems.addEventListener("click", (event) => {
@@ -3838,13 +3926,14 @@
 
         try {
           const payload = getOrderPayload();
-          await addDoc(collection(db, "orders"), payload);
+          await submitOrderPayload(payload);
           cart = [];
           renderCart();
           orderForm.reset();
           orderForm.classList.remove("delivery-mode");
-          openModal();
-          orderStatus.textContent = "تم إرسال الطلب بنجاح. جاري التحضير الآن، خليك مكانك وطلبك هيوصلك.";
+          closeModal();
+          orderStatus.textContent = "";
+          openSuccessDialog();
         } catch (error) {
           orderStatus.textContent = error.code === "permission-denied"
             ? "Firestore Rules لسه مش منشورة على Firebase. انشر firestore.rules على مشروع seeu-f688b."

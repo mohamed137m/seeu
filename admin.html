@@ -700,7 +700,8 @@
       query,
       serverTimestamp,
       setDoc,
-      updateDoc
+      updateDoc,
+      writeBatch
     } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-firestore.js";
     import {
       getAuth,
@@ -768,6 +769,10 @@
 
     function menuId(category, title) {
       return `${category}-${title}`;
+    }
+
+    function tableLockId(tableNumber) {
+      return encodeURIComponent(String(tableNumber).trim());
     }
 
     function formatDate(createdAt) {
@@ -867,7 +872,7 @@
           <div class="order-actions">
             <button class="btn btn-secondary" type="button" data-action="preparing" data-id="${order.id}">قيد التحضير</button>
             <button class="btn btn-primary" type="button" data-action="done" data-id="${order.id}">تم التنفيذ</button>
-            <button class="btn btn-danger" type="button" data-action="delete" data-id="${order.id}">مسح الطلب</button>
+            <button class="btn btn-danger" type="button" data-action="delete" data-id="${order.id}" data-service-type="${order.serviceType || ""}" data-table-number="${order.tableNumber || ""}">مسح الطلب</button>
           </div>
         `;
         return card;
@@ -1012,7 +1017,12 @@
       button.disabled = true;
       try {
         if (button.dataset.action === "delete") {
-          await deleteDoc(doc(db, "orders", button.dataset.id));
+          const batch = writeBatch(db);
+          batch.delete(doc(db, "orders", button.dataset.id));
+          if (button.dataset.serviceType === "inside" && button.dataset.tableNumber) {
+            batch.delete(doc(db, "activeTables", tableLockId(button.dataset.tableNumber)));
+          }
+          await batch.commit();
           return;
         }
 
