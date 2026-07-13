@@ -136,6 +136,21 @@
       font-weight: 900;
     }
 
+    .admin-session {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      width: fit-content;
+      margin-top: 8px;
+      padding: 7px 12px;
+      color: var(--white);
+      background: rgba(255, 255, 255, .1);
+      border: 1px solid rgba(255, 255, 255, .16);
+      border-radius: 999px;
+      font-size: .86rem;
+      font-weight: 900;
+    }
+
     .btn {
       min-height: 44px;
       display: inline-flex;
@@ -234,9 +249,54 @@
 
     .grid {
       display: grid;
-      grid-template-columns: 1.25fr .75fr;
+      grid-template-columns: minmax(0, 1.35fr) minmax(320px, .65fr);
       gap: 16px;
       align-items: start;
+    }
+
+    .pricing-panel {
+      margin-bottom: 0;
+    }
+
+    .side-stack {
+      display: grid;
+      gap: 16px;
+    }
+
+    .pricing-tools {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 180px;
+      gap: 10px;
+      margin-bottom: 12px;
+    }
+
+    .price-list {
+      max-height: 430px;
+      overflow: auto;
+      display: grid;
+      gap: 10px;
+      padding-inline-end: 4px;
+    }
+
+    .price-row {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 96px;
+      align-items: center;
+      gap: 10px;
+      padding: 12px;
+      color: var(--ink);
+      background: rgba(255, 249, 241, .94);
+      border-radius: var(--radius);
+    }
+
+    .price-row small {
+      color: var(--muted);
+      font-weight: 800;
+    }
+
+    .price-row .btn {
+      grid-column: 1 / -1;
+      min-height: 38px;
     }
 
     .panel-head {
@@ -245,6 +305,16 @@
       justify-content: space-between;
       gap: 12px;
       margin-bottom: 12px;
+    }
+
+    .panel-head p {
+      padding: 6px 10px;
+      color: rgba(255, 255, 255, .86);
+      background: rgba(255, 255, 255, .1);
+      border: 1px solid rgba(255, 255, 255, .14);
+      border-radius: 999px;
+      font-size: .86rem;
+      font-weight: 900;
     }
 
     .list {
@@ -265,21 +335,196 @@
     .order-card,
     .review-card {
       display: grid;
-      gap: 10px;
-      padding: 14px;
+      gap: 14px;
+      padding: 16px;
       color: var(--ink);
-      background: rgba(255, 249, 241, .94);
-      border: 1px solid rgba(255, 255, 255, .2);
+      background:
+        linear-gradient(135deg, rgba(255, 249, 241, .98), rgba(255, 255, 255, .93)),
+        var(--paper);
+      border: 1px solid rgba(73, 48, 39, .12);
       border-radius: var(--radius);
+      box-shadow: 0 18px 42px rgba(18, 10, 7, .12);
     }
 
-    .order-card header,
+    .order-card {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .order-card::before {
+      content: "";
+      position: absolute;
+      inset: 0 auto 0 0;
+      width: 5px;
+      background: var(--berry);
+    }
+
+    .order-card.is-preparing::before {
+      background: #b8872f;
+    }
+
+    .order-card.is-done::before {
+      background: var(--mint);
+    }
+
     .review-card header {
       display: flex;
       align-items: flex-start;
       justify-content: space-between;
       gap: 10px;
       flex-wrap: wrap;
+    }
+
+    .order-top {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 12px;
+      flex-wrap: wrap;
+      padding-inline-start: 4px;
+    }
+
+    .order-title {
+      display: grid;
+      gap: 4px;
+    }
+
+    .order-title strong {
+      color: var(--coffee);
+      font-size: 1.28rem;
+      line-height: 1.25;
+    }
+
+    .order-title span {
+      color: var(--muted);
+      font-size: .88rem;
+      font-weight: 900;
+    }
+
+    .order-total {
+      min-width: 140px;
+      padding: 10px 12px;
+      color: var(--espresso);
+      background: linear-gradient(135deg, rgba(243, 199, 122, .9), rgba(200, 135, 82, .72));
+      border-radius: var(--radius);
+      text-align: center;
+      font-weight: 900;
+    }
+
+    .order-total span {
+      display: block;
+      font-size: .75rem;
+      opacity: .78;
+    }
+
+    .order-total strong {
+      display: block;
+      font-size: 1.2rem;
+      line-height: 1.2;
+    }
+
+    .order-info {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 8px;
+    }
+
+    .info-chip {
+      display: grid;
+      gap: 2px;
+      padding: 10px;
+      background: rgba(73, 48, 39, .055);
+      border: 1px solid rgba(73, 48, 39, .08);
+      border-radius: var(--radius);
+      font-weight: 900;
+    }
+
+    .info-chip span {
+      color: var(--muted);
+      font-size: .76rem;
+    }
+
+    .info-chip strong {
+      color: var(--coffee);
+      overflow-wrap: anywhere;
+    }
+
+    .order-items {
+      display: grid;
+      gap: 8px;
+    }
+
+    .order-item {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 92px 104px;
+      align-items: center;
+      gap: 10px;
+      padding: 10px;
+      background: rgba(255, 255, 255, .7);
+      border: 1px solid rgba(73, 48, 39, .08);
+      border-radius: var(--radius);
+    }
+
+    .order-item-name {
+      display: grid;
+      gap: 2px;
+      min-width: 0;
+    }
+
+    .order-item-name strong {
+      color: var(--coffee);
+      line-height: 1.25;
+      overflow-wrap: anywhere;
+    }
+
+    .order-item-name span,
+    .order-item-price span {
+      color: var(--muted);
+      font-size: .78rem;
+      font-weight: 900;
+    }
+
+    .order-item-qty,
+    .order-item-price {
+      display: grid;
+      gap: 2px;
+      text-align: center;
+      font-weight: 900;
+    }
+
+    .order-item-qty strong,
+    .order-item-price strong {
+      color: var(--coffee);
+      direction: ltr;
+    }
+
+    .order-notes {
+      padding: 10px 12px;
+      color: var(--coffee);
+      background: rgba(63, 143, 134, .09);
+      border: 1px solid rgba(63, 143, 134, .16);
+      border-radius: var(--radius);
+      font-weight: 800;
+    }
+
+    .order-actions {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 8px;
+      padding-top: 2px;
+    }
+
+    .order-actions .btn {
+      width: 100%;
+      min-height: 42px;
+      padding-inline: 10px;
+      font-size: .88rem;
+    }
+
+    .order-actions .btn[data-action="preparing"] {
+      color: var(--white);
+      background: #111;
+      border-color: #111;
     }
 
     .badge {
@@ -317,7 +562,12 @@
     @media (max-width: 900px) {
       .grid,
       .stats,
-      .login-panel form {
+      .login-panel form,
+      .pricing-tools,
+      .price-row,
+      .order-info,
+      .order-item,
+      .order-actions {
         grid-template-columns: 1fr;
       }
 
@@ -349,6 +599,7 @@
         <h1>لوحة أدمن SEEU</h1>
         <p>طلبات العملاء وآرائهم في صفحة منفصلة عن الموقع الرئيسي.</p>
         <p class="credit-line">تم تطوير النظام بواسطة المهندس محمد رضا، مؤسس شركة Code Plus.</p>
+        <p class="admin-session" id="adminSession" hidden></p>
       </div>
       <button class="btn btn-secondary" id="logoutBtn" type="button" hidden>تسجيل خروج</button>
     </section>
@@ -380,13 +631,27 @@
           <div class="list" id="ordersList"></div>
         </section>
 
-        <section class="panel">
-          <div class="panel-head">
-            <h2>آراء العملاء</h2>
-            <p id="reviewsStatus">تحميل الآراء...</p>
-          </div>
-          <div class="list" id="reviewsList"></div>
-        </section>
+        <div class="side-stack">
+          <section class="panel pricing-panel">
+            <div class="panel-head">
+              <h2>أسعار المنيو</h2>
+              <p id="pricesStatus">تحميل الأسعار...</p>
+            </div>
+            <div class="pricing-tools">
+              <input id="priceSearch" type="search" placeholder="ابحث عن مشروب">
+              <select id="priceCategory"></select>
+            </div>
+            <div class="price-list" id="priceList"></div>
+          </section>
+
+          <section class="panel">
+            <div class="panel-head">
+              <h2>آراء العملاء</h2>
+              <p id="reviewsStatus">تحميل الآراء...</p>
+            </div>
+            <div class="list" id="reviewsList"></div>
+          </section>
+        </div>
       </div>
     </section>
   </main>
@@ -403,6 +668,7 @@
       orderBy,
       query,
       serverTimestamp,
+      setDoc,
       updateDoc
     } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-firestore.js";
     import {
@@ -411,6 +677,7 @@
       signInWithEmailAndPassword,
       signOut
     } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-auth.js";
+    import { categories, menuItems } from "./menu-data.js";
 
     const firebaseConfig = {
       apiKey: "AIzaSyDPjDrx7vQn0MsyonTLUBf65EHjg42xY-I",
@@ -431,17 +698,46 @@
     const dashboard = document.getElementById("dashboard");
     const loginForm = document.getElementById("loginForm");
     const loginStatus = document.getElementById("loginStatus");
+    const adminSession = document.getElementById("adminSession");
     const logoutBtn = document.getElementById("logoutBtn");
     const ordersList = document.getElementById("ordersList");
     const reviewsList = document.getElementById("reviewsList");
     const ordersStatus = document.getElementById("ordersStatus");
     const reviewsStatus = document.getElementById("reviewsStatus");
+    const pricesStatus = document.getElementById("pricesStatus");
+    const priceSearch = document.getElementById("priceSearch");
+    const priceCategory = document.getElementById("priceCategory");
+    const priceList = document.getElementById("priceList");
     const totalOrders = document.getElementById("totalOrders");
     const newOrders = document.getElementById("newOrders");
     const insideOrders = document.getElementById("insideOrders");
     const reviewsCount = document.getElementById("reviewsCount");
     let unsubscribeOrders = null;
     let unsubscribeReviews = null;
+    let unsubscribePrices = null;
+    let priceMap = new Map();
+
+    function priceDocId(id) {
+      return encodeURIComponent(id);
+    }
+
+    function formatPrice(value) {
+      const price = Number(value) || 0;
+      return price > 0 ? `${price.toLocaleString("ar-EG")} جنيه` : "بدون سعر";
+    }
+
+    function formatMoney(value) {
+      const price = Number(value) || 0;
+      return `${price.toLocaleString("ar-EG")} جنيه`;
+    }
+
+    function permissionMessage(scope, action = "قراءة") {
+      return `قواعد Firebase المنشورة مانعة ${action} ${scope}. انشر ملف firestore.rules على مشروع seeu-f688b وتأكد أن الأدمن مسجل بإيميل ${ADMIN_EMAIL}.`;
+    }
+
+    function menuId(category, title) {
+      return `${category}-${title}`;
+    }
 
     function formatDate(createdAt) {
       const date = createdAt?.toDate?.();
@@ -474,33 +770,73 @@
 
       ordersList.replaceChildren(...orders.map((order) => {
         const card = document.createElement("article");
-        card.className = "order-card";
+        card.className = `order-card is-${order.status || "new"}`;
         const isInside = order.serviceType === "inside";
-        const title = isInside
-          ? `ترابيزة ${order.tableNumber || "-"}`
-          : `توصيل - ${order.customer?.name || "عميل"}`;
-        const contact = isInside
-          ? ""
-          : `<p><strong>موبايل:</strong> ${order.customer?.phone || "-"} | <strong>عنوان:</strong> ${order.customer?.address || "-"}</p>`;
+        const orderTitle = isInside ? `ترابيزة ${order.tableNumber || "-"}` : "طلب توصيل";
+        const serviceLabel = isInside ? "داخل الكافيه" : "خارج الكافيه";
+        const customerName = isInside ? "عميل داخل المكان" : order.customer?.name || "عميل توصيل";
+        const customerPhone = isInside ? "-" : order.customer?.phone || "-";
+        const customerAddress = isInside ? "SEEU Cafe" : order.customer?.address || "-";
         const items = (order.items || [])
-          .map((item) => `<li>${item.qty}× ${item.title} - ${item.arabicName}</li>`)
+          .map((item) => `
+            <li class="order-item">
+              <div class="order-item-name">
+                <strong>${item.arabicName || item.title}</strong>
+                <span>${item.title || ""}</span>
+              </div>
+              <div class="order-item-qty">
+                <span>الكمية</span>
+                <strong>${item.qty || 0}x</strong>
+              </div>
+              <div class="order-item-price">
+                <span>${formatPrice(item.unitPrice)}</span>
+                <strong>${formatMoney(item.lineTotal)}</strong>
+              </div>
+            </li>
+          `)
           .join("");
 
         card.innerHTML = `
-          <header>
-            <div>
-              <strong>${title}</strong>
-              <p>${formatDate(order.createdAt)} | ${order.totalItems || 0} صنف</p>
+          <div class="order-top">
+            <div class="order-title">
+              <strong>${orderTitle}</strong>
+              <span>${formatDate(order.createdAt)} | ${order.totalItems || 0} صنف</span>
             </div>
             <span class="badge ${order.status || "new"}">${statusLabel(order.status)}</span>
-          </header>
-          ${contact}
-          <ul>${items}</ul>
-          ${order.notes ? `<p><strong>ملاحظات:</strong> ${order.notes}</p>` : ""}
-          <div class="actions">
+            <div class="order-total">
+              <span>الإجمالي</span>
+              <strong>${formatMoney(order.totalPrice)}</strong>
+            </div>
+          </div>
+
+          <div class="order-info">
+            <div class="info-chip">
+              <span>نوع الطلب</span>
+              <strong>${serviceLabel}</strong>
+            </div>
+            <div class="info-chip">
+              <span>العميل</span>
+              <strong>${customerName}</strong>
+            </div>
+            <div class="info-chip">
+              <span>التواصل / المكان</span>
+              <strong>${customerPhone}</strong>
+            </div>
+          </div>
+
+          ${!isInside ? `
+            <div class="info-chip">
+              <span>عنوان التوصيل</span>
+              <strong>${customerAddress}</strong>
+            </div>
+          ` : ""}
+
+          <ul class="order-items">${items}</ul>
+          ${order.notes ? `<p class="order-notes"><strong>ملاحظات:</strong> ${order.notes}</p>` : ""}
+          <div class="order-actions">
             <button class="btn btn-secondary" type="button" data-action="preparing" data-id="${order.id}">قيد التحضير</button>
             <button class="btn btn-primary" type="button" data-action="done" data-id="${order.id}">تم التنفيذ</button>
-            <button class="btn btn-danger" type="button" data-action="delete" data-id="${order.id}">مسح الترابيزة/الطلب</button>
+            <button class="btn btn-danger" type="button" data-action="delete" data-id="${order.id}">مسح الطلب</button>
           </div>
         `;
         return card;
@@ -535,6 +871,53 @@
       }));
     }
 
+    function renderPriceCategories() {
+      priceCategory.innerHTML = '<option value="all">كل التصنيفات</option>';
+      categories
+        .filter((category) => category.id !== "all")
+        .forEach((category) => {
+          const option = document.createElement("option");
+          option.value = category.id;
+          option.textContent = category.label;
+          priceCategory.appendChild(option);
+        });
+    }
+
+    function renderPrices() {
+      const search = priceSearch.value.trim().toLowerCase();
+      const categoryFilter = priceCategory.value || "all";
+      const rows = menuItems
+        .map(([category, label, title, arabicName]) => ({
+          id: menuId(category, title),
+          category,
+          label,
+          title,
+          arabicName
+        }))
+        .filter((item) => categoryFilter === "all" || item.category === categoryFilter)
+        .filter((item) => {
+          const haystack = `${item.title} ${item.arabicName} ${item.label}`.toLowerCase();
+          return !search || haystack.includes(search);
+        });
+
+      pricesStatus.textContent = `${rows.length} مشروب ظاهر`;
+
+      priceList.replaceChildren(...rows.map((item) => {
+        const row = document.createElement("div");
+        row.className = "price-row";
+        const storedPrice = Number(priceMap.get(priceDocId(item.id))?.price) || "";
+        row.innerHTML = `
+          <div>
+            <strong>${item.title}</strong>
+            <small>${item.arabicName} | ${item.label}</small>
+          </div>
+          <input type="number" min="0" step="1" inputmode="numeric" value="${storedPrice}" placeholder="السعر" data-price-input="${item.id}">
+          <button class="btn btn-primary" type="button" data-price-save="${item.id}">حفظ</button>
+        `;
+        return row;
+      }));
+    }
+
     function subscribeDashboard() {
       if (unsubscribeOrders) unsubscribeOrders();
       if (unsubscribeReviews) unsubscribeReviews();
@@ -544,7 +927,7 @@
         renderOrders,
         (error) => {
           ordersStatus.textContent = error.code === "permission-denied"
-            ? "Firebase Rules مانعة قراءة الطلبات."
+            ? permissionMessage("الطلبات")
             : error.message || "خطأ في قراءة الطلبات.";
         }
       );
@@ -554,8 +937,21 @@
         renderReviews,
         (error) => {
           reviewsStatus.textContent = error.code === "permission-denied"
-            ? "Firebase Rules مانعة قراءة الآراء."
+            ? permissionMessage("الآراء")
             : error.message || "خطأ في قراءة الآراء.";
+        }
+      );
+
+      unsubscribePrices = onSnapshot(
+        collection(db, "prices"),
+        (snapshot) => {
+          priceMap = new Map(snapshot.docs.map((priceDoc) => [priceDoc.id, priceDoc.data()]));
+          renderPrices();
+        },
+        (error) => {
+          pricesStatus.textContent = error.code === "permission-denied"
+            ? permissionMessage("الأسعار")
+            : error.message || "خطأ في قراءة الأسعار.";
         }
       );
     }
@@ -614,21 +1010,63 @@
       }
     });
 
+    priceSearch.addEventListener("input", renderPrices);
+    priceCategory.addEventListener("change", renderPrices);
+
+    priceList.addEventListener("click", async (event) => {
+      const button = event.target.closest("button[data-price-save]");
+      if (!button) return;
+
+      const itemId = button.dataset.priceSave;
+      const input = Array.from(priceList.querySelectorAll("input[data-price-input]"))
+        .find((priceInput) => priceInput.dataset.priceInput === itemId);
+      const item = menuItems
+        .map(([category, label, title, arabicName]) => ({ id: menuId(category, title), category, label, title, arabicName }))
+        .find((menuItem) => menuItem.id === itemId);
+      const price = Number(input.value) || 0;
+
+      button.disabled = true;
+      try {
+        await setDoc(doc(db, "prices", priceDocId(itemId)), {
+          itemId,
+          category: item?.category || "",
+          label: item?.label || "",
+          title: item?.title || "",
+          arabicName: item?.arabicName || "",
+          price,
+          updatedAt: serverTimestamp()
+        }, { merge: true });
+        pricesStatus.textContent = `تم حفظ سعر ${item?.arabicName || itemId}`;
+      } catch (error) {
+        pricesStatus.textContent = error.code === "permission-denied"
+          ? permissionMessage("الأسعار", "حفظ")
+          : error.message || "مش قادرين نحفظ السعر.";
+      } finally {
+        button.disabled = false;
+      }
+    });
+
     onAuthStateChanged(auth, (user) => {
       const isAdmin = user?.email === ADMIN_EMAIL;
       loginPanel.hidden = isAdmin;
       dashboard.hidden = !isAdmin;
       logoutBtn.hidden = !isAdmin;
+      adminSession.hidden = !isAdmin;
+      adminSession.textContent = isAdmin ? `جلسة الأدمن: ${user.email}` : "";
 
       if (isAdmin) {
+        renderPriceCategories();
+        renderPrices();
         subscribeDashboard();
         return;
       }
 
       if (unsubscribeOrders) unsubscribeOrders();
       if (unsubscribeReviews) unsubscribeReviews();
+      if (unsubscribePrices) unsubscribePrices();
       unsubscribeOrders = null;
       unsubscribeReviews = null;
+      unsubscribePrices = null;
     });
   </script>
 </body>

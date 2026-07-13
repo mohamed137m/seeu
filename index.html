@@ -1084,12 +1084,14 @@
     .menu-card[data-category="ice-tea"]::before,
     .menu-card[data-category="mojito"]::before,
     .menu-card[data-category="mojito-mix"]::before,
+    .menu-card[data-category="matcha"]::before,
     .menu-card[data-category="smoothie"]::before,
     .menu-card[data-category="bonbon"]::before {
       background: linear-gradient(135deg, rgba(63, 143, 134, .18), transparent 48%);
     }
 
     .menu-card[data-category="iced-coffee"]::before,
+    .menu-card[data-category="boba"]::before,
     .menu-card[data-category="hot-drinks"]::before,
     .menu-card[data-category="espresso"]::before {
       background: linear-gradient(135deg, rgba(66, 126, 166, .2), transparent 48%);
@@ -1234,12 +1236,14 @@
     .menu-card[data-category="ice-tea"] .drink-category,
     .menu-card[data-category="mojito"] .drink-category,
     .menu-card[data-category="mojito-mix"] .drink-category,
+    .menu-card[data-category="matcha"] .drink-category,
     .menu-card[data-category="smoothie"] .drink-category,
     .menu-card[data-category="bonbon"] .drink-category {
       color: #9be2d8;
     }
 
     .menu-card[data-category="iced-coffee"] .drink-category,
+    .menu-card[data-category="boba"] .drink-category,
     .menu-card[data-category="hot-drinks"] .drink-category,
     .menu-card[data-category="espresso"] .drink-category {
       color: #a9d8ff;
@@ -1276,6 +1280,21 @@
       font-weight: 800;
     }
 
+    .drink-price {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 34px;
+      margin-top: 12px;
+      padding: 6px 12px;
+      color: var(--espresso);
+      background: rgba(243, 199, 122, .92);
+      border-radius: var(--radius);
+      font-size: .92rem;
+      font-weight: 900;
+      direction: rtl;
+    }
+
     .drink-chip {
       display: inline-flex;
       align-items: center;
@@ -1294,6 +1313,7 @@
     .menu-card[data-category="ice-tea"] .drink-chip::before,
     .menu-card[data-category="mojito"] .drink-chip::before,
     .menu-card[data-category="mojito-mix"] .drink-chip::before,
+    .menu-card[data-category="matcha"] .drink-chip::before,
     .menu-card[data-category="smoothie"] .drink-chip::before,
     .menu-card[data-category="bonbon"] .drink-chip::before {
       background: #9be2d8;
@@ -1301,6 +1321,7 @@
     }
 
     .menu-card[data-category="iced-coffee"] .drink-chip::before,
+    .menu-card[data-category="boba"] .drink-chip::before,
     .menu-card[data-category="hot-drinks"] .drink-chip::before,
     .menu-card[data-category="espresso"] .drink-chip::before {
       background: #a9d8ff;
@@ -1475,6 +1496,19 @@
       gap: 10px;
     }
 
+    .cart-total {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 14px 16px;
+      color: var(--coffee);
+      background: rgba(243, 199, 122, .18);
+      border: 1px solid rgba(200, 135, 82, .22);
+      border-radius: var(--radius);
+      font-weight: 900;
+    }
+
     .cart-empty {
       padding: 18px;
       color: var(--muted);
@@ -1512,6 +1546,12 @@
     .cart-item small {
       color: var(--muted);
       font-weight: 800;
+    }
+
+    .cart-price-line {
+      color: var(--coffee);
+      font-size: .86rem;
+      font-weight: 900;
     }
 
     .qty-controls {
@@ -3095,6 +3135,10 @@
       <div class="modal-body">
         <p class="cart-empty">اختار أكتر من مشروب في نفس الطلب، وبعدها اكتب رقم الترابيزة وابعت الطلب مرة واحدة.</p>
         <div class="cart-items" id="cartItems"></div>
+        <div class="cart-total" id="cartTotal" hidden>
+          <span>الإجمالي</span>
+          <strong>0 جنيه</strong>
+        </div>
         <form class="order-form" id="orderForm">
           <div class="service-switch" role="radiogroup" aria-label="نوع الطلب">
             <label><input type="radio" name="serviceType" value="inside" checked> جوه الكافيه</label>
@@ -3192,6 +3236,8 @@
       iceTea: "https://images.unsplash.com/photo-1499638673689-79a0b5115d87?auto=format&fit=crop&w=720&q=82",
       milkshake: "https://images.unsplash.com/photo-1572490122747-3968b75cc699?auto=format&fit=crop&w=720&q=82",
       icedCoffee: "https://images.unsplash.com/photo-1461023058943-07fcbe16d735?auto=format&fit=crop&w=720&q=82",
+      matcha: "https://images.unsplash.com/photo-1536256263959-770b48d82b0a?auto=format&fit=crop&w=720&q=82",
+      boba: "https://images.unsplash.com/photo-1558857563-b371033873b8?auto=format&fit=crop&w=720&q=82",
       frappe: "https://images.unsplash.com/photo-1541167760496-1628856ab772?auto=format&fit=crop&w=720&q=82",
       frappuccino: "https://images.unsplash.com/photo-1570968915860-54d5c301fa9f?auto=format&fit=crop&w=720&q=82",
       smoothie: "https://images.unsplash.com/photo-1505252585461-04db1eb84625?auto=format&fit=crop&w=720&q=82",
@@ -3208,6 +3254,8 @@
       { id: "ice-tea", label: "آيس تي" },
       { id: "milkshake", label: "ميلك شيك" },
       { id: "iced-coffee", label: "آيسد كوفي" },
+      { id: "matcha", label: "ماتشا" },
+      { id: "boba", label: "بوبا" },
       { id: "frappe", label: "فرابيه" },
       { id: "frappuccino", label: "فرابتشينو" },
       { id: "smoothie", label: "سموذي" },
@@ -3286,6 +3334,18 @@
       ["iced-coffee", "iced coffee", "Ice Spanish Latte Classic", "آيس سبانش لاتيه كلاسيك", imageMap.icedCoffee],
       ["iced-coffee", "iced coffee", "Ice Spanish Latte Vanilla", "آيس سبانش لاتيه فانيليا", imageMap.icedCoffee],
       ["iced-coffee", "iced coffee", "Ice Spanish Latte Hazelnut", "آيس سبانش لاتيه بندق", imageMap.icedCoffee],
+
+      ["matcha", "matcha", "Matcha Blueberry", "ماتشا بلوبيري", imageMap.matcha],
+      ["matcha", "matcha", "Matcha Mango", "ماتشا مانجا", imageMap.matcha],
+      ["matcha", "matcha", "Matcha Strawberry", "ماتشا فراولة", imageMap.matcha],
+      ["matcha", "matcha", "Matcha Raspberry", "ماتشا راس بيري", imageMap.matcha],
+      ["matcha", "matcha", "Matcha Coconut", "ماتشا كوكونت", imageMap.matcha],
+      ["matcha", "matcha", "Classic Matcha", "ماتشا بس", imageMap.matcha],
+      ["boba", "boba", "Boba Coffee", "بوبا كوفي", imageMap.boba],
+      ["boba", "boba", "Boba Berry", "بوبا توت", imageMap.boba],
+      ["boba", "boba", "Boba Strawberry", "بوبا فراولة", imageMap.boba],
+      ["boba", "boba", "Boba Mango", "بوبا مانجا", imageMap.boba],
+      ["boba", "boba", "Boba Cherry Cola", "بوبا شيري كولا", imageMap.boba],
 
       ["frappe", "frappe", "Vanilla Frappe", "فرابيه فانيليا", imageMap.frappe],
       ["frappe", "frappe", "Frappe Chocolate", "فرابيه شوكولاتة", imageMap.frappe],
@@ -3383,6 +3443,7 @@
     const orderModal = document.getElementById("orderModal");
     const cartCount = document.getElementById("cartCount");
     const cartItems = document.getElementById("cartItems");
+    const cartTotal = document.getElementById("cartTotal");
     const orderForm = document.getElementById("orderForm");
     const orderStatus = document.getElementById("orderStatus");
     const continueShopping = document.getElementById("continueShopping");
@@ -3391,6 +3452,37 @@
     const reviewForm = document.getElementById("reviewForm");
     const reviewStatus = document.getElementById("reviewStatus");
     let cart = [];
+    let priceMap = new Map();
+
+    function priceDocId(id) {
+      return encodeURIComponent(id);
+    }
+
+    function formatPrice(value) {
+      const price = Number(value) || 0;
+      return price > 0 ? `${price.toLocaleString("ar-EG")} جنيه` : "السعر قريبًا";
+    }
+
+    function formatMoney(value) {
+      const price = Number(value) || 0;
+      return `${price.toLocaleString("ar-EG")} جنيه`;
+    }
+
+    function getItemPrice(id) {
+      return Number(priceMap.get(priceDocId(id))?.price) || 0;
+    }
+
+    function getCartGrandTotal() {
+      return cart.reduce((total, item) => total + (getItemPrice(item.id) * item.qty), 0);
+    }
+
+    function updateVisiblePrices() {
+      document.querySelectorAll("[data-price-id]").forEach((element) => {
+        element.textContent = formatPrice(getItemPrice(element.dataset.priceId));
+      });
+
+      if (cart.length) renderCart();
+    }
 
     function updateMenuCount(filter, cards) {
       const visibleCount = Array.from(cards).filter((card) => !card.classList.contains("hide")).length;
@@ -3466,6 +3558,11 @@
         meta.append(chip, order);
 
         const itemId = `${category}-${title}`;
+        const price = document.createElement("span");
+        price.className = "drink-price";
+        price.dataset.priceId = itemId;
+        price.textContent = formatPrice(getItemPrice(itemId));
+
         const controls = document.createElement("div");
         controls.className = "order-controls";
 
@@ -3496,7 +3593,7 @@
 
         quickCheck.append(checkbox, checkText);
         controls.append(quickCheck, orderButton);
-        body.append(tag, heading, text, meta, controls);
+        body.append(tag, heading, text, meta, price, controls);
         card.append(imageWrap, body);
         fragment.appendChild(card);
       });
@@ -3583,10 +3680,16 @@
 
       if (!cart.length) {
         cartItems.innerHTML = '<div class="cart-empty">لسه ما اخترتش أي حاجة من المنيو.</div>';
+        cartTotal.hidden = true;
         return;
       }
 
+      cartTotal.hidden = false;
+      cartTotal.querySelector("strong").textContent = formatMoney(getCartGrandTotal());
+
       cartItems.replaceChildren(...cart.map((item) => {
+        const unitPrice = getItemPrice(item.id);
+        const lineTotal = unitPrice * item.qty;
         const row = document.createElement("div");
         row.className = "cart-item";
         row.innerHTML = `
@@ -3594,6 +3697,7 @@
           <div>
             <strong>${item.title}</strong>
             <small>${item.description}</small>
+            <div class="cart-price-line">${formatPrice(unitPrice)} × ${item.qty} = ${formatMoney(lineTotal)}</div>
           </div>
           <div class="qty-controls" aria-label="كمية ${item.title}">
             <button type="button" data-action="decrease" data-id="${item.id}">-</button>
@@ -3616,14 +3720,20 @@
         serviceType,
         status: "new",
         totalItems: getCartTotal(),
-        items: cart.map(({ id, category, label, title, description, qty }) => ({
-          id,
-          category,
-          label,
-          title,
-          arabicName: description,
-          qty
-        })),
+        totalPrice: getCartGrandTotal(),
+        items: cart.map(({ id, category, label, title, description, qty }) => {
+          const unitPrice = getItemPrice(id);
+          return {
+            id,
+            category,
+            label,
+            title,
+            arabicName: description,
+            qty,
+            unitPrice,
+            lineTotal: unitPrice * qty
+          };
+        }),
         createdAt: serverTimestamp()
       };
 
@@ -3776,6 +3886,13 @@
       });
     }
 
+    function initPrices() {
+      onSnapshot(collection(db, "prices"), (snapshot) => {
+        priceMap = new Map(snapshot.docs.map((priceDoc) => [priceDoc.id, priceDoc.data()]));
+        updateVisiblePrices();
+      });
+    }
+
     function initNavigation() {
       const navbar = document.getElementById("navbar");
       const mobileToggle = document.getElementById("mobileToggle");
@@ -3879,6 +3996,7 @@
     initOrdersUi();
     initReviewsForm();
     initLiveReviews();
+    initPrices();
   </script>
 </body>
 </html>
